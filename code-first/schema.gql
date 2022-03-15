@@ -1,0 +1,12 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Foo"""
+type Foo {
+  bar: String!
+}
+
+type Query {
+  foo: Foo!
+}
