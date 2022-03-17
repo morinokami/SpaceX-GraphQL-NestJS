@@ -2,11 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""Foo"""
-type Foo {
-  bar: String!
+"""Capsule"""
+type Capsule {
+  id: ID!
+  landLandings: Float!
+  lastUpdate: String
+  reuseCount: Float!
+  serial: String!
+  status: String!
+  type: String!
+  waterLandings: Float!
 }
 
 type Query {
-  foo: Foo!
+  allCapsules: [Capsule!]!
+  capsule(id: String!): Capsule!
 }
