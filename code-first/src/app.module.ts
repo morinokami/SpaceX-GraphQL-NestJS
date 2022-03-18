@@ -2,6 +2,7 @@ import { ApolloDriver } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { CapsulesModule } from './capsules/capsules.module';
+import { LaunchesModule } from './launches/launches.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { CapsulesModule } from './capsules/capsules.module';
       sortSchema: true,
     }),
     CapsulesModule,
+    LaunchesModule,
   ],
 })
 export class AppModule {}

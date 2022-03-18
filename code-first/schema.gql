@@ -7,6 +7,7 @@ type Capsule {
   id: ID!
   landLandings: Float!
   lastUpdate: String
+  launches: [Launch!]!
   reuseCount: Float!
   serial: String!
   status: String!
@@ -14,7 +15,20 @@ type Capsule {
   waterLandings: Float!
 }
 
+"""Launch"""
+type Launch {
+  flightNumber: Float!
+  id: ID!
+  name: String!
+}
+
 type Query {
+  """Get all capsules"""
   allCapsules: [Capsule!]!
+
+  """Get all launches"""
+  allLaunches: [Launch!]!
+
+  """Get one capsule"""
   capsule(id: String!): Capsule!
 }
