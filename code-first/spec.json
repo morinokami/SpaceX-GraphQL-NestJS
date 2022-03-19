@@ -9485,12 +9485,12 @@
                     "title": "Status"
                   },
                   "speed_kn": {
-                    "type": "string",
+                    "type": "number",
                     "description": "The speed in KN.",
                     "title": "Speed KN"
                   },
                   "course_deg": {
-                    "type": "string",
+                    "type": "number",
                     "description": "The course in degrees.",
                     "title": "Course Degrees"
                   },
@@ -9647,12 +9647,12 @@
                   "title": "Status"
                 },
                 "speed_kn": {
-                  "type": "string",
+                  "type": "number",
                   "description": "The speed in KN.",
                   "title": "Speed KN"
                 },
                 "course_deg": {
-                  "type": "string",
+                  "type": "number",
                   "description": "The course in degrees.",
                   "title": "Course Degrees"
                 },
@@ -9930,12 +9930,12 @@
                         "title": "Status"
                       },
                       "speed_kn": {
-                        "type": "string",
+                        "type": "number",
                         "description": "The speed in KN.",
                         "title": "Speed KN"
                       },
                       "course_deg": {
-                        "type": "string",
+                        "type": "number",
                         "description": "The course in degrees.",
                         "title": "Course Degrees"
                       },

@@ -29,7 +29,7 @@ export class Capsule {
   landLandings: number;
 
   @Field({ nullable: true })
-  lastUpdate: string;
+  lastUpdate?: string;
 
   @Field(() => [Launch])
   launches: Launch[];

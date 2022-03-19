@@ -6775,11 +6775,11 @@ export class DefaultService {
         /**
          * The speed in KN.
          */
-        speed_kn?: string;
+        speed_kn?: number;
         /**
          * The course in degrees.
          */
-        course_deg?: string;
+        course_deg?: number;
         /**
          * The latitude.
          */
@@ -6888,11 +6888,11 @@ export class DefaultService {
         /**
          * The speed in KN.
          */
-        speed_kn?: string;
+        speed_kn?: number;
         /**
          * The course in degrees.
          */
-        course_deg?: string;
+        course_deg?: number;
         /**
          * The latitude.
          */
@@ -7092,11 +7092,11 @@ export class DefaultService {
             /**
              * The speed in KN.
              */
-            speed_kn?: string;
+            speed_kn?: number;
             /**
              * The course in degrees.
              */
-            course_deg?: string;
+            course_deg?: number;
             /**
              * The latitude.
              */

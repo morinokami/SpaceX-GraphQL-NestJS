@@ -40,5 +40,27 @@ type Query {
 
 """Ship"""
 type Ship {
+  abs: Float
+  active: Boolean!
+  class: Float
+  courseDeg: Float
+  homePort: String
   id: ID!
+  image: String
+  imo: Float
+  lastAisUpdate: String
+  latitude: Float
+  launches: [Launch!]!
+  legacyId: String
+  link: String
+  longitude: Float
+  massLbs: Float
+  mmsi: Float
+  model: String
+  name: String!
+  roles: [String!]!
+  speedKn: Float
+  status: String
+  type: String
+  yearBuilt: Float
 }

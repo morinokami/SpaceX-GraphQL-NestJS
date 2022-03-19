@@ -8,16 +8,16 @@ export class CapsulesService {
     capsule: Awaited<ReturnType<typeof DefaultService.getACapsule>>,
   ): Capsule {
     return {
-      id: capsule.id as string,
-      serial: capsule.serial as string,
+      id: capsule.id,
+      serial: capsule.serial,
       status: capsule.status as CapsuleStatus,
       type: capsule.type as CapsuleType,
-      reuseCount: capsule.reuse_count ?? 0,
-      waterLandings: capsule.water_landings ?? 0,
-      landLandings: capsule.land_landings ?? 0,
+      reuseCount: capsule.reuse_count,
+      waterLandings: capsule.water_landings,
+      landLandings: capsule.land_landings,
       lastUpdate: capsule.last_update,
       launches: [],
-      launchIds: capsule.launches ?? [],
+      launchIds: capsule.launches,
     };
   }
 
