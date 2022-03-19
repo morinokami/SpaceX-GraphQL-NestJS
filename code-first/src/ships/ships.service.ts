@@ -4,13 +4,17 @@ import { Ship } from './models/ship.model';
 
 @Injectable()
 export class ShipsService {
+  private convertToShip(
+    ship: Awaited<ReturnType<typeof DefaultService.getAShip>>,
+  ): Ship {
+    return {
+      id: ship.id as string,
+    };
+  }
+
   async getAllShips(): Promise<Ship[]> {
     const ships = await DefaultService.getAllShips();
-    return ships.map((ship) => {
-      return {
-        id: ship.id as string,
-      };
-    });
+    return ships.map((ship) => this.convertToShip(ship));
   }
 
   async getShipsByIds(ids: string[]): Promise<Ship[]> {
@@ -19,10 +23,6 @@ export class ShipsService {
         return DefaultService.getAShip(id);
       }),
     );
-    return ships.map((ship) => {
-      return {
-        id: ship.id as string,
-      };
-    });
+    return ships.map((ship) => this.convertToShip(ship));
   }
 }
