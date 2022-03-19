@@ -3046,29 +3046,29 @@ export class DefaultService {
          */
         cores?: Array<{
             /**
-             * The cores' core.
+             * The core.
              */
             core?: string;
             /**
-             * The cores' flight.
+             * The flight number.
              */
-            flight?: string;
+            flight?: number;
             /**
-             * The cores' gridfins.
+             * Whether has gridfins.
              */
-            gridfins?: string;
+            gridfins?: boolean;
             /**
-             * The cores' legs.
+             * Whether has legs.
              */
-            legs?: string;
+            legs?: boolean;
             /**
-             * Reused.
+             * Whether reused.
              */
             reused?: boolean;
             /**
-             * The landing attempt.
+             * Whether landing attempted.
              */
-            landing_attempt?: string;
+            landing_attempt?: boolean;
             /**
              * The landing success.
              */
@@ -6858,13 +6858,13 @@ export class DefaultService {
          */
         mmsi?: number;
         /**
-         * The autonomous spaceport drone ship.
+         * The number of autonomous spaceport drone ships.
          */
-        abs?: string;
+        abs?: number;
         /**
-         * The class.
+         * The class number.
          */
-        class?: string;
+        class?: number;
         /**
          * The mass in kilograms.
          */

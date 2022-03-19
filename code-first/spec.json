@@ -12,13 +12,9 @@
   },
   "host": "api.spacexdata.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "consumes": [],
-  "produces": [
-    "application/json"
-  ],
+  "produces": ["application/json"],
   "paths": {
     "/v4/capsules": {
       "get": {
@@ -4293,32 +4289,33 @@
                     "properties": {
                       "core": {
                         "type": "string",
-                        "description": "The cores' core.",
-                        "title": "Cores' Core"
+                        "description": "The core.",
+                        "title": "Core"
                       },
                       "flight": {
-                        "type": "string",
-                        "description": "The cores' flight.",
-                        "title": "Cores' Flight"
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "The flight number.",
+                        "title": "Flight"
                       },
                       "gridfins": {
-                        "type": "string",
-                        "description": "The cores' gridfins.",
-                        "title": "Cores' Gridfins"
+                        "type": "boolean",
+                        "description": "Whether has gridfins.",
+                        "title": "Gridfins"
                       },
                       "legs": {
-                        "type": "string",
-                        "description": "The cores' legs.",
-                        "title": "Cores' Legs"
+                        "type": "boolean",
+                        "description": "Whether has legs.",
+                        "title": "Legs"
                       },
                       "reused": {
                         "type": "boolean",
-                        "description": "Reused.",
+                        "description": "Whether reused.",
                         "title": "Reused"
                       },
                       "landing_attempt": {
-                        "type": "string",
-                        "description": "The landing attempt.",
+                        "type": "boolean",
+                        "description": "Whether landing attempted.",
                         "title": "Landing Attempt"
                       },
                       "landing_success": {
@@ -9610,13 +9607,15 @@
                   "title": "MMSI"
                 },
                 "abs": {
-                  "type": "string",
-                  "description": "The autonomous spaceport drone ship.",
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The number of autonomous spaceport drone ships.",
                   "title": "ABS"
                 },
                 "class": {
-                  "type": "string",
-                  "description": "The class.",
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The class number.",
                   "title": "Class"
                 },
                 "mass_kg": {
