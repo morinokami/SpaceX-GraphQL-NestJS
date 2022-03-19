@@ -17,9 +17,11 @@ type Capsule {
 
 """Launch"""
 type Launch {
+  capsules: [Capsule!]!
   flightNumber: Float!
   id: ID!
   name: String!
+  ships: [Ship!]!
 }
 
 type Query {
@@ -29,6 +31,14 @@ type Query {
   """Get all launches"""
   allLaunches: [Launch!]!
 
+  """Get all ships"""
+  allShips: [Ship!]!
+
   """Get one capsule"""
   capsule(id: String!): Capsule!
+}
+
+"""Ship"""
+type Ship {
+  id: ID!
 }
