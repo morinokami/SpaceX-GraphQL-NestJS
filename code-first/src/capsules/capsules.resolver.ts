@@ -1,5 +1,5 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { LaunchesService } from 'src/launches/launches.service';
+import { LaunchesDataLoader } from 'src/launches/launches.dataloader';
 import { Launch } from 'src/launches/models/launch.model';
 import { CapsulesService } from './capsules.service';
 import { Capsule } from './models/capsule.model';
@@ -8,7 +8,7 @@ import { Capsule } from './models/capsule.model';
 export class CapsulesResolver {
   constructor(
     private readonly capsulesService: CapsulesService,
-    private readonly launchesService: LaunchesService,
+    private readonly launchesDataLoader: LaunchesDataLoader,
   ) {}
 
   @Query(() => [Capsule], { description: 'Get all capsules' })
@@ -23,8 +23,10 @@ export class CapsulesResolver {
 
   // TODO: Pagination
 
-  @ResolveField()
+  @ResolveField(() => [Launch])
   async launches(@Parent() capsule: Capsule): Promise<Launch[]> {
-    return this.launchesService.getLaunchesByIds(capsule.launchIds);
+    return Promise.all(
+      capsule.launchIds.map((id) => this.launchesDataLoader.load(id)),
+    );
   }
 }

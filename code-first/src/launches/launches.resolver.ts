@@ -1,8 +1,8 @@
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { CapsulesService } from 'src/capsules/capsules.service';
+import { CapsulesDataLoader } from 'src/capsules/capsules.dataloader';
 import { Capsule } from 'src/capsules/models/capsule.model';
 import { Ship } from 'src/ships/models/ship.model';
-import { ShipsService } from 'src/ships/ships.service';
+import { ShipsDataLoader } from 'src/ships/ships.dataloader';
 import { LaunchesService } from './launches.service';
 import { Launch } from './models/launch.model';
 
@@ -10,8 +10,8 @@ import { Launch } from './models/launch.model';
 export class LaunchesResolver {
   constructor(
     private readonly launchesService: LaunchesService,
-    private readonly shipsService: ShipsService,
-    private readonly capsulesService: CapsulesService,
+    private readonly shipsDataLoader: ShipsDataLoader,
+    private readonly capsulesDataLoader: CapsulesDataLoader,
   ) {}
 
   @Query(() => [Launch], { description: 'Get all launches' })
@@ -19,13 +19,17 @@ export class LaunchesResolver {
     return this.launchesService.getAllLaunches();
   }
 
-  @ResolveField()
+  @ResolveField(() => [Ship])
   async ships(@Parent() launch: Launch): Promise<Ship[]> {
-    return this.shipsService.getShipsByIds(launch.shipIds);
+    return Promise.all(
+      launch.shipIds.map((id) => this.shipsDataLoader.load(id)),
+    );
   }
 
-  @ResolveField()
+  @ResolveField(() => [Capsule])
   async capsules(@Parent() launch: Launch): Promise<Capsule[]> {
-    return this.capsulesService.getCapsulesByIds(launch.capsuleIds);
+    return Promise.all(
+      launch.capsuleIds.map((id) => this.capsulesDataLoader.load(id)),
+    );
   }
 }
