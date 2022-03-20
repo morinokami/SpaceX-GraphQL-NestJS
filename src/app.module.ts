@@ -14,6 +14,7 @@ import { CoresModule } from './cores/cores.module';
       autoSchemaFile: 'schema.gql',
       sortSchema: true,
       playground: true,
+      introspection: true,
     }),
     CapsulesModule,
     LaunchesModule,
