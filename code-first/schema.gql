@@ -8,20 +8,53 @@ type Capsule {
   landLandings: Float!
   lastUpdate: String
   launches: [Launch!]!
-  reuseCount: Float!
+  reuseCount: Int!
   serial: String!
   status: String!
   type: String!
   waterLandings: Float!
 }
 
+"""Company Info"""
+type CompanyInfo {
+  ceo: String
+  coo: String
+  cto: String
+  ctoPropulsion: String
+  employees: Int
+  founded: Int
+  founder: String
+  headquarters: Headquarters
+  id: ID!
+  launchSites: Int
+  links: Links
+  name: String
+  summary: String
+  testSites: Int
+  valuation: Float
+  vehicles: Int
+}
+
+type Headquarters {
+  address: String
+  city: String
+  state: String
+}
+
 """Launch"""
 type Launch {
   capsules: [Capsule!]!
-  flightNumber: Float!
+  flightNumber: Int!
   id: ID!
   name: String!
   ships: [Ship!]!
+}
+
+type Links {
+  elonTwitter: String
+  flickr: String
+  twitter: String
+  website: String
 }
 
 type Query {
@@ -36,31 +69,34 @@ type Query {
 
   """Get one capsule"""
   capsule(id: String!): Capsule!
+
+  """Company info"""
+  companyInfo: CompanyInfo!
 }
 
 """Ship"""
 type Ship {
-  abs: Float
+  abs: Int
   active: Boolean!
-  class: Float
+  class: Int
   courseDeg: Float
   homePort: String
   id: ID!
   image: String
-  imo: Float
+  imo: Int
   lastAisUpdate: String
   latitude: Float
   launches: [Launch!]!
   legacyId: String
   link: String
   longitude: Float
-  massLbs: Float
-  mmsi: Float
+  massLbs: Int
+  mmsi: Int
   model: String
   name: String!
   roles: [String!]!
   speedKn: Float
   status: String
   type: String
-  yearBuilt: Float
+  yearBuilt: Int
 }

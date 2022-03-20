@@ -1,4 +1,4 @@
-import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
+import { Field, HideField, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Launch } from 'src/launches/models/launch.model';
 
 @ObjectType({ description: 'Ship' })
@@ -24,22 +24,22 @@ export class Ship {
   @Field()
   active: boolean;
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   imo?: number;
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   mmsi?: number;
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   abs?: number;
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   class?: number;
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   massLbs?: number;
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   yearBuilt?: number;
 
   @Field({ nullable: true })

@@ -1,4 +1,4 @@
-import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
+import { Field, HideField, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Launch } from 'src/launches/models/launch.model';
 
 export type CapsuleStatus = 'unknown' | 'active' | 'retired' | 'destroyed';
@@ -19,7 +19,7 @@ export class Capsule {
   @Field()
   type: CapsuleType;
 
-  @Field()
+  @Field(() => Int)
   reuseCount: number;
 
   @Field()

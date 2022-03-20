@@ -1,4 +1,4 @@
-import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
+import { Field, HideField, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Capsule } from 'src/capsules/models/capsule.model';
 import { Ship } from 'src/ships/models/ship.model';
 
@@ -7,7 +7,7 @@ export class Launch {
   @Field(() => ID)
   id: string;
 
-  @Field()
+  @Field(() => Int)
   flightNumber: number;
 
   @Field()
