@@ -19,7 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "codegen:client": "rimraf generated && mkdir generated && openapi --input ./spec.json --output ./generated --client node"
+    "codegen:client": "rimraf generated && mkdir generated && openapi --input ./openapi.yaml --output ./generated --client node"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.7",

@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { DefaultService } from 'generated';
+import { DefaultService, Ship as _Ship } from 'generated';
 import { Ship } from './models/ship.model';
 
 @Injectable()
 export class ShipsService {
-  private convertToShip(
-    ship: Awaited<ReturnType<typeof DefaultService.getAShip>>,
-  ): Ship {
+  private convertToShip(ship: _Ship): Ship {
     return {
       id: ship.id,
       name: ship.name,
@@ -43,7 +41,7 @@ export class ShipsService {
   async getShipsByIds(ids: string[]): Promise<Ship[]> {
     const ships = await Promise.all(
       ids.map((id) => {
-        return DefaultService.getAShip(id);
+        return DefaultService.getOneShip(id);
       }),
     );
     return ships.map((ship) => this.convertToShip(ship));

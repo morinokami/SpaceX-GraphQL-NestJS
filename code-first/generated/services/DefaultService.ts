@@ -3,6 +3,7 @@
 /* eslint-disable */
 import type { Capsule } from '../models/Capsule';
 import type { Company } from '../models/Company';
+import type { Core } from '../models/Core';
 import type { Launch } from '../models/Launch';
 import type { Ship } from '../models/Ship';
 
@@ -51,6 +52,18 @@ export class DefaultService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/v4/company',
+        });
+    }
+
+    /**
+     * Get all cores
+     * @returns Core default
+     * @throws ApiError
+     */
+    public static getAllCores(): CancelablePromise<Array<Core>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/cores',
         });
     }
 

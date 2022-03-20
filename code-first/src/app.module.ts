@@ -5,6 +5,7 @@ import { CapsulesModule } from './capsules/capsules.module';
 import { LaunchesModule } from './launches/launches.module';
 import { ShipsModule } from './ships/ships.module';
 import { CompanyInfoModule } from './company-info/company-info.module';
+import { CoresModule } from './cores/cores.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CompanyInfoModule } from './company-info/company-info.module';
     LaunchesModule,
     ShipsModule,
     CompanyInfoModule,
+    CoresModule,
   ],
 })
 export class AppModule {}

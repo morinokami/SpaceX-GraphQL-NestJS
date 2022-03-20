@@ -53,6 +53,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Company"
+  /v4/cores:
+    get:
+      summary: Get all cores
+      operationId: GetAllCores
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Core"
   /v4/launches:
     get:
       summary: Get all launches
@@ -221,6 +234,38 @@ components:
         summary:
           type: string
           nullable: true
+    Core:
+      type: object
+      properties:
+        id:
+          type: string
+        serial:
+          type: string
+        block:
+          type: string
+        status:
+          type: string
+        reuse_count:
+          type: integer
+          format: int32
+        rtls_attempts:
+          type: integer
+          format: int32
+        rtls_landings:
+          type: integer
+          format: int32
+        asds_attempts:
+          type: integer
+          format: int32
+        asds_landings:
+          type: integer
+          format: int32
+        last_update:
+          type: string
+        launches:
+          type: array
+          items:
+            type: string
     Launch:
       type: object
       properties:

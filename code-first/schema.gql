@@ -35,6 +35,21 @@ type CompanyInfo {
   vehicles: Int
 }
 
+"""Capsule"""
+type Core {
+  asdsAttempts: Float!
+  asdsLandings: Float!
+  block: String
+  id: ID!
+  lastUpdate: String
+  launches: [Launch!]!
+  reuseCount: Float!
+  rtlsAttempts: Float!
+  rtlsLandings: Float!
+  serial: String!
+  status: String!
+}
+
 type Headquarters {
   address: String
   city: String
@@ -60,6 +75,9 @@ type Links {
 type Query {
   """Get all capsules"""
   allCapsules: [Capsule!]!
+
+  """Get all cores"""
+  allCores: [Core!]!
 
   """Get all launches"""
   allLaunches: [Launch!]!

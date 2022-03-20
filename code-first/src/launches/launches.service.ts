@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { DefaultService } from 'generated';
+import { DefaultService, Launch as _Launch } from 'generated';
 import { Launch } from './models/launch.model';
 
 @Injectable()
 export class LaunchesService {
-  private convertToLaunch(
-    launch: Awaited<ReturnType<typeof DefaultService.getALaunch>>,
-  ): Launch {
+  private convertToLaunch(launch: _Launch): Launch {
     return {
       id: launch.id,
       flightNumber: launch.flight_number,
@@ -26,7 +24,7 @@ export class LaunchesService {
   async getLaunchesByIds(ids: string[]): Promise<Launch[]> {
     const launches = await Promise.all(
       ids.map((id) => {
-        return DefaultService.getALaunch(id);
+        return DefaultService.getOneLaunch(id);
       }),
     );
     return launches.map((launch) => this.convertToLaunch(launch));
