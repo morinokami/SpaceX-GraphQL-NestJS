@@ -13,6 +13,7 @@ import { CoresModule } from './cores/cores.module';
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
       sortSchema: true,
+      playground: true,
     }),
     CapsulesModule,
     LaunchesModule,
