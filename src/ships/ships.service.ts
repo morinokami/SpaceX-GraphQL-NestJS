@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DefaultService, Ship as _Ship } from 'generated';
+import { DefaultService, Ship as _Ship } from 'src/generated';
 import { Ship } from './models/ship.model';
 
 @Injectable()

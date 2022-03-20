@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Capsule as _Capsule, DefaultService } from 'generated';
+import { Capsule as _Capsule, DefaultService } from 'src/generated';
 import { Capsule, CapsuleStatus, CapsuleType } from './models/capsule.model';
 
 @Injectable()

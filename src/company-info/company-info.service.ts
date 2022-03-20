@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DefaultService } from 'generated';
+import { DefaultService } from 'src/generated';
 import { CompanyInfo } from './models/company-info.model';
 
 @Injectable()

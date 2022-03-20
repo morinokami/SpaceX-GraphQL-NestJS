@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Core as _Core, DefaultService } from 'generated';
+import { Core as _Core, DefaultService } from 'src/generated';
 import { Core, CoreStatus } from './models/core.model';
 
 @Injectable()

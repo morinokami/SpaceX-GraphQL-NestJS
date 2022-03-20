@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DefaultService, Launch as _Launch } from 'generated';
+import { DefaultService, Launch as _Launch } from 'src/generated';
 import { Launch } from './models/launch.model';
 
 @Injectable()
