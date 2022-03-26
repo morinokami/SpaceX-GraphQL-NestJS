@@ -4,6 +4,7 @@
 import type { Capsule } from '../models/Capsule';
 import type { Company } from '../models/Company';
 import type { Core } from '../models/Core';
+import type { DocMeta } from '../models/DocMeta';
 import type { Launch } from '../models/Launch';
 import type { Ship } from '../models/Ship';
 
@@ -40,6 +41,54 @@ export class DefaultService {
             path: {
                 'capsuleID': capsuleId,
             },
+        });
+    }
+
+    /**
+     * Query capsules
+     * @param requestBody
+     * @returns any default
+     * @throws ApiError
+     */
+    public static queryCapsules(
+        requestBody: {
+            /**
+             * Accepts any valid MongoDB find() query
+             */
+            query?: any;
+            options?: {
+                /**
+                 * Fields to return (by default returns all fields)
+                 */
+                select?: string;
+                /**
+                 * Sort order
+                 */
+                sort?: string;
+                /**
+                 * Use offset or page to set skip position
+                 */
+                offset?: number;
+                page?: number;
+                limit?: number;
+                /**
+                 * If set to false, it will return all docs without adding limit condition
+                 */
+                pagination?: boolean;
+                /**
+                 * Paths which should be populated with other documents
+                 */
+                populate?: Array<any>;
+            };
+        },
+    ): CancelablePromise<(DocMeta & {
+        docs?: Array<Capsule>;
+    })> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/v4/capsules/query',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 
