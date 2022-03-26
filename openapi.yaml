@@ -42,6 +42,71 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Capsule"
+  /v4/capsules/query:
+    post:
+      summary: Query capsules
+      operationId: QueryCapsules
+      requestBody:
+        content:
+          "*/*":
+            schema:
+              type: object
+              properties:
+                query:
+                  title: Query
+                  type: object
+                  properties: {}
+                  description: Accepts any valid MongoDB find() query
+                options:
+                  title: Options
+                  type: object
+                  properties:
+                    select:
+                      title: Select
+                      type: string
+                      description: Fields to return (by default returns all fields)
+                    sort:
+                      title: Sort
+                      type: string
+                      description: Sort order
+                    offset:
+                      title: Offset
+                      type: integer
+                      description: Use offset or page to set skip position
+                      format: int32
+                    page:
+                      title: Page
+                      type: integer
+                      format: int32
+                    limit:
+                      title: Limit
+                      type: integer
+                      format: int32
+                    pagination:
+                      title: Pagination
+                      type: boolean
+                      description: If set to false, it will return all docs without adding limit condition
+                    populate:
+                      title: Populate
+                      type: array
+                      description: Paths which should be populated with other documents
+                      items:
+                        type: object
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Capsule"
   /v4/company:
     get:
       summary: Get company info
@@ -532,3 +597,33 @@ components:
           type: array
           items:
             type: string
+    DocMeta:
+      type: object
+      properties:
+        totalDocs:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        limit:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        pagingCounter:
+          type: integer
+          format: int32
+        hasPrevPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+        prevPage:
+          type: string
+        nextPage:
+          type: integer
+          format: int32
