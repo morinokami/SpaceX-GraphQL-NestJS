@@ -48,7 +48,7 @@ paths:
       operationId: QueryCapsules
       requestBody:
         content:
-          "*/*":
+          application/json:
             schema:
               type: object
               properties:

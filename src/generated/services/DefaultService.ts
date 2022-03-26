@@ -88,7 +88,7 @@ export class DefaultService {
             method: 'POST',
             url: '/v4/capsules/query',
             body: requestBody,
-            mediaType: '*/*',
+            mediaType: 'application/json',
         });
     }
 
