@@ -6,6 +6,7 @@ import type { Company } from '../models/Company';
 import type { Core } from '../models/Core';
 import type { DocMeta } from '../models/DocMeta';
 import type { Launch } from '../models/Launch';
+import type { Roadster } from '../models/Roadster';
 import type { Ship } from '../models/Ship';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -143,6 +144,18 @@ export class DefaultService {
             path: {
                 'id': id,
             },
+        });
+    }
+
+    /**
+     * Get Roadster Info
+     * @returns Roadster default
+     * @throws ApiError
+     */
+    public static getRoadsterInfo(): CancelablePromise<Roadster> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/roadster',
         });
     }
 

@@ -6,6 +6,7 @@ import { LaunchesModule } from './launches/launches.module';
 import { ShipsModule } from './ships/ships.module';
 import { CompanyInfoModule } from './company-info/company-info.module';
 import { CoresModule } from './cores/cores.module';
+import { RoadsterInfoModule } from './roadster-info/roadster-info.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { CoresModule } from './cores/cores.module';
     ShipsModule,
     CompanyInfoModule,
     CoresModule,
+    RoadsterInfoModule,
   ],
 })
 export class AppModule {}

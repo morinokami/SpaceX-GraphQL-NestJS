@@ -107,11 +107,45 @@ type Query {
 
   """Company info"""
   companyInfo: CompanyInfo!
+
+  """Roadster info"""
+  roadsterInfo: RoadsterInfo!
 }
 
 input QueryOptionsInput {
   limit: Int = 10
   offset: Int = 0
+}
+
+"""Roadster Info"""
+type RoadsterInfo {
+  apoapsisAu: Float
+  details: String
+  earthDistanceKm: Float
+  earthDistanceMi: Float
+  eccentricity: Float
+  epochJd: Float
+  flickrImages: [String!]!
+  id: ID!
+  inclination: Float
+  launchDateUnix: Int
+  launchDateUtc: String
+  launchMassKg: Int
+  launchMassLbs: Int
+  longitude: Float
+  marsDistanceKm: Float
+  marsDistanceMi: Float
+  name: String
+  noradId: Int
+  orbitType: String
+  periapsisArg: Float
+  periapsisAu: Float
+  periodDays: Float
+  semiMajorAxisAu: Float
+  speedKph: Float
+  speedMph: Float
+  video: String
+  wikipedia: String
 }
 
 """Ship"""

@@ -162,6 +162,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Launch"
+  /v4/roadster:
+    get:
+      summary: Get Roadster Info
+      operationId: GetRoadsterInfo
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Roadster"
   /v4/ships:
     get:
       summary: Get all ships
@@ -516,6 +527,84 @@ components:
         launch_library_id:
           type: string
           nullable: true
+    Roadster:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        launch_date_utc:
+          type: string
+        launch_date_unix:
+          type: integer
+          format: int32
+        launch_mass_kg:
+          type: integer
+          format: int32
+        launch_mass_lbs:
+          type: integer
+          format: int32
+        norad_id:
+          type: integer
+          format: int32
+        epoch_jd:
+          type: number
+          format: float
+        orbit_type:
+          type: string
+        apoapsis_au:
+          type: number
+          format: float
+        periapsis_au:
+          type: number
+          format: float
+        semi_major_axis_au:
+          type: number
+          format: float
+        eccentricity:
+          type: number
+          format: float
+        inclination:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        periapsis_arg:
+          type: number
+          format: float
+        period_days:
+          type: number
+          format: float
+        speed_kph:
+          type: number
+          format: float
+        speed_mph:
+          type: number
+          format: float
+        earth_distance_km:
+          type: number
+          format: float
+        earth_distance_mi:
+          type: number
+          format: float
+        mars_distance_km:
+          type: number
+          format: float
+        mars_distance_mi:
+          type: number
+          format: float
+        flickr_images:
+          type: array
+          items:
+            type: string
+        wikipedia:
+          type: string
+        video:
+          type: string
+        details:
+          type: string
     Ship:
       type: object
       properties:
