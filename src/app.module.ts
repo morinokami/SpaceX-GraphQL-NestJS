@@ -10,6 +10,7 @@ import { RoadsterInfoModule } from './roadster-info/roadster-info.module';
 import { StarlinkModule } from './starlink/starlink.module';
 import { LandpadsModule } from './landpads/landpads.module';
 import { CrewModule } from './crew/crew.module';
+import { HistoryModule } from './history/history.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { CrewModule } from './crew/crew.module';
     StarlinkModule,
     LandpadsModule,
     CrewModule,
+    HistoryModule,
   ],
 })
 export class AppModule {}

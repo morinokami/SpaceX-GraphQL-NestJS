@@ -184,6 +184,62 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Crew"
+  /v4/history:
+    get:
+      summary: Get all history events
+      operationId: GetAllHistory
+      parameters: []
+      responses:
+        "200":
+          description: default
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/History"
+  /v4/history/{id}:
+    get:
+      summary: Get one history event
+      operationId: GetOneHistory
+      parameters:
+        - name: id
+          in: path
+          description: ID of historic event
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: default
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/History"
+  /v4/history/query:
+    post:
+      summary: Query history events
+      operationId: QueryHistory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryOptions"
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/History"
   /v4/landpads:
     get:
       summary: Get all landpads
@@ -546,6 +602,25 @@ components:
           type: array
           items:
             type: string
+    History:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        event_date_utc:
+          type: string
+        event_date_unix:
+          type: integer
+          format: int32
+        details:
+          type: string
+        links:
+          type: object
+          properties:
+            article:
+              type: string
     Landpad:
       type: object
       properties:

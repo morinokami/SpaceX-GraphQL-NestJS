@@ -6,6 +6,7 @@ import type { Company } from '../models/Company';
 import type { Core } from '../models/Core';
 import type { Crew } from '../models/Crew';
 import type { DocMeta } from '../models/DocMeta';
+import type { History } from '../models/History';
 import type { Landpad } from '../models/Landpad';
 import type { Launch } from '../models/Launch';
 import type { QueryOptions } from '../models/QueryOptions';
@@ -173,6 +174,55 @@ export class DefaultService {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/v4/crew/query',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
+     * Get all history events
+     * @returns History default
+     * @throws ApiError
+     */
+    public static getAllHistory(): CancelablePromise<Array<History>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/history',
+        });
+    }
+
+    /**
+     * Get one history event
+     * @param id ID of historic event
+     * @returns History default
+     * @throws ApiError
+     */
+    public static getOneHistory(
+        id: string,
+    ): CancelablePromise<History> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/history/{id}',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
+    /**
+     * Query history events
+     * @param requestBody
+     * @returns any default
+     * @throws ApiError
+     */
+    public static queryHistory(
+        requestBody: QueryOptions,
+    ): CancelablePromise<(DocMeta & {
+        docs?: Array<History>;
+    })> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/v4/history/query',
             body: requestBody,
             mediaType: 'application/json',
         });

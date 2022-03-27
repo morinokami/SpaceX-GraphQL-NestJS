@@ -11,6 +11,7 @@ export type { Company } from './models/Company';
 export type { Core } from './models/Core';
 export type { Crew } from './models/Crew';
 export type { DocMeta } from './models/DocMeta';
+export type { History } from './models/History';
 export type { Landpad } from './models/Landpad';
 export type { Launch } from './models/Launch';
 export type { QueryOptions } from './models/QueryOptions';

@@ -27,12 +27,20 @@ type CompanyInfo {
   headquarters: Headquarters!
   id: ID!
   launchSites: Int
-  links: Links!
+  links: CompanyInfoLinks!
   name: String
   summary: String
   testSites: Int
   valuation: Float
   vehicles: Int
+}
+
+"""Company Info Links"""
+type CompanyInfoLinks {
+  elonTwitter: String
+  flickr: String
+  twitter: String
+  website: String
 }
 
 """Capsule"""
@@ -68,6 +76,21 @@ type Headquarters {
   state: String
 }
 
+"""History"""
+type History {
+  details: String
+  eventDateUnix: Int
+  eventDateUtc: String
+  id: ID!
+  links: HistoryLinks!
+  title: String
+}
+
+"""History Links"""
+type HistoryLinks {
+  article: String
+}
+
 """Landpad"""
 type Landpad {
   details: String
@@ -101,14 +124,6 @@ type Launch {
   ships: [Ship!]!
 }
 
-"""Links"""
-type Links {
-  elonTwitter: String
-  flickr: String
-  twitter: String
-  website: String
-}
-
 type PaginatedCapsules {
   docs: [Capsule!]!
   hasNextPage: Boolean!
@@ -139,6 +154,20 @@ type PaginatedCores {
 
 type PaginatedCrew {
   docs: [Crew!]!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  limit: Int!
+  nextPage: Int
+  offset: Int!
+  page: Int!
+  pagingCounter: Int!
+  prevPage: Int
+  totalDocs: Int!
+  totalPages: Int!
+}
+
+type PaginatedHistory {
+  docs: [History!]!
   hasNextPage: Boolean!
   hasPrevPage: Boolean!
   limit: Int!
@@ -203,6 +232,9 @@ type Query {
   """Get all crew"""
   allCrew: [Crew!]!
 
+  """Get all histories"""
+  allHistories: [History!]!
+
   """Get all landpads"""
   allLandpads: [Landpad!]!
 
@@ -235,6 +267,12 @@ type Query {
 
   """Query crew"""
   crews(input: QueryOptionsInput!): PaginatedCrew!
+
+  """Query histories"""
+  histories(input: QueryOptionsInput!): PaginatedHistory!
+
+  """Get one history"""
+  history(id: String!): History!
 
   """Get one landpad"""
   landpad(id: String!): Landpad!

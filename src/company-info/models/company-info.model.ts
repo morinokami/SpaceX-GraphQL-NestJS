@@ -12,8 +12,8 @@ class Headquarters {
   state?: string;
 }
 
-@ObjectType({ description: 'Links' })
-class Links {
+@ObjectType({ description: 'Company Info Links' })
+class CompanyInfoLinks {
   @Field({ nullable: true })
   website?: string;
 
@@ -71,8 +71,8 @@ export class CompanyInfo {
   @Field(() => Headquarters)
   headquarters: Headquarters;
 
-  @Field(() => Links)
-  links: Links;
+  @Field(() => CompanyInfoLinks)
+  links: CompanyInfoLinks;
 
   @Field({ nullable: true })
   summary?: string;

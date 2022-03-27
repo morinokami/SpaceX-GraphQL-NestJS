@@ -22,6 +22,10 @@ Playground: https://spacex-graphql-nestjs.herokuapp.com/graphql
   * allDragons
   * dragon
   * dragons
+* History
+  * ✔️ allHistories
+  * ✔️ history
+  * ✔️ histories
 * Landpads
   * ✔️ allLandpads
   * ✔️ landpad
@@ -53,4 +57,3 @@ Playground: https://spacex-graphql-nestjs.herokuapp.com/graphql
   * ✔️ allStarlinks
   * ✔️ starlink
   * ✔️ starlinks
-* History
