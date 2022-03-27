@@ -19,9 +19,9 @@ Playground: https://spacex-graphql-nestjs.herokuapp.com/graphql
   * ✔️ crew
   * ✔️ crews
 * Dragons
-  * allDragons
-  * dragon
-  * dragons
+  * ✔️ allDragons
+  * ✔️ dragon
+  * ✔️ dragons
 * History
   * ✔️ allHistories
   * ✔️ history
