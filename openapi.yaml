@@ -130,6 +130,60 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Core"
+  /v4/crew:
+    get:
+      summary: Get all crew members
+      operationId: GetAllCrewMembers
+      parameters: []
+      responses:
+        "200":
+          description: default
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Crew"
+  /v4/crew/{id}:
+    get:
+      summary: Get one crew member
+      operationId: GetOneCrewMember
+      parameters:
+        - name: id
+          in: path
+          description: ID of crew member
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Crew"
+  /v4/crew/query:
+    post:
+      summary: Query crew members
+      operationId: QueryCrewMembers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryOptions"
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Crew"
   /v4/landpads:
     get:
       summary: Get all landpads
@@ -468,6 +522,25 @@ components:
           type: integer
           format: int32
         last_update:
+          type: string
+        launches:
+          type: array
+          items:
+            type: string
+    Crew:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        agency:
+          type: string
+        image:
+          type: string
+        wikipedia:
           type: string
         launches:
           type: array

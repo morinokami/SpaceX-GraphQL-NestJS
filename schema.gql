@@ -50,6 +50,17 @@ type Core {
   status: String!
 }
 
+"""Crew"""
+type Crew {
+  agency: String
+  id: ID!
+  image: String
+  launches: [Launch!]!
+  name: String
+  status: String!
+  wikipedia: String
+}
+
 """Headquarters"""
 type Headquarters {
   address: String
@@ -126,6 +137,20 @@ type PaginatedCores {
   totalPages: Int!
 }
 
+type PaginatedCrew {
+  docs: [Crew!]!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  limit: Int!
+  nextPage: Int
+  offset: Int!
+  page: Int!
+  pagingCounter: Int!
+  prevPage: Int
+  totalDocs: Int!
+  totalPages: Int!
+}
+
 type PaginatedLandpads {
   docs: [Landpad!]!
   hasNextPage: Boolean!
@@ -175,6 +200,9 @@ type Query {
   """Get all cores"""
   allCores: [Core!]!
 
+  """Get all crew"""
+  allCrew: [Crew!]!
+
   """Get all landpads"""
   allLandpads: [Landpad!]!
 
@@ -201,6 +229,12 @@ type Query {
 
   """Query cores"""
   cores(input: QueryOptionsInput!): PaginatedCores!
+
+  """Get one crew"""
+  crew(id: String!): Crew!
+
+  """Query crew"""
+  crews(input: QueryOptionsInput!): PaginatedCrew!
 
   """Get one landpad"""
   landpad(id: String!): Landpad!

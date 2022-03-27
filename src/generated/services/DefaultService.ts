@@ -4,6 +4,7 @@
 import type { Capsule } from '../models/Capsule';
 import type { Company } from '../models/Company';
 import type { Core } from '../models/Core';
+import type { Crew } from '../models/Crew';
 import type { DocMeta } from '../models/DocMeta';
 import type { Landpad } from '../models/Landpad';
 import type { Launch } from '../models/Launch';
@@ -123,6 +124,55 @@ export class DefaultService {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/v4/cores/query',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
+     * Get all crew members
+     * @returns any default
+     * @throws ApiError
+     */
+    public static getAllCrewMembers(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/crew',
+        });
+    }
+
+    /**
+     * Get one crew member
+     * @param id ID of crew member
+     * @returns Crew default
+     * @throws ApiError
+     */
+    public static getOneCrewMember(
+        id: string,
+    ): CancelablePromise<Crew> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/crew/{id}',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
+    /**
+     * Query crew members
+     * @param requestBody
+     * @returns any default
+     * @throws ApiError
+     */
+    public static queryCrewMembers(
+        requestBody: QueryOptions,
+    ): CancelablePromise<(DocMeta & {
+        docs?: Array<Crew>;
+    })> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/v4/crew/query',
             body: requestBody,
             mediaType: 'application/json',
         });

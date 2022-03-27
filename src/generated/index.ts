@@ -9,6 +9,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 export type { Capsule } from './models/Capsule';
 export type { Company } from './models/Company';
 export type { Core } from './models/Core';
+export type { Crew } from './models/Crew';
 export type { DocMeta } from './models/DocMeta';
 export type { Landpad } from './models/Landpad';
 export type { Launch } from './models/Launch';
