@@ -12,8 +12,8 @@ Playground: https://spacex-graphql-nestjs.herokuapp.com/graphql
   * ✔️ companyInfo
 * Cores
   * ✔️ allCores
-  * core
-  * cores
+  * ✔️ core
+  * ✔️ cores
 * Crew
   * allCrews
   * crew
