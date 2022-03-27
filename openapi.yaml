@@ -104,8 +104,10 @@ paths:
       responses:
         200:
           description: default
-          schema:
-            $ref: "#/components/schemas/Core"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Core"
   /v4/cores/query:
     post:
       summary: Query cores
@@ -138,10 +140,12 @@ paths:
       responses:
         "200":
           description: default
-          schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/Crew"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Crew"
   /v4/crew/{id}:
     get:
       summary: Get one crew member
@@ -324,8 +328,10 @@ paths:
       responses:
         200:
           description: default
-          schema:
-            $ref: "#/components/schemas/Landpad"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Landpad"
   /v4/landpads/query:
     post:
       summary: Query landpads
@@ -389,11 +395,12 @@ paths:
       responses:
         200:
           description: default
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: "#/components/schemas/Launchpad"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Launchpad"
   /v4/launchpads/{id}:
     get:
       summary: Get one launchpad
@@ -510,10 +517,12 @@ paths:
       responses:
         "200":
           description: default
-          schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/Starlink"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Starlink"
   /v4/starlink/{id}:
     get:
       summary: Get one Starlink sat

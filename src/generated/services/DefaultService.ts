@@ -98,12 +98,12 @@ export class DefaultService {
     /**
      * Get one core
      * @param coreId ID of core
-     * @returns any default
+     * @returns Core default
      * @throws ApiError
      */
     public static getOneCore(
         coreId: string,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<Core> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/v4/cores/{coreID}',
@@ -134,10 +134,10 @@ export class DefaultService {
 
     /**
      * Get all crew members
-     * @returns any default
+     * @returns Crew default
      * @throws ApiError
      */
-    public static getAllCrewMembers(): CancelablePromise<any> {
+    public static getAllCrewMembers(): CancelablePromise<Array<Crew>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/v4/crew',
@@ -294,12 +294,12 @@ export class DefaultService {
     /**
      * Get one landpad
      * @param id ID of landpad
-     * @returns any default
+     * @returns Landpad default
      * @throws ApiError
      */
     public static getOneLandpad(
         id: string,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<Landpad> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/v4/landpads/{id}',
@@ -360,10 +360,10 @@ export class DefaultService {
 
     /**
      * Get all launchpads
-     * @returns any default
+     * @returns Launchpad default
      * @throws ApiError
      */
-    public static getAllLaunchpads(): CancelablePromise<any> {
+    public static getAllLaunchpads(): CancelablePromise<Array<Launchpad>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/v4/launchpads',
@@ -470,10 +470,10 @@ export class DefaultService {
 
     /**
      * Get all Starlink sats
-     * @returns any default
+     * @returns Starlink default
      * @throws ApiError
      */
-    public static getAllStarlinkSats(): CancelablePromise<any> {
+    public static getAllStarlinkSats(): CancelablePromise<Array<Starlink>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/v4/starlink',
