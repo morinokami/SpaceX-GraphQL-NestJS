@@ -57,6 +57,30 @@ type Headquarters {
   state: String
 }
 
+"""Landpad"""
+type Landpad {
+  details: String
+  fullName: String
+  id: ID!
+  images: LandpadImages
+  landingAttempts: Int!
+  landingSuccesses: Int!
+  latitude: Float
+  launches: [Launch!]!
+  locality: String
+  longitude: Float
+  name: String
+  region: String
+  status: String!
+  type: String
+  wikipedia: String
+}
+
+"""Landpad Images"""
+type LandpadImages {
+  large: [String!]
+}
+
 """Launch"""
 type Launch {
   capsules: [Capsule!]!
@@ -90,6 +114,20 @@ type PaginatedCapsules {
 
 type PaginatedCores {
   docs: [Core!]!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  limit: Int!
+  nextPage: Int
+  offset: Int!
+  page: Int!
+  pagingCounter: Int!
+  prevPage: Int
+  totalDocs: Int!
+  totalPages: Int!
+}
+
+type PaginatedLandpads {
+  docs: [Landpad!]!
   hasNextPage: Boolean!
   hasPrevPage: Boolean!
   limit: Int!
@@ -137,6 +175,9 @@ type Query {
   """Get all cores"""
   allCores: [Core!]!
 
+  """Get all landpads"""
+  allLandpads: [Landpad!]!
+
   """Get all launches"""
   allLaunches: [Launch!]!
 
@@ -160,6 +201,12 @@ type Query {
 
   """Query cores"""
   cores(input: QueryOptionsInput!): PaginatedCores!
+
+  """Get one landpad"""
+  landpad(id: String!): Landpad!
+
+  """Query landpads"""
+  landpads(input: QueryOptionsInput!): PaginatedLandpads!
 
   """Roadster info"""
   roadsterInfo: RoadsterInfo!

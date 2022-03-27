@@ -10,6 +10,7 @@ export type { Capsule } from './models/Capsule';
 export type { Company } from './models/Company';
 export type { Core } from './models/Core';
 export type { DocMeta } from './models/DocMeta';
+export type { Landpad } from './models/Landpad';
 export type { Launch } from './models/Launch';
 export type { QueryOptions } from './models/QueryOptions';
 export type { Roadster } from './models/Roadster';

@@ -8,6 +8,7 @@ import { CompanyInfoModule } from './company-info/company-info.module';
 import { CoresModule } from './cores/cores.module';
 import { RoadsterInfoModule } from './roadster-info/roadster-info.module';
 import { StarlinkModule } from './starlink/starlink.module';
+import { LandpadsModule } from './landpads/landpads.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { StarlinkModule } from './starlink/starlink.module';
     CoresModule,
     RoadsterInfoModule,
     StarlinkModule,
+    LandpadsModule,
   ],
 })
 export class AppModule {}
