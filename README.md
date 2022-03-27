@@ -52,5 +52,5 @@ Playground: https://spacex-graphql-nestjs.herokuapp.com/graphql
 * Starlink
   * ✔️ allStarlinks
   * ✔️ starlink
-  * starlinks
+  * ✔️ starlinks
 * History

@@ -50,48 +50,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                query:
-                  title: Query
-                  type: object
-                  properties: {}
-                  description: Accepts any valid MongoDB find() query
-                options:
-                  title: Options
-                  type: object
-                  properties:
-                    select:
-                      title: Select
-                      type: string
-                      description: Fields to return (by default returns all fields)
-                    sort:
-                      title: Sort
-                      type: string
-                      description: Sort order
-                    offset:
-                      title: Offset
-                      type: integer
-                      description: Use offset or page to set skip position
-                      format: int32
-                    page:
-                      title: Page
-                      type: integer
-                      format: int32
-                    limit:
-                      title: Limit
-                      type: integer
-                      format: int32
-                    pagination:
-                      title: Pagination
-                      type: boolean
-                      description: If set to false, it will return all docs without adding limit condition
-                    populate:
-                      title: Populate
-                      type: array
-                      description: Paths which should be populated with other documents
-                      items:
-                        type: object
+              $ref: "#/components/schemas/QueryOptions"
         required: true
       responses:
         200:
@@ -234,6 +193,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Starlink"
+  /v4/starlink/query:
+    post:
+      summary: Query Starlink sats
+      operationId: QueryStarlinkSats
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryOptions"
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Starlink"
 components:
   schemas:
     Capsule:
@@ -842,6 +825,49 @@ components:
               type: string
             TLE_LINE2:
               type: string
+    QueryOptions:
+      type: object
+      properties:
+        query:
+          title: Query
+          type: object
+          properties: {}
+          description: Accepts any valid MongoDB find() query
+        options:
+          title: Options
+          type: object
+          properties:
+            select:
+              title: Select
+              type: string
+              description: Fields to return (by default returns all fields)
+            sort:
+              title: Sort
+              type: string
+              description: Sort order
+            offset:
+              title: Offset
+              type: integer
+              description: Use offset or page to set skip position
+              format: int32
+            page:
+              title: Page
+              type: integer
+              format: int32
+            limit:
+              title: Limit
+              type: integer
+              format: int32
+            pagination:
+              title: Pagination
+              type: boolean
+              description: If set to false, it will return all docs without adding limit condition
+            populate:
+              title: Populate
+              type: array
+              description: Paths which should be populated with other documents
+              items:
+                type: object
     DocMeta:
       type: object
       properties:

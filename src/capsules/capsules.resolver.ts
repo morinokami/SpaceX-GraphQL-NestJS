@@ -23,7 +23,7 @@ export class CapsulesResolver {
     return this.capsulesService.getCapsule(id);
   }
 
-  @Query(() => PaginatedCapsules, { description: 'query capsules' })
+  @Query(() => PaginatedCapsules, { description: 'Query capsules' })
   async capsules(
     @Args('input') options: QueryOptionsInput,
   ): Promise<PaginatedCapsules> {

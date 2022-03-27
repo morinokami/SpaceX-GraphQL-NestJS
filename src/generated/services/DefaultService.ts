@@ -6,6 +6,7 @@ import type { Company } from '../models/Company';
 import type { Core } from '../models/Core';
 import type { DocMeta } from '../models/DocMeta';
 import type { Launch } from '../models/Launch';
+import type { QueryOptions } from '../models/QueryOptions';
 import type { Roadster } from '../models/Roadster';
 import type { Ship } from '../models/Ship';
 import type { Starlink } from '../models/Starlink';
@@ -53,36 +54,7 @@ export class DefaultService {
      * @throws ApiError
      */
     public static queryCapsules(
-        requestBody: {
-            /**
-             * Accepts any valid MongoDB find() query
-             */
-            query?: any;
-            options?: {
-                /**
-                 * Fields to return (by default returns all fields)
-                 */
-                select?: string;
-                /**
-                 * Sort order
-                 */
-                sort?: string;
-                /**
-                 * Use offset or page to set skip position
-                 */
-                offset?: number;
-                page?: number;
-                limit?: number;
-                /**
-                 * If set to false, it will return all docs without adding limit condition
-                 */
-                pagination?: boolean;
-                /**
-                 * Paths which should be populated with other documents
-                 */
-                populate?: Array<any>;
-            };
-        },
+        requestBody: QueryOptions,
     ): CancelablePromise<(DocMeta & {
         docs?: Array<Capsule>;
     })> {
@@ -217,6 +189,25 @@ export class DefaultService {
             path: {
                 'id': id,
             },
+        });
+    }
+
+    /**
+     * Query Starlink sats
+     * @param requestBody
+     * @returns any default
+     * @throws ApiError
+     */
+    public static queryStarlinkSats(
+        requestBody: QueryOptions,
+    ): CancelablePromise<(DocMeta & {
+        docs?: Array<Starlink>;
+    })> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/v4/starlink/query',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 

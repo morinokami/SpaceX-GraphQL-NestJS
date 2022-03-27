@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { QueryOptionsInput } from 'src/common';
 import { DefaultService, Starlink as _Starlink } from 'src/generated';
+import { PaginatedStarlinks } from './models/paginated-starlinks.model';
 import { Starlink } from './models/starlink.model';
 
 @Injectable()
@@ -26,5 +28,13 @@ export class StarlinkService {
   async getStarlink(id: string): Promise<Starlink> {
     const starlink = await DefaultService.getOneStarlinkSat(id);
     return this.convertToStarlink(starlink);
+  }
+
+  async getStarlinks(options: QueryOptionsInput): Promise<PaginatedStarlinks> {
+    const starlinks = await DefaultService.queryStarlinkSats({ options });
+    return {
+      ...starlinks,
+      docs: starlinks.docs.map((starlink) => this.convertToStarlink(starlink)),
+    };
   }
 }

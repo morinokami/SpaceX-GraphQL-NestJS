@@ -88,6 +88,20 @@ type PaginatedCapsules {
   totalPages: Int!
 }
 
+type PaginatedStarlinks {
+  docs: [Starlink!]!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  limit: Int!
+  nextPage: Int
+  offset: Int!
+  page: Int!
+  pagingCounter: Int!
+  prevPage: Int
+  totalDocs: Int!
+  totalPages: Int!
+}
+
 type Query {
   """Get all capsules"""
   allCapsules: [Capsule!]!
@@ -107,7 +121,7 @@ type Query {
   """Get one capsule"""
   capsule(id: String!): Capsule!
 
-  """query capsules"""
+  """Query capsules"""
   capsules(input: QueryOptionsInput!): PaginatedCapsules!
 
   """Company info"""
@@ -118,6 +132,9 @@ type Query {
 
   """Get one starlink"""
   starlink(id: String!): Starlink!
+
+  """Query starlinks"""
+  starlinks(input: QueryOptionsInput!): PaginatedStarlinks!
 }
 
 input QueryOptionsInput {
