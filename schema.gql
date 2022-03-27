@@ -88,6 +88,20 @@ type PaginatedCapsules {
   totalPages: Int!
 }
 
+type PaginatedCores {
+  docs: [Core!]!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  limit: Int!
+  nextPage: Int
+  offset: Int!
+  page: Int!
+  pagingCounter: Int!
+  prevPage: Int
+  totalDocs: Int!
+  totalPages: Int!
+}
+
 type PaginatedShips {
   docs: [Ship!]!
   hasNextPage: Boolean!
@@ -140,6 +154,12 @@ type Query {
 
   """Company info"""
   companyInfo: CompanyInfo!
+
+  """Get one core"""
+  core(id: String!): Core!
+
+  """Query cores"""
+  cores(input: QueryOptionsInput!): PaginatedCores!
 
   """Roadster info"""
   roadsterInfo: RoadsterInfo!

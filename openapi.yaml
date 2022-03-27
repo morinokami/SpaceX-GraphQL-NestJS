@@ -90,6 +90,46 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Core"
+  /v4/cores/{coreID}:
+    get:
+      summary: Get one core
+      operationId: GetOneCore
+      parameters:
+        - name: coreID
+          in: path
+          description: The ID of the core.
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: default
+          schema:
+            $ref: "#/components/schemas/Core"
+  /v4/cores/query:
+    post:
+      summary: Query cores
+      operationId: QueryCores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryOptions"
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Core"
   /v4/launches:
     get:
       summary: Get all launches

@@ -91,6 +91,43 @@ export class DefaultService {
     }
 
     /**
+     * Get one core
+     * @param coreId The ID of the core.
+     * @returns any default
+     * @throws ApiError
+     */
+    public static getOneCore(
+        coreId: string,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/cores/{coreID}',
+            path: {
+                'coreID': coreId,
+            },
+        });
+    }
+
+    /**
+     * Query cores
+     * @param requestBody
+     * @returns any default
+     * @throws ApiError
+     */
+    public static queryCores(
+        requestBody: QueryOptions,
+    ): CancelablePromise<(DocMeta & {
+        docs?: Array<Core>;
+    })> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/v4/cores/query',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
      * Get all launches
      * @returns Launch default
      * @throws ApiError
