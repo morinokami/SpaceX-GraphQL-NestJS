@@ -778,8 +778,8 @@ components:
                 type: object
                 properties:
                   kN:
-                    type: integer
-                    format: int32
+                    type: number
+                    format: float
                   lbf:
                     type: integer
                     format: int32

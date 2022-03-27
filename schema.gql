@@ -15,6 +15,12 @@ type Capsule {
   waterLandings: Float!
 }
 
+"""Cargo"""
+type Cargo {
+  solarArray: Int
+  unpressurizedCargo: Boolean
+}
+
 """Company Info"""
 type CompanyInfo {
   ceo: String
@@ -69,11 +75,58 @@ type Crew {
   wikipedia: String
 }
 
+"""Diameter"""
+type Diameter {
+  feet: Float
+  meters: Float
+}
+
+"""Dragon"""
+type Dragon {
+  active: Boolean!
+  crewCapacity: Int!
+  description: String
+  diameter: Diameter!
+  dryMassKg: Int!
+  dryMassLb: Int!
+  firstFlight: String
+  flickrImages: [String!]!
+  heatShield: HeatShield!
+  heightWTrunk: HeightWTrunk!
+  id: ID!
+  launchPayloadMass: PayloadMass!
+  launchPayloadVol: PayloadVolume!
+  name: String!
+  orbitDurationYr: Int!
+  pressurizedCapsule: PressurizedCapsule!
+  returnPayloadMass: PayloadMass!
+  returnPayloadVol: PayloadVolume!
+  sidewallAngleDeg: Int!
+  thrusters: [Thruster!]!
+  trunk: Trunk!
+  type: String!
+  wikipedia: String
+}
+
 """Headquarters"""
 type Headquarters {
   address: String
   city: String
   state: String
+}
+
+"""Heat Shield"""
+type HeatShield {
+  devPartner: String
+  material: String!
+  sizeMeters: Float!
+  tempDegrees: Int
+}
+
+"""HeightWTrunk"""
+type HeightWTrunk {
+  feet: Float
+  meters: Float
 }
 
 """History"""
@@ -182,6 +235,20 @@ type PaginatedCrew {
   totalPages: Int!
 }
 
+type PaginatedDragons {
+  docs: [Dragon!]!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  limit: Int!
+  nextPage: Int
+  offset: Int!
+  page: Int!
+  pagingCounter: Int!
+  prevPage: Int
+  totalDocs: Int!
+  totalPages: Int!
+}
+
 type PaginatedHistory {
   docs: [History!]!
   hasNextPage: Boolean!
@@ -252,6 +319,23 @@ type PaginatedStarlinks {
   totalPages: Int!
 }
 
+"""Payload Mass"""
+type PayloadMass {
+  kg: Int
+  lb: Int
+}
+
+"""Payload Volume"""
+type PayloadVolume {
+  cubicFeet: Int
+  cubicMeters: Int
+}
+
+"""Pressurized Capsule"""
+type PressurizedCapsule {
+  payloadVolume: PayloadVolume!
+}
+
 type Query {
   """Get all capsules"""
   allCapsules: [Capsule!]!
@@ -261,6 +345,9 @@ type Query {
 
   """Get all crew"""
   allCrew: [Crew!]!
+
+  """Get all dragons"""
+  allDragons: [Dragon!]!
 
   """Get all histories"""
   allHistories: [History!]!
@@ -300,6 +387,12 @@ type Query {
 
   """Query crew"""
   crews(input: QueryOptionsInput!): PaginatedCrew!
+
+  """Get one dragon"""
+  dragon(id: String!): Dragon!
+
+  """Query dragons"""
+  dragons(input: QueryOptionsInput!): PaginatedDragons!
 
   """Query histories"""
   histories(input: QueryOptionsInput!): PaginatedHistory!
@@ -453,4 +546,27 @@ type Starlink {
   spaceTrack: SpaceTrack!
   velocityKms: Float
   version: String
+}
+
+"""Thrust"""
+type Thrust {
+  kN: Float
+  lbf: Int
+}
+
+"""Thruster"""
+type Thruster {
+  amount: Int
+  fuel1: String
+  fuel2: String
+  isp: Int
+  pods: Int
+  thrust: Thrust
+  type: String
+}
+
+"""Trunk"""
+type Trunk {
+  cargo: Cargo!
+  trunkVolume: PayloadVolume!
 }

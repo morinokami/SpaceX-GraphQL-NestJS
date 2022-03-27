@@ -17,7 +17,7 @@ class HeatShield {
 
 @ObjectType({ description: 'Thrust' })
 class Thrust {
-  @Field(() => Int, { nullable: true })
+  @Field({ nullable: true })
   kN: number;
 
   @Field(() => Int, { nullable: true })
@@ -150,13 +150,13 @@ export class Dragon {
   launchPayloadMass: PayloadMass;
 
   @Field(() => PayloadVolume)
-  launchPayloadVolume: PayloadVolume;
+  launchPayloadVol: PayloadVolume;
 
   @Field(() => PayloadMass)
   returnPayloadMass: PayloadMass;
 
   @Field(() => PayloadVolume)
-  returnPayloadVolume: PayloadVolume;
+  returnPayloadVol: PayloadVolume;
 
   @Field(() => PressurizedCapsule)
   pressurizedCapsule: PressurizedCapsule;
