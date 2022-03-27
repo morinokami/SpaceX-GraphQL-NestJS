@@ -5,6 +5,7 @@ import type { Capsule } from '../models/Capsule';
 import type { Company } from '../models/Company';
 import type { Core } from '../models/Core';
 import type { DocMeta } from '../models/DocMeta';
+import type { Landpad } from '../models/Landpad';
 import type { Launch } from '../models/Launch';
 import type { QueryOptions } from '../models/QueryOptions';
 import type { Roadster } from '../models/Roadster';
@@ -92,7 +93,7 @@ export class DefaultService {
 
     /**
      * Get one core
-     * @param coreId The ID of the core.
+     * @param coreId ID of core
      * @returns any default
      * @throws ApiError
      */
@@ -122,6 +123,55 @@ export class DefaultService {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/v4/cores/query',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
+     * Get all landpads
+     * @returns Landpad default
+     * @throws ApiError
+     */
+    public static getAllLandpads(): CancelablePromise<Array<Landpad>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/landpads',
+        });
+    }
+
+    /**
+     * Get one landpad
+     * @param id ID of landpad
+     * @returns any default
+     * @throws ApiError
+     */
+    public static getOneLandpad(
+        id: string,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/landpads/{id}',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
+    /**
+     * Query landpads
+     * @param requestBody
+     * @returns any default
+     * @throws ApiError
+     */
+    public static queryLandpads(
+        requestBody: QueryOptions,
+    ): CancelablePromise<(DocMeta & {
+        docs?: Array<Landpad>;
+    })> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/v4/landpads/query',
             body: requestBody,
             mediaType: 'application/json',
         });

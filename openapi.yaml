@@ -97,7 +97,7 @@ paths:
       parameters:
         - name: coreID
           in: path
-          description: The ID of the core.
+          description: ID of core
           required: true
           schema:
             type: string
@@ -130,6 +130,60 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Core"
+  /v4/landpads:
+    get:
+      summary: Get all landpads
+      operationId: GetAllLandpads
+      parameters: []
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Landpad"
+  /v4/landpads/{id}:
+    get:
+      summary: Get one landpad
+      operationId: GetOneLandpad
+      parameters:
+        - name: id
+          in: path
+          description: ID of landpad
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: default
+          schema:
+            $ref: "#/components/schemas/Landpad"
+  /v4/landpads/query:
+    post:
+      summary: Query landpads
+      operationId: QueryLandpads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryOptions"
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Landpad"
   /v4/launches:
     get:
       summary: Get all launches
@@ -419,6 +473,51 @@ components:
           type: array
           items:
             type: string
+    Landpad:
+      type: object
+      properties:
+        id:
+          type: string
+          title: ID
+        name:
+          type: string
+        full_name:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+        locality:
+          type: string
+        region:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        landing_attempts:
+          type: integer
+          format: int32
+        landing_successes:
+          type: integer
+          format: int32
+        wikipedia:
+          type: string
+        details:
+          type: string
+        launches:
+          type: array
+          items:
+            type: string
+        images:
+          type: object
+          properties:
+            large:
+              type: array
+              items:
+                type: string
     Launch:
       type: object
       properties:
