@@ -184,6 +184,62 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Crew"
+  /v4/dragons:
+    get:
+      summary: Get all Dragons
+      operationId: GetAllDragons
+      parameters: []
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Dragon"
+  /v4/dragons/{id}:
+    get:
+      summary: Get one Dragon
+      operationId: GetOneDragon
+      parameters:
+        - name: id
+          in: path
+          description: ID of Dragon
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: default
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dragon"
+  /v4/dragons/query:
+    post:
+      summary: Query Dragons
+      operationId: QueryDragons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryOptions"
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Dragon"
   /v4/history:
     get:
       summary: Get all history events
@@ -657,6 +713,170 @@ components:
           type: array
           items:
             type: string
+    Dragon:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        active:
+          type: boolean
+        crew_capacity:
+          type: integer
+          format: int32
+        sidewall_angle_deg:
+          type: integer
+          format: int32
+        orbit_duration_yr:
+          type: integer
+          format: int32
+        dry_mass_kg:
+          type: integer
+          format: int32
+        dry_mass_lb:
+          type: integer
+          format: int32
+        first_flight:
+          type: string
+        heat_shield:
+          type: object
+          properties:
+            material:
+              type: string
+            size_meters:
+              type: number
+              format: float
+            temp_degrees:
+              type: integer
+              format: int32
+            dev_partner:
+              type: string
+        thrusters:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              amount:
+                type: integer
+                format: int32
+              pods:
+                type: integer
+                format: int32
+              fuel_1:
+                type: string
+              fuel_2:
+                type: string
+              isp:
+                type: integer
+                format: int32
+              thrust:
+                type: object
+                properties:
+                  kN:
+                    type: integer
+                    format: int32
+                  lbf:
+                    type: integer
+                    format: int32
+        launch_payload_mass:
+          type: object
+          properties:
+            kg:
+              type: integer
+              format: int32
+            lb:
+              type: integer
+              format: int32
+        launch_payload_vol:
+          type: object
+          properties:
+            cubic_meters:
+              type: integer
+              format: int32
+            cubic_feet:
+              type: integer
+              format: int32
+        return_payload_mass:
+          type: object
+          properties:
+            kg:
+              type: integer
+              format: int32
+            lb:
+              type: integer
+              format: int32
+        return_payload_vol:
+          type: object
+          properties:
+            cubic_meters:
+              type: integer
+              format: int32
+            cubic_feet:
+              type: integer
+              format: int32
+        pressurized_capsule:
+          type: object
+          properties:
+            payload_volume:
+              type: object
+              properties:
+                cubic_meters:
+                  type: integer
+                  format: int32
+                cubic_feet:
+                  type: integer
+                  format: int32
+        trunk:
+          type: object
+          properties:
+            trunk_volume:
+              type: object
+              properties:
+                cubic_meters:
+                  type: integer
+                  format: int32
+                cubic_feet:
+                  type: integer
+                  format: int32
+            cargo:
+              type: object
+              properties:
+                solar_array:
+                  type: integer
+                  format: int32
+                unpressurized_cargo:
+                  type: boolean
+        height_w_trunk:
+          type: object
+          properties:
+            meters:
+              type: number
+              format: float
+            feet:
+              type: number
+              format: float
+        diameter:
+          type: object
+          properties:
+            meters:
+              type: number
+              format: float
+            feet:
+              type: integer
+              format: int32
+        flickr_images:
+          type: array
+          items:
+            type: string
+        wikipedia:
+          type: string
+        description:
+          type: string
     History:
       type: object
       properties:

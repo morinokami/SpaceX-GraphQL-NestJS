@@ -6,6 +6,7 @@ import type { Company } from '../models/Company';
 import type { Core } from '../models/Core';
 import type { Crew } from '../models/Crew';
 import type { DocMeta } from '../models/DocMeta';
+import type { Dragon } from '../models/Dragon';
 import type { History } from '../models/History';
 import type { Landpad } from '../models/Landpad';
 import type { Launch } from '../models/Launch';
@@ -175,6 +176,55 @@ export class DefaultService {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/v4/crew/query',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
+     * Get all Dragons
+     * @returns Dragon default
+     * @throws ApiError
+     */
+    public static getAllDragons(): CancelablePromise<Array<Dragon>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/dragons',
+        });
+    }
+
+    /**
+     * Get one Dragon
+     * @param id ID of Dragon
+     * @returns Dragon default
+     * @throws ApiError
+     */
+    public static getOneDragon(
+        id: string,
+    ): CancelablePromise<Dragon> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/dragons/{id}',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
+    /**
+     * Query Dragons
+     * @param requestBody
+     * @returns any default
+     * @throws ApiError
+     */
+    public static queryDragons(
+        requestBody: QueryOptions,
+    ): CancelablePromise<(DocMeta & {
+        docs?: Array<Dragon>;
+    })> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/v4/dragons/query',
             body: requestBody,
             mediaType: 'application/json',
         });
