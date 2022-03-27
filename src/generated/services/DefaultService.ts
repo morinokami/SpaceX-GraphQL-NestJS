@@ -163,6 +163,25 @@ export class DefaultService {
     }
 
     /**
+     * Query ships
+     * @param requestBody
+     * @returns any default
+     * @throws ApiError
+     */
+    public static queryShips(
+        requestBody: QueryOptions,
+    ): CancelablePromise<(DocMeta & {
+        docs?: Array<Ship>;
+    })> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/v4/ships/query',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
      * Get all Starlink sats
      * @returns any default
      * @throws ApiError

@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { QueryOptionsInput } from 'src/common';
 import { DefaultService, Ship as _Ship } from 'src/generated';
+import { PaginatedShips } from './models/paginated-ships.model';
 import { Ship } from './models/ship.model';
 
 @Injectable()
@@ -36,6 +38,19 @@ export class ShipsService {
   async getAllShips(): Promise<Ship[]> {
     const ships = await DefaultService.getAllShips();
     return ships.map((ship) => this.convertToShip(ship));
+  }
+
+  async getShip(id: string): Promise<Ship> {
+    const ship = await DefaultService.getOneShip(id);
+    return this.convertToShip(ship);
+  }
+
+  async getShips(options: QueryOptionsInput): Promise<PaginatedShips> {
+    const ships = await DefaultService.queryShips({ options });
+    return {
+      ...ships,
+      docs: ships.docs.map((ship) => this.convertToShip(ship)),
+    };
   }
 
   async getShipsByIds(ids: string[]): Promise<Ship[]> {

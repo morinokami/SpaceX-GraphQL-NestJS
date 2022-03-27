@@ -163,6 +163,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Ship"
+  /v4/ships/query:
+    post:
+      summary: Query ships
+      operationId: QueryShips
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryOptions"
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Ship"
   /v4/starlink:
     get:
       summary: Get all Starlink sats

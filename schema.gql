@@ -88,6 +88,20 @@ type PaginatedCapsules {
   totalPages: Int!
 }
 
+type PaginatedShips {
+  docs: [Ship!]!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  limit: Int!
+  nextPage: Int
+  offset: Int!
+  page: Int!
+  pagingCounter: Int!
+  prevPage: Int
+  totalDocs: Int!
+  totalPages: Int!
+}
+
 type PaginatedStarlinks {
   docs: [Starlink!]!
   hasNextPage: Boolean!
@@ -129,6 +143,12 @@ type Query {
 
   """Roadster info"""
   roadsterInfo: RoadsterInfo!
+
+  """Get one ship"""
+  ship(id: String!): Ship!
+
+  """Query ships"""
+  ships(input: QueryOptionsInput!): PaginatedShips!
 
   """Get one starlink"""
   starlink(id: String!): Starlink!

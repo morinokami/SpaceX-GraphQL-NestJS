@@ -47,8 +47,8 @@ Playground: https://spacex-graphql-nestjs.herokuapp.com/graphql
   * rockets
 * Ships
   * ✔️ allShips
-  * ship
-  * ships
+  * ✔️ ship
+  * ✔️ ships
 * Starlink
   * ✔️ allStarlinks
   * ✔️ starlink
