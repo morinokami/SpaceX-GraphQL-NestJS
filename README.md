@@ -23,9 +23,9 @@ Playground: https://spacex-graphql-nestjs.herokuapp.com/graphql
   * dragon
   * dragons
 * Landpads
-  * allLandpads
-  * landpad
-  * landpads
+  * ✔️ allLandpads
+  * ✔️ landpad
+  * ✔️ landpads
 * Launches
   * allLaunches
   * launch
