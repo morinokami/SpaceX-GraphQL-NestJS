@@ -325,6 +325,61 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Launch"
+  /v4/launchpads:
+    get:
+      summary: Get all launchpads
+      operationId: GetAllLaunchpads
+      parameters: []
+      responses:
+        200:
+          description: default
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Launchpad"
+  /v4/launchpads/{id}:
+    get:
+      summary: Get one launchpad
+      operationId: GetOneLaunchpad
+      parameters:
+        - name: id
+          in: path
+          description: ID of launchpad
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Launchpad"
+  /v4/launchpads/query:
+    post:
+      summary: Query launchpads
+      operationId: QueryLaunchpads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryOptions"
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Launchpad"
   /v4/roadster:
     get:
       summary: Get Roadster Info
@@ -851,6 +906,52 @@ components:
         launch_library_id:
           type: string
           nullable: true
+    Launchpad:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        full_name:
+          type: string
+        status:
+          type: string
+        locality:
+          type: string
+        region:
+          type: string
+        timezone:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        launch_attempts:
+          type: integer
+          format: int32
+        launch_successes:
+          type: integer
+          format: int32
+        rockets:
+          type: array
+          items:
+            type: string
+        launches:
+          type: array
+          items:
+            type: string
+        images:
+          type: object
+          properties:
+            large:
+              type: array
+              items:
+                type: string
+        details:
+          type: string
     Roadster:
       type: object
       properties:

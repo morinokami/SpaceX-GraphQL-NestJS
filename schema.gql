@@ -124,6 +124,22 @@ type Launch {
   ships: [Ship!]!
 }
 
+"""Launchpad"""
+type Launchpad {
+  fullName: String
+  id: ID!
+  latitude: Float
+  launchAttempts: Int!
+  launchSuccesses: Int!
+  launches: [Launch!]!
+  locality: String
+  longitude: Float
+  name: String
+  region: String
+  status: String!
+  timezone: String
+}
+
 type PaginatedCapsules {
   docs: [Capsule!]!
   hasNextPage: Boolean!
@@ -194,6 +210,20 @@ type PaginatedLandpads {
   totalPages: Int!
 }
 
+type PaginatedLaunchpads {
+  docs: [Launchpad!]!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  limit: Int!
+  nextPage: Int
+  offset: Int!
+  page: Int!
+  pagingCounter: Int!
+  prevPage: Int
+  totalDocs: Int!
+  totalPages: Int!
+}
+
 type PaginatedShips {
   docs: [Ship!]!
   hasNextPage: Boolean!
@@ -241,6 +271,9 @@ type Query {
   """Get all launches"""
   allLaunches: [Launch!]!
 
+  """Get all launchpads"""
+  allLaunchpads: [Launchpad!]!
+
   """Get all ships"""
   allShips: [Ship!]!
 
@@ -279,6 +312,12 @@ type Query {
 
   """Query landpads"""
   landpads(input: QueryOptionsInput!): PaginatedLandpads!
+
+  """Get one launchpad"""
+  launchpad(id: String!): Launchpad!
+
+  """Query launchpads"""
+  launchpads(input: QueryOptionsInput!): PaginatedLaunchpads!
 
   """Roadster info"""
   roadsterInfo: RoadsterInfo!

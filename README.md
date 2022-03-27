@@ -36,9 +36,9 @@ Playground: https://spacex-graphql-nestjs.herokuapp.com/graphql
   * launches
   * ...
 * Launchpads
-  * allLaunchpads
-  * launchpad
-  * launchpads
+  * ✔️ allLaunchpads
+  * ✔️ launchpad
+  * ✔️ launchpads
 * Payloads
   * allPayloads
   * payload

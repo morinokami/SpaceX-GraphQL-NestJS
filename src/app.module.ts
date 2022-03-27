@@ -11,6 +11,7 @@ import { StarlinkModule } from './starlink/starlink.module';
 import { LandpadsModule } from './landpads/landpads.module';
 import { CrewModule } from './crew/crew.module';
 import { HistoryModule } from './history/history.module';
+import { LaunchpadsModule } from './launchpads/launchpads.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { HistoryModule } from './history/history.module';
     LandpadsModule,
     CrewModule,
     HistoryModule,
+    LaunchpadsModule,
   ],
 })
 export class AppModule {}
