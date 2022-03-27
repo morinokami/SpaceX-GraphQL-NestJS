@@ -24,10 +24,10 @@ type CompanyInfo {
   employees: Int
   founded: Int
   founder: String
-  headquarters: Headquarters
+  headquarters: Headquarters!
   id: ID!
   launchSites: Int
-  links: Links
+  links: Links!
   name: String
   summary: String
   testSites: Int
@@ -50,6 +50,7 @@ type Core {
   status: String!
 }
 
+"""Headquarters"""
 type Headquarters {
   address: String
   city: String
@@ -65,6 +66,7 @@ type Launch {
   ships: [Ship!]!
 }
 
+"""Links"""
 type Links {
   elonTwitter: String
   flickr: String
@@ -99,6 +101,9 @@ type Query {
   """Get all ships"""
   allShips: [Ship!]!
 
+  """Get all starlinks"""
+  allStarlinks: [Starlink!]!
+
   """Get one capsule"""
   capsule(id: String!): Capsule!
 
@@ -110,6 +115,9 @@ type Query {
 
   """Roadster info"""
   roadsterInfo: RoadsterInfo!
+
+  """Get one starlink"""
+  starlink(id: String!): Starlink!
 }
 
 input QueryOptionsInput {
@@ -173,4 +181,61 @@ type Ship {
   status: String
   type: String
   yearBuilt: Int
+}
+
+"""Space Track"""
+type SpaceTrack {
+  APOAPSIS: Float
+  ARG_OF_PERICENTER: Float
+  BSTAR: Float
+  CCSDS_OMM_VERS: String
+  CENTER_NAME: String
+  CLASSIFICATION_TYPE: String
+  COMMENT: String
+  COUNTRY_CODE: String
+  CREATION_DATE: String
+  DECAYED: Int
+  DECAY_DATE: String
+  ECCENTRICITY: Float
+  ELEMENT_SET_NO: Int
+  EPHEMERIS_TYPE: Int
+  EPOCH: String
+  FILE: Int
+  GP_ID: Int
+  INCLINATION: Float
+  LAUNCH_DATE: String
+  MEAN_ANOMALY: Float
+  MEAN_ELEMENT_THEORY: String
+  MEAN_MOTION: Float
+  MEAN_MOTION_DDOT: Float
+  MEAN_MOTION_DOT: Float
+  NORAD_CAT_ID: Int
+  OBJECT_ID: String
+  OBJECT_NAME: String
+  OBJECT_TYPE: String
+  ORIGINATOR: String
+  PERIAPSIS: Float
+  PERIOD: Float
+  RA_OF_ASC_NODE: Float
+  RCS_SIZE: String
+  REF_FRAME: String
+  REV_AT_EPOCH: Int
+  SEMIMAJOR_AXIS: Float
+  SITE: String
+  TIME_SYSTEM: String
+  TLE_LINE0: String
+  TLE_LINE1: String
+  TLE_LINE2: String
+}
+
+"""Starlink"""
+type Starlink {
+  heightKm: Float
+  id: ID!
+  latitude: Float
+  launch: Launch
+  longitude: Float
+  spaceTrack: SpaceTrack!
+  velocityKms: Float
+  version: String
 }

@@ -204,6 +204,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Ship"
+  /v4/starlink:
+    get:
+      summary: Get all Starlink sats
+      operationId: GetAllStarlinkSats
+      parameters: []
+      responses:
+        "200":
+          description: default
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Starlink"
+  /v4/starlink/{id}:
+    get:
+      summary: Get one Starlink sat
+      operationId: GetOneStarlinkSat
+      parameters:
+        - name: id
+          in: path
+          description: ID of starlink sat
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Starlink"
 components:
   schemas:
     Capsule:
@@ -686,6 +716,132 @@ components:
           type: array
           items:
             type: string
+    Starlink:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: string
+        launch:
+          type: string
+        longitude:
+          type: number
+          format: float
+        latitude:
+          type: number
+          format: float
+        height_km:
+          type: number
+          format: float
+        velocity_kms:
+          type: number
+          format: float
+        spaceTrack:
+          type: object
+          properties:
+            CCSDS_OMM_VERS:
+              type: string
+            COMMENT:
+              type: string
+            CREATION_DATE:
+              type: string
+            ORIGINATOR:
+              type: string
+            OBJECT_NAME:
+              type: string
+            OBJECT_ID:
+              type: string
+            CENTER_NAME:
+              type: string
+            REF_FRAME:
+              type: string
+            TIME_SYSTEM:
+              type: string
+            MEAN_ELEMENT_THEORY:
+              type: string
+            EPOCH:
+              type: string
+            MEAN_MOTION:
+              type: number
+              format: float
+            ECCENTRICITY:
+              type: number
+              format: float
+            INCLINATION:
+              type: number
+              format: float
+            RA_OF_ASC_NODE:
+              type: number
+              format: float
+            ARG_OF_PERICENTER:
+              type: number
+              format: float
+            MEAN_ANOMALY:
+              type: number
+              format: float
+            EPHEMERIS_TYPE:
+              type: integer
+              format: int32
+            CLASSIFICATION_TYPE:
+              type: string
+            NORAD_CAT_ID:
+              type: integer
+              format: int32
+            ELEMENT_SET_NO:
+              type: integer
+              format: int32
+            REV_AT_EPOCH:
+              type: integer
+              format: int32
+            BSTAR:
+              type: number
+              format: float
+            MEAN_MOTION_DOT:
+              type: number
+              format: float
+            MEAN_MOTION_DDOT:
+              type: number
+              format: float
+            SEMIMAJOR_AXIS:
+              type: number
+              format: float
+            PERIOD:
+              type: number
+              format: float
+            APOAPSIS:
+              type: number
+              format: float
+            PERIAPSIS:
+              type: number
+              format: float
+            OBJECT_TYPE:
+              type: string
+            RCS_SIZE:
+              type: string
+            COUNTRY_CODE:
+              type: string
+            LAUNCH_DATE:
+              type: string
+            SITE:
+              type: string
+            DECAY_DATE:
+              type: string
+            DECAYED:
+              type: integer
+              format: int32
+            FILE:
+              type: integer
+              format: int32
+            GP_ID:
+              type: integer
+              format: int32
+            TLE_LINE0:
+              type: string
+            TLE_LINE1:
+              type: string
+            TLE_LINE2:
+              type: string
     DocMeta:
       type: object
       properties:

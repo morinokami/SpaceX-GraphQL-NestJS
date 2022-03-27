@@ -8,6 +8,7 @@ import type { DocMeta } from '../models/DocMeta';
 import type { Launch } from '../models/Launch';
 import type { Roadster } from '../models/Roadster';
 import type { Ship } from '../models/Ship';
+import type { Starlink } from '../models/Starlink';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -183,6 +184,36 @@ export class DefaultService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/v4/ships/{id}',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
+    /**
+     * Get all Starlink sats
+     * @returns any default
+     * @throws ApiError
+     */
+    public static getAllStarlinkSats(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/starlink',
+        });
+    }
+
+    /**
+     * Get one Starlink sat
+     * @param id ID of starlink sat
+     * @returns Starlink default
+     * @throws ApiError
+     */
+    public static getOneStarlinkSat(
+        id: string,
+    ): CancelablePromise<Starlink> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/starlink/{id}',
             path: {
                 'id': id,
             },

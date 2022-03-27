@@ -1,6 +1,6 @@
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
-@ObjectType()
+@ObjectType({ description: 'Headquarters' })
 class Headquarters {
   @Field({ nullable: true })
   address?: string;
@@ -12,7 +12,7 @@ class Headquarters {
   state?: string;
 }
 
-@ObjectType()
+@ObjectType({ description: 'Links' })
 class Links {
   @Field({ nullable: true })
   website?: string;
@@ -68,11 +68,11 @@ export class CompanyInfo {
   @Field({ nullable: true })
   valuation?: number;
 
-  @Field(() => Headquarters, { nullable: true })
-  headquarters?: Headquarters;
+  @Field(() => Headquarters)
+  headquarters: Headquarters;
 
-  @Field(() => Links, { nullable: true })
-  links?: Links;
+  @Field(() => Links)
+  links: Links;
 
   @Field({ nullable: true })
   summary?: string;
