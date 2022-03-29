@@ -46,9 +46,9 @@ Playground: https://spacex-graphql-nestjs.herokuapp.com/graphql
 * Roadster Info
   * ✔️ roadsterInfo
 * Rockets
-  * allRockets
-  * rocket
-  * rockets
+  * ✔️ allRockets
+  * ✔️ rocket
+  * ✔️ rockets
 * Ships
   * ✔️ allShips
   * ✔️ ship
