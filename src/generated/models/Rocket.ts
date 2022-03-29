@@ -26,6 +26,12 @@ export type Rocket = {
         kg?: number;
         lb?: number;
     };
+    payload_weights?: Array<{
+        id?: string;
+        name?: string;
+        kg?: number;
+        lb?: number;
+    }>;
     first_stage?: {
         reusable?: boolean;
         engines?: number;
@@ -54,11 +60,11 @@ export type Rocket = {
             composite_fairing?: {
                 height?: {
                     meters?: number;
-                    feet?: string;
+                    feet?: number;
                 };
                 diameter?: {
                     meters?: number;
-                    feet?: string;
+                    feet?: number;
                 };
             };
         };
@@ -89,12 +95,6 @@ export type Rocket = {
         number?: number;
         material?: string;
     };
-    payload_weights?: Array<{
-        id?: string;
-        name?: string;
-        kg?: number;
-        lb?: number;
-    }>;
     flickr_images?: Array<string>;
     wikipedia?: string;
     description?: string;

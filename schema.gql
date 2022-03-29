@@ -49,6 +49,12 @@ type CompanyInfoLinks {
   website: String
 }
 
+"""Composite Fairing"""
+type CompositeFairing {
+  diameter: Diameter!
+  height: Height!
+}
+
 """Capsule"""
 type Core {
   asdsAttempts: Float!
@@ -108,6 +114,31 @@ type Dragon {
   wikipedia: String
 }
 
+"""Engines"""
+type Engines {
+  engineLossMax: Float
+  isp: Isp!
+  layout: String
+  number: Int
+  propellant1: String
+  propellant2: String
+  thrustSeaLevel: ThrustSeaLevel!
+  thrustToWeight: Float
+  thrustVacuum: ThrustVacuum!
+  type: String
+  version: String
+}
+
+"""First Stage"""
+type FirstStage {
+  burnTimeSec: Int
+  engines: Int
+  fuelAmountTons: Float
+  reusable: Boolean
+  thrustSeaLevel: ThrustSeaLevel!
+  thrustVacuum: ThrustVacuum!
+}
+
 """Headquarters"""
 type Headquarters {
   address: String
@@ -121,6 +152,12 @@ type HeatShield {
   material: String!
   sizeMeters: Float!
   tempDegrees: Int
+}
+
+"""Height"""
+type Height {
+  feet: Float
+  meters: Float
 }
 
 """HeightWTrunk"""
@@ -142,6 +179,18 @@ type History {
 """History Links"""
 type HistoryLinks {
   article: String
+}
+
+"""Isp"""
+type Isp {
+  seaLevel: Int
+  vacuum: Int
+}
+
+"""Landing Legs"""
+type LandingLegs {
+  material: String
+  number: Int
 }
 
 """Landpad"""
@@ -191,6 +240,12 @@ type Launchpad {
   region: String
   status: String!
   timezone: String
+}
+
+"""Mass"""
+type Mass {
+  kg: Int
+  lb: Int
 }
 
 type PaginatedCapsules {
@@ -291,6 +346,20 @@ type PaginatedLaunchpads {
   totalPages: Int!
 }
 
+type PaginatedRockets {
+  docs: [Rocket!]!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  limit: Int!
+  nextPage: Int
+  offset: Int!
+  page: Int!
+  pagingCounter: Int!
+  prevPage: Int
+  totalDocs: Int!
+  totalPages: Int!
+}
+
 type PaginatedShips {
   docs: [Ship!]!
   hasNextPage: Boolean!
@@ -331,6 +400,20 @@ type PayloadVolume {
   cubicMeters: Int
 }
 
+"""Payload Weights"""
+type PayloadWeight {
+  id: String
+  kg: Int
+  lb: Int
+  name: String
+}
+
+"""Payloads"""
+type Payloads {
+  compositeFairing: CompositeFairing!
+  option1: String
+}
+
 """Pressurized Capsule"""
 type PressurizedCapsule {
   payloadVolume: PayloadVolume!
@@ -360,6 +443,9 @@ type Query {
 
   """Get all launchpads"""
   allLaunchpads: [Launchpad!]!
+
+  """Get all rockets"""
+  allRockets: [Rocket!]!
 
   """Get all ships"""
   allShips: [Ship!]!
@@ -415,6 +501,12 @@ type Query {
   """Roadster info"""
   roadsterInfo: RoadsterInfo!
 
+  """Get one rocket"""
+  rocket(id: String!): Rocket!
+
+  """Get rockets"""
+  rockets(input: QueryOptionsInput!): PaginatedRockets!
+
   """Get one ship"""
   ship(id: String!): Ship!
 
@@ -462,6 +554,42 @@ type RoadsterInfo {
   speedMph: Float
   video: String
   wikipedia: String
+}
+
+"""Rocket"""
+type Rocket {
+  active: Boolean
+  boosters: Int
+  company: String
+  costPerLaunch: Int
+  country: String
+  description: String!
+  diameter: Diameter!
+  engines: Engines!
+  firstFlight: String
+  firstStage: FirstStage!
+  flickrImages: [String!]!
+  height: Height!
+  id: ID!
+  landingLegs: LandingLegs!
+  mass: Mass!
+  name: String
+  payloadWeights: [PayloadWeight!]!
+  secondStage: SecondStage!
+  stages: Int
+  successRatePct: Int
+  type: String
+  wikipedia: String!
+}
+
+"""Second Stage"""
+type SecondStage {
+  burnTimeSec: Int
+  engines: Int
+  fuelAmountTons: Float
+  payloads: Payloads!
+  reusable: Boolean
+  thrust: Thrust!
 }
 
 """Ship"""
@@ -551,6 +679,18 @@ type Starlink {
 """Thrust"""
 type Thrust {
   kN: Float
+  lbf: Int
+}
+
+"""Thrust Sea Level"""
+type ThrustSeaLevel {
+  kN: Int
+  lbf: Int
+}
+
+"""Thrust Vacuum"""
+type ThrustVacuum {
+  kN: Int
   lbf: Int
 }
 

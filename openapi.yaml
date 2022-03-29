@@ -454,6 +454,61 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Roadster"
+  /v4/rockets:
+    get:
+      summary: Get all rockets
+      operationId: GetAllRockets
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Rocket"
+  /v4/rockets/{id}:
+    get:
+      summary: Get one rocket
+      operationId: GetOneRocket
+      parameters:
+        - name: id
+          in: path
+          description: ID of rocket
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rocket"
+  /v4/rockets/query:
+    post:
+      summary: Query rockets
+      operationId: QueryRockets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryOptions"
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Rocket"
   /v4/ships:
     get:
       summary: Get all ships
@@ -1380,8 +1435,8 @@ components:
               type: number
               format: float
             feet:
-              type: integer
-              format: int32
+              type: number
+              format: float
         diameter:
           type: object
           properties:
@@ -1389,8 +1444,8 @@ components:
               type: number
               format: float
             feet:
-              type: integer
-              format: int32
+              type: number
+              format: float
         mass:
           type: object
           properties:
@@ -1400,6 +1455,21 @@ components:
             lb:
               type: integer
               format: int32
+        payload_weights:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              kg:
+                type: integer
+                format: int32
+              lb:
+                type: integer
+                format: int32
         first_stage:
           type: object
           properties:
@@ -1410,8 +1480,10 @@ components:
               format: int32
             fuel_amount_tons:
               type: number
+              format: float
             burn_time_sec:
               type: integer
+              format: int32
             thrust_sea_level:
               type: object
               properties:
@@ -1440,8 +1512,10 @@ components:
               format: int32
             fuel_amount_tons:
               type: number
+              format: float
             burn_time_sec:
               type: integer
+              format: int32
             thrust:
               type: object
               properties:
@@ -1466,7 +1540,8 @@ components:
                           type: number
                           format: float
                         feet:
-                          type: string
+                          type: number
+                          format: float
                     diameter:
                       type: object
                       properties:
@@ -1474,7 +1549,8 @@ components:
                           type: number
                           format: float
                         feet:
-                          type: string
+                          type: number
+                          format: float
         engines:
           type: object
           properties:
@@ -1498,6 +1574,7 @@ components:
                   format: int32
             engine_loss_max:
               type: integer
+              format: int32
             propellant_1:
               type: string
             propellant_2:
@@ -1521,8 +1598,8 @@ components:
                   type: integer
                   format: int32
             thrust_to_weight:
-              type: integer
-              format: int32
+              type: number
+              format: float
         landing_legs:
           type: object
           properties:
@@ -1531,21 +1608,6 @@ components:
               format: int32
             material:
               type: string
-        payload_weights:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              name:
-                type: string
-              kg:
-                type: integer
-                format: int32
-              lb:
-                type: integer
-                format: int32
         flickr_images:
           type: array
           items:

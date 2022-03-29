@@ -1,4 +1,5 @@
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
+import { Diameter, Thrust } from 'src/common';
 
 @ObjectType({ description: 'Heat Shield' })
 class HeatShield {
@@ -13,15 +14,6 @@ class HeatShield {
 
   @Field({ nullable: true })
   devPartner?: string;
-}
-
-@ObjectType({ description: 'Thrust' })
-class Thrust {
-  @Field({ nullable: true })
-  kN: number;
-
-  @Field(() => Int, { nullable: true })
-  lbf: number;
 }
 
 @ObjectType({ description: 'Thruster' })
@@ -92,15 +84,6 @@ class Trunk {
 
 @ObjectType({ description: 'HeightWTrunk' })
 class HeightWTrunk {
-  @Field({ nullable: true })
-  meters?: number;
-
-  @Field({ nullable: true })
-  feet?: number;
-}
-
-@ObjectType({ description: 'Diameter' })
-class Diameter {
   @Field({ nullable: true })
   meters?: number;
 

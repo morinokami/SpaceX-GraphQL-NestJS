@@ -13,6 +13,7 @@ import type { Launch } from '../models/Launch';
 import type { Launchpad } from '../models/Launchpad';
 import type { QueryOptions } from '../models/QueryOptions';
 import type { Roadster } from '../models/Roadster';
+import type { Rocket } from '../models/Rocket';
 import type { Ship } from '../models/Ship';
 import type { Starlink } from '../models/Starlink';
 
@@ -416,6 +417,55 @@ export class DefaultService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/v4/roadster',
+        });
+    }
+
+    /**
+     * Get all rockets
+     * @returns Rocket default
+     * @throws ApiError
+     */
+    public static getAllRockets(): CancelablePromise<Array<Rocket>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/rockets',
+        });
+    }
+
+    /**
+     * Get one rocket
+     * @param id ID of rocket
+     * @returns Rocket default
+     * @throws ApiError
+     */
+    public static getOneRocket(
+        id: string,
+    ): CancelablePromise<Rocket> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/rockets/{id}',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
+    /**
+     * Query rockets
+     * @param requestBody
+     * @returns any default
+     * @throws ApiError
+     */
+    public static queryRockets(
+        requestBody: QueryOptions,
+    ): CancelablePromise<(DocMeta & {
+        docs?: Array<Rocket>;
+    })> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/v4/rockets/query',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 

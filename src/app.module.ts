@@ -13,6 +13,7 @@ import { CrewModule } from './crew/crew.module';
 import { HistoryModule } from './history/history.module';
 import { LaunchpadsModule } from './launchpads/launchpads.module';
 import { DragonsModule } from './dragons/dragons.module';
+import { RocketsModule } from './rockets/rockets.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { DragonsModule } from './dragons/dragons.module';
     HistoryModule,
     LaunchpadsModule,
     DragonsModule,
+    RocketsModule,
   ],
 })
 export class AppModule {}
