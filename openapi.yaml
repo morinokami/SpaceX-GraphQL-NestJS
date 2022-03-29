@@ -1344,6 +1344,216 @@ components:
           type: string
         details:
           type: string
+    Rocket:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        active:
+          type: boolean
+        stages:
+          type: integer
+          format: int32
+        boosters:
+          type: integer
+          format: int32
+        cost_per_launch:
+          type: integer
+          format: int32
+        success_rate_pct:
+          type: integer
+          format: int32
+        first_flight:
+          type: string
+        country:
+          type: string
+        company:
+          type: string
+        height:
+          type: object
+          properties:
+            meters:
+              type: number
+              format: float
+            feet:
+              type: integer
+              format: int32
+        diameter:
+          type: object
+          properties:
+            meters:
+              type: number
+              format: float
+            feet:
+              type: integer
+              format: int32
+        mass:
+          type: object
+          properties:
+            kg:
+              type: integer
+              format: int32
+            lb:
+              type: integer
+              format: int32
+        first_stage:
+          type: object
+          properties:
+            reusable:
+              type: boolean
+            engines:
+              type: integer
+              format: int32
+            fuel_amount_tons:
+              type: number
+            burn_time_sec:
+              type: integer
+            thrust_sea_level:
+              type: object
+              properties:
+                kN:
+                  type: integer
+                  format: int32
+                lbf:
+                  type: integer
+                  format: int32
+            thrust_vacuum:
+              type: object
+              properties:
+                kN:
+                  type: integer
+                  format: int32
+                lbf:
+                  type: integer
+                  format: int32
+        second_stage:
+          type: object
+          properties:
+            reusable:
+              type: boolean
+            engines:
+              type: integer
+              format: int32
+            fuel_amount_tons:
+              type: number
+            burn_time_sec:
+              type: integer
+            thrust:
+              type: object
+              properties:
+                kN:
+                  type: integer
+                  format: int32
+                lbf:
+                  type: integer
+                  format: int32
+            payloads:
+              type: object
+              properties:
+                option_1:
+                  type: string
+                composite_fairing:
+                  type: object
+                  properties:
+                    height:
+                      type: object
+                      properties:
+                        meters:
+                          type: number
+                          format: float
+                        feet:
+                          type: string
+                    diameter:
+                      type: object
+                      properties:
+                        meters:
+                          type: number
+                          format: float
+                        feet:
+                          type: string
+        engines:
+          type: object
+          properties:
+            number:
+              type: integer
+              format: int32
+            type:
+              type: string
+            version:
+              type: string
+            layout:
+              type: string
+            isp:
+              type: object
+              properties:
+                sea_level:
+                  type: integer
+                  format: int32
+                vacuum:
+                  type: integer
+                  format: int32
+            engine_loss_max:
+              type: integer
+            propellant_1:
+              type: string
+            propellant_2:
+              type: string
+            thrust_sea_level:
+              type: object
+              properties:
+                kN:
+                  type: integer
+                  format: int32
+                lbf:
+                  type: integer
+                  format: int32
+            thrust_vacuum:
+              type: object
+              properties:
+                kN:
+                  type: integer
+                  format: int32
+                lbf:
+                  type: integer
+                  format: int32
+            thrust_to_weight:
+              type: integer
+              format: int32
+        landing_legs:
+          type: object
+          properties:
+            number:
+              type: integer
+              format: int32
+            material:
+              type: string
+        payload_weights:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              kg:
+                type: integer
+                format: int32
+              lb:
+                type: integer
+                format: int32
+        flickr_images:
+          type: array
+          items:
+            type: string
+        wikipedia:
+          type: string
+        description:
+          type: string
     Ship:
       type: object
       properties:
