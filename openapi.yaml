@@ -1181,6 +1181,91 @@ components:
                 type: string
         details:
           type: string
+    Payload:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        reused:
+          type: boolean
+        launch:
+          type: string
+        customers:
+          type: array
+          items:
+            type: string
+        norad_ids:
+          type: array
+          items:
+            type: integer
+            format: int32
+        nationalities:
+          type: array
+          items:
+            type: string
+        manufacturers:
+          type: array
+          items:
+            type: string
+        mass_kg:
+          type: integer
+          format: int32
+        mass_lbs:
+          type: integer
+          format: int32
+        orbit:
+          type: string
+        reference_system:
+          type: string
+        regime:
+          type: string
+        longitude:
+          type: string
+        semi_major_axis_km:
+          type: string
+        eccentricity:
+          type: string
+        periapsis_km:
+          type: string
+        apoapsis_km:
+          type: string
+        inclination_deg:
+          type: string
+        period_min:
+          type: string
+        lifespan_years:
+          type: string
+        epoch:
+          type: string
+        mean_motion:
+          type: string
+        raan:
+          type: string
+        arg_of_pericenter:
+          type: string
+        mean_anomaly:
+          type: string
+        dragon:
+          type: object
+          properties:
+            capsule:
+              type: string
+            mass_returned_kg:
+              type: string
+            mass_returned_lbs:
+              type: string
+            flight_time_sec:
+              type: string
+            manifest:
+              type: string
+            water_landing:
+              type: string
+            land_landing:
+              type: string
     Roadster:
       type: object
       properties:

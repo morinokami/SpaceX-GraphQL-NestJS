@@ -16,6 +16,7 @@ export type { History } from './models/History';
 export type { Landpad } from './models/Landpad';
 export type { Launch } from './models/Launch';
 export type { Launchpad } from './models/Launchpad';
+export type { Payload } from './models/Payload';
 export type { QueryOptions } from './models/QueryOptions';
 export type { Roadster } from './models/Roadster';
 export type { Ship } from './models/Ship';
