@@ -346,6 +346,20 @@ type PaginatedLaunchpads {
   totalPages: Int!
 }
 
+type PaginatedPayload {
+  docs: [Payload!]!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  limit: Int!
+  nextPage: Int
+  offset: Int!
+  page: Int!
+  pagingCounter: Int!
+  prevPage: Int
+  totalDocs: Int!
+  totalPages: Int!
+}
+
 type PaginatedRockets {
   docs: [Rocket!]!
   hasNextPage: Boolean!
@@ -386,6 +400,49 @@ type PaginatedStarlinks {
   prevPage: Int
   totalDocs: Int!
   totalPages: Int!
+}
+
+"""Payload"""
+type Payload {
+  apoapsisKm: Float
+  argOfPericenter: Float
+  customers: [String!]!
+  dragon: PayloadDragon!
+  eccentricity: Float
+  epoch: String
+  id: ID!
+  inclinationDeg: Float
+  launch: Launch
+  lifespanYears: Float
+  longitude: Float
+  manufacturers: [String!]!
+  massKg: Float
+  massLbs: Float
+  meanAnomaly: Float
+  meanMotion: Float
+  name: String
+  nationalities: [String!]!
+  noradIds: [Int!]!
+  orbit: String
+  periapsisKm: Float
+  periodMin: Float
+  raan: Float
+  referenceSystem: String
+  regime: String
+  reused: Boolean!
+  semiMajorAxisKm: Float
+  type: String
+}
+
+"""Payload Dragon"""
+type PayloadDragon {
+  capsule: Capsule
+  flightTimeSec: Int
+  landLanding: Boolean
+  manifest: String
+  massReturnedKg: Float
+  massReturnedLbs: Float
+  waterLanding: Boolean
 }
 
 """Payload Mass"""
@@ -444,6 +501,9 @@ type Query {
   """Get all launchpads"""
   allLaunchpads: [Launchpad!]!
 
+  """Get all payloads"""
+  allPayloads: [Payload!]!
+
   """Get all rockets"""
   allRockets: [Rocket!]!
 
@@ -497,6 +557,12 @@ type Query {
 
   """Query launchpads"""
   launchpads(input: QueryOptionsInput!): PaginatedLaunchpads!
+
+  """Get one payload"""
+  payload(id: String!): Payload!
+
+  """Query payloads"""
+  payloads(input: QueryOptionsInput!): PaginatedPayload!
 
   """Roadster info"""
   roadsterInfo: RoadsterInfo!

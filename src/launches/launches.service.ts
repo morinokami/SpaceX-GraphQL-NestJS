@@ -23,10 +23,16 @@ export class LaunchesService {
 
   async getLaunchesByIds(ids: string[]): Promise<Launch[]> {
     const launches = await Promise.all(
-      ids.map((id) => {
-        return DefaultService.getOneLaunch(id);
+      ids.map(async (id) => {
+        try {
+          return await DefaultService.getOneLaunch(id);
+        } catch {
+          return null;
+        }
       }),
     );
-    return launches.map((launch) => this.convertToLaunch(launch));
+    return launches.map((launch) =>
+      launch ? this.convertToLaunch(launch) : null,
+    );
   }
 }

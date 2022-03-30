@@ -10,7 +10,7 @@ export class StarlinkService {
     return {
       id: starlink.id,
       version: starlink.version,
-      launch: '',
+      launch: null,
       launchId: starlink.launch,
       longitude: starlink.longitude,
       latitude: starlink.latitude,

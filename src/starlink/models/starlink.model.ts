@@ -136,7 +136,7 @@ export class Starlink {
   version?: string;
 
   @Field(() => Launch, { nullable: true })
-  launch?: string;
+  launch?: Launch;
 
   @Field({ nullable: true })
   longitude?: number;

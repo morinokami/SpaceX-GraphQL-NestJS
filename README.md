@@ -40,9 +40,9 @@ Playground: https://spacex-graphql-nestjs.herokuapp.com/graphql
   * ✔️ launchpad
   * ✔️ launchpads
 * Payloads
-  * allPayloads
-  * payload
-  * payloads
+  * ✔️ allPayloads
+  * ✔️ payload
+  * ✔️ payloads
 * Roadster Info
   * ✔️ roadsterInfo
 * Rockets
