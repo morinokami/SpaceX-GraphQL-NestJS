@@ -238,6 +238,7 @@ type Launchpad {
   longitude: Float
   name: String
   region: String
+  rockets: [Rocket!]!
   status: String!
   timezone: String
 }

@@ -19,6 +19,8 @@ export class LaunchpadsService {
       longitude: launchpad.longitude,
       launchAttempts: launchpad.launch_attempts,
       launchSuccesses: launchpad.launch_successes,
+      rockets: [],
+      rocketIds: launchpad.rockets,
       launches: [],
       launchIds: launchpad.launches,
     };

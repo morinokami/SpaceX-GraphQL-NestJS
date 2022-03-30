@@ -1,5 +1,6 @@
 import { Field, HideField, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Launch } from 'src/launches/models/launch.model';
+import { Rocket } from 'src/rockets/models/rocket.model';
 
 export type LaunchpadStatus =
   | 'active'
@@ -44,11 +45,11 @@ export class Launchpad {
   @Field(() => Int)
   launchSuccesses: number;
 
-  // TODO: Add rockets
-  // @Field(() => [Rockets])
-  // rockets: Rockets[];
-  // @HideField()
-  // rocketIds: string[];
+  @Field(() => [Rocket])
+  rockets: Rocket[];
+
+  @HideField()
+  rocketIds: string[];
 
   @Field(() => [Launch])
   launches: Launch[];

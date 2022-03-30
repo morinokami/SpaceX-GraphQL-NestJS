@@ -91,4 +91,11 @@ export class RocketsService {
       docs: rockets.docs.map((rocket) => this.convertToRocket(rocket)),
     };
   }
+
+  async getRocketsByIds(ids: string[]): Promise<Rocket[]> {
+    const rockets = await Promise.all(
+      ids.map((id) => DefaultService.getOneRocket(id)),
+    );
+    return rockets.map((rocket) => this.convertToRocket(rocket));
+  }
 }
