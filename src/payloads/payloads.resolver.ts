@@ -1,9 +1,10 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { CapsulesDataLoader } from 'src/capsules/capsules.dataloader';
 import { QueryOptionsInput } from 'src/common';
 import { LaunchesDataLoader } from 'src/launches/launches.dataloader';
 import { Launch } from 'src/launches/models/launch.model';
 import { PaginatedPayload } from './models/paginated-payload.model';
-import { Payload } from './models/payload.model';
+import { Payload, PayloadDragon } from './models/payload.model';
 import { PayloadsService } from './payloads.service';
 
 @Resolver(() => Payload)
@@ -11,6 +12,7 @@ export class PayloadsResolver {
   constructor(
     private readonly payloadsService: PayloadsService,
     private readonly launchesDataLoader: LaunchesDataLoader,
+    private readonly capsulesDataLoader: CapsulesDataLoader,
   ) {}
 
   @Query(() => [Payload], { description: 'Get all payloads' })
@@ -38,5 +40,14 @@ export class PayloadsResolver {
     return this.launchesDataLoader.load(payload.launchId);
   }
 
-  // TODO: Resolve Capsule
+  @ResolveField(() => PayloadDragon)
+  async dragon(@Parent() payload: Payload): Promise<PayloadDragon> {
+    if (!payload.dragon.capsuleId) {
+      return payload.dragon;
+    }
+    const capsule = await this.capsulesDataLoader.load(
+      payload.dragon.capsuleId,
+    );
+    return { ...payload.dragon, capsule };
+  }
 }

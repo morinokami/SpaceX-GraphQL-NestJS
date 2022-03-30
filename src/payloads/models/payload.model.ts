@@ -3,7 +3,7 @@ import { Capsule } from 'src/capsules/models/capsule.model';
 import { Launch } from 'src/launches/models/launch.model';
 
 @ObjectType({ description: 'Payload Dragon' })
-class PaylaodDragon {
+export class PayloadDragon {
   @Field(() => Capsule, { nullable: true })
   capsule?: Capsule;
 
@@ -112,8 +112,8 @@ export class Payload {
   @Field({ nullable: true })
   meanAnomaly?: number;
 
-  @Field(() => PaylaodDragon)
-  dragon: PaylaodDragon;
+  @Field(() => PayloadDragon)
+  dragon: PayloadDragon;
 
   @HideField()
   launchId: string;

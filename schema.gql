@@ -402,23 +402,12 @@ type PaginatedStarlinks {
   totalPages: Int!
 }
 
-"""Payload Dragon"""
-type PaylaodDragon {
-  capsule: Capsule
-  flightTimeSec: Int
-  landLanding: Boolean
-  manifest: String
-  massReturnedKg: Float
-  massReturnedLbs: Float
-  waterLanding: Boolean
-}
-
 """Payload"""
 type Payload {
   apoapsisKm: Float
   argOfPericenter: Float
   customers: [String!]!
-  dragon: PaylaodDragon!
+  dragon: PayloadDragon!
   eccentricity: Float
   epoch: String
   id: ID!
@@ -443,6 +432,17 @@ type Payload {
   reused: Boolean!
   semiMajorAxisKm: Float
   type: String
+}
+
+"""Payload Dragon"""
+type PayloadDragon {
+  capsule: Capsule
+  flightTimeSec: Int
+  landLanding: Boolean
+  manifest: String
+  massReturnedKg: Float
+  massReturnedLbs: Float
+  waterLanding: Boolean
 }
 
 """Payload Mass"""
