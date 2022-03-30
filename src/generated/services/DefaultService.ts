@@ -11,6 +11,7 @@ import type { History } from '../models/History';
 import type { Landpad } from '../models/Landpad';
 import type { Launch } from '../models/Launch';
 import type { Launchpad } from '../models/Launchpad';
+import type { Payload } from '../models/Payload';
 import type { QueryOptions } from '../models/QueryOptions';
 import type { Roadster } from '../models/Roadster';
 import type { Rocket } from '../models/Rocket';
@@ -403,6 +404,55 @@ export class DefaultService {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/v4/launchpads/query',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
+     * Get all payloads
+     * @returns any default
+     * @throws ApiError
+     */
+    public static getAllPayloads(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/payloads',
+        });
+    }
+
+    /**
+     * Get one payload
+     * @param id ID of payload
+     * @returns Payload default
+     * @throws ApiError
+     */
+    public static getOnePayload(
+        id: string,
+    ): CancelablePromise<Payload> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/payloads/{id}',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
+    /**
+     * Query payloads
+     * @param requestBody
+     * @returns any default
+     * @throws ApiError
+     */
+    public static queryPayloads(
+        requestBody: QueryOptions,
+    ): CancelablePromise<(DocMeta & {
+        docs?: Array<Payload>;
+    })> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/v4/payloads/query',
             body: requestBody,
             mediaType: 'application/json',
         });

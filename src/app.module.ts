@@ -14,6 +14,7 @@ import { HistoryModule } from './history/history.module';
 import { LaunchpadsModule } from './launchpads/launchpads.module';
 import { DragonsModule } from './dragons/dragons.module';
 import { RocketsModule } from './rockets/rockets.module';
+import { PayloadsModule } from './payloads/payloads.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { RocketsModule } from './rockets/rockets.module';
     LaunchpadsModule,
     DragonsModule,
     RocketsModule,
+    PayloadsModule,
   ],
 })
 export class AppModule {}

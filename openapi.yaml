@@ -443,6 +443,60 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Launchpad"
+  /v4/payloads:
+    get:
+      summary: Get all payloads
+      operationId: GetAllPayloads
+      parameters: []
+      responses:
+        200:
+          description: default
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Payload"
+  /v4/payloads/{id}:
+    get:
+      summary: Get one payload
+      operationId: GetOnePayload
+      parameters:
+        - name: id
+          in: path
+          description: ID of payload
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payload"
+  /v4/payloads/query:
+    post:
+      summary: Query payloads
+      operationId: QueryPayloads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryOptions"
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Payload"
   /v4/roadster:
     get:
       summary: Get Roadster Info
@@ -1267,11 +1321,11 @@ components:
           items:
             type: string
         mass_kg:
-          type: integer
-          format: int32
+          type: number
+          format: float
         mass_lbs:
-          type: integer
-          format: int32
+          type: number
+          format: float
         orbit:
           type: string
         reference_system:
@@ -1279,48 +1333,63 @@ components:
         regime:
           type: string
         longitude:
-          type: string
+          type: number
+          format: float
         semi_major_axis_km:
-          type: string
+          type: number
+          format: float
         eccentricity:
-          type: string
+          type: number
+          format: float
         periapsis_km:
-          type: string
+          type: number
+          format: float
         apoapsis_km:
-          type: string
+          type: number
+          format: float
         inclination_deg:
-          type: string
+          type: number
+          format: float
         period_min:
-          type: string
+          type: number
+          format: float
         lifespan_years:
-          type: string
+          type: number
+          format: float
         epoch:
           type: string
         mean_motion:
-          type: string
+          type: number
+          format: float
         raan:
-          type: string
+          type: number
+          format: float
         arg_of_pericenter:
-          type: string
+          type: number
+          format: float
         mean_anomaly:
-          type: string
+          type: number
+          format: float
         dragon:
           type: object
           properties:
             capsule:
               type: string
             mass_returned_kg:
-              type: string
+              type: number
+              format: float
             mass_returned_lbs:
-              type: string
+              type: number
+              format: float
             flight_time_sec:
-              type: string
+              type: integer
+              format: int32
             manifest:
               type: string
             water_landing:
-              type: string
+              type: boolean
             land_landing:
-              type: string
+              type: boolean
     Roadster:
       type: object
       properties:
