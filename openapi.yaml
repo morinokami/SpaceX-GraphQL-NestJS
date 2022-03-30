@@ -387,6 +387,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Launch"
+  /v4/launches/query:
+    post:
+      summary: Query launches
+      operationId: QueryLaunches
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryOptions"
+        required: true
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/DocMeta"
+                  - type: object
+                    properties:
+                      docs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Launch"
   /v4/launchpads:
     get:
       summary: Get all launchpads

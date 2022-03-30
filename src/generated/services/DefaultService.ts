@@ -361,6 +361,25 @@ export class DefaultService {
     }
 
     /**
+     * Query launches
+     * @param requestBody
+     * @returns any default
+     * @throws ApiError
+     */
+    public static queryLaunches(
+        requestBody: QueryOptions,
+    ): CancelablePromise<(DocMeta & {
+        docs?: Array<Launch>;
+    })> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/v4/launches/query',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
      * Get all launchpads
      * @returns Launchpad default
      * @throws ApiError
