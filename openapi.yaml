@@ -475,10 +475,12 @@ paths:
       responses:
         200:
           description: default
-          schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/Payload"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Payload"
   /v4/payloads/{id}:
     get:
       summary: Get one payload
