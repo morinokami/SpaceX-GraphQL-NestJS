@@ -430,10 +430,10 @@ export class DefaultService {
 
     /**
      * Get all payloads
-     * @returns any default
+     * @returns Payload default
      * @throws ApiError
      */
-    public static getAllPayloads(): CancelablePromise<any> {
+    public static getAllPayloads(): CancelablePromise<Array<Payload>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/v4/payloads',
