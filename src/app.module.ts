@@ -1,5 +1,5 @@
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
-import { ApolloDriver } from '@nestjs/apollo';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { CapsulesModule } from './capsules/capsules.module';
@@ -16,16 +16,23 @@ import { LaunchpadsModule } from './launchpads/launchpads.module';
 import { DragonsModule } from './dragons/dragons.module';
 import { RocketsModule } from './rockets/rockets.module';
 import { PayloadsModule } from './payloads/payloads.module';
+import CapsulesAPI from './datasources/capsules-api';
 
 @Module({
   imports: [
-    GraphQLModule.forRoot({
+    GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
       sortSchema: true,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       introspection: true,
+      // https://github.com/nestjs/graphql/issues/229
+      dataSources: () => {
+        return {
+          capsulesAPI: new CapsulesAPI(),
+        };
+      },
     }),
     CapsulesModule,
     LaunchesModule,
