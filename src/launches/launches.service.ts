@@ -27,6 +27,7 @@ export class LaunchesService {
       ships: [],
       capsules: [],
       payloads: [],
+      launchpad: null,
       links: {
         patch: launch.links.patch,
         reddit: launch.links.reddit,
@@ -43,6 +44,7 @@ export class LaunchesService {
       shipIds: launch.ships,
       capsuleIds: launch.capsules,
       payloadIds: launch.payloads,
+      launchpadId: launch.launchpad,
     };
   }
 

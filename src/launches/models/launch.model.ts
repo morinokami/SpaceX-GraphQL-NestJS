@@ -1,6 +1,7 @@
 import { Field, HideField, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Capsule } from 'src/capsules/models/capsule.model';
 import { Crew } from 'src/crew/models/crew.model';
+import { Launchpad } from 'src/launchpads/models/launchpad.model';
 import { Payload } from 'src/payloads/models/payload.model';
 import { Rocket } from 'src/rockets/models/rocket.model';
 import { Ship } from 'src/ships/models/ship.model';
@@ -152,7 +153,8 @@ export class Launch {
   @Field(() => [Payload])
   payloads: Payload[];
 
-  // TODO: launchpad
+  @Field(() => Launchpad, { nullable: true })
+  launchpad?: Launchpad;
 
   // TODO: cores
 
@@ -176,4 +178,7 @@ export class Launch {
 
   @HideField()
   payloadIds: string[];
+
+  @HideField()
+  launchpadId?: string;
 }

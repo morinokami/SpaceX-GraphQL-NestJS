@@ -47,4 +47,11 @@ export class LaunchpadsService {
       ),
     };
   }
+
+  async getLaunchpadsByIds(ids: string[]): Promise<Launchpad[]> {
+    const launchpads = await Promise.all(
+      ids.map((id) => DefaultService.getOneLaunchpad(id)),
+    );
+    return launchpads.map((launchpad) => this.convertToLauchpad(launchpad));
+  }
 }

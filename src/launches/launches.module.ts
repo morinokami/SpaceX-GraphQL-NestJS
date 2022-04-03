@@ -7,6 +7,7 @@ import { LaunchesDataLoader } from './launches.dataloader';
 import { RocketsModule } from 'src/rockets/rockets.module';
 import { CrewModule } from 'src/crew/crew.module';
 import { PayloadsModule } from 'src/payloads/payloads.module';
+import { LaunchpadsModule } from 'src/launchpads/launchpads.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { PayloadsModule } from 'src/payloads/payloads.module';
     RocketsModule,
     CrewModule,
     PayloadsModule,
+    LaunchpadsModule,
   ],
   providers: [LaunchesService, LaunchesResolver, LaunchesDataLoader],
   exports: [LaunchesDataLoader],

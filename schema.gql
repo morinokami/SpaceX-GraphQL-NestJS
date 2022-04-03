@@ -243,6 +243,7 @@ type Launch {
   failures: [Failure!]!
   flightNumber: Int!
   id: ID!
+  launchpad: Launchpad
   links: Link!
   name: String!
   net: Boolean!
