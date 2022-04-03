@@ -6,6 +6,7 @@ import { CapsulesModule } from 'src/capsules/capsules.module';
 import { LaunchesDataLoader } from './launches.dataloader';
 import { RocketsModule } from 'src/rockets/rockets.module';
 import { CrewModule } from 'src/crew/crew.module';
+import { PayloadsModule } from 'src/payloads/payloads.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { CrewModule } from 'src/crew/crew.module';
     forwardRef(() => CapsulesModule),
     RocketsModule,
     CrewModule,
+    PayloadsModule,
   ],
   providers: [LaunchesService, LaunchesResolver, LaunchesDataLoader],
   exports: [LaunchesDataLoader],

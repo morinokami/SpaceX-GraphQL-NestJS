@@ -3,6 +3,8 @@ import { CapsulesDataLoader } from 'src/capsules/capsules.dataloader';
 import { Capsule } from 'src/capsules/models/capsule.model';
 import { CrewDataLoader } from 'src/crew/crew.dataloader';
 import { Crew } from 'src/crew/models/crew.model';
+import { Payload } from 'src/payloads/models/payload.model';
+import { PayloadsDataLoader } from 'src/payloads/payloads.dataloader';
 import { Rocket } from 'src/rockets/models/rocket.model';
 import { RocketsDataLoader } from 'src/rockets/rockets.dataloader';
 import { Ship } from 'src/ships/models/ship.model';
@@ -18,6 +20,7 @@ export class LaunchesResolver {
     private readonly crewDataLoader: CrewDataLoader,
     private readonly shipsDataLoader: ShipsDataLoader,
     private readonly capsulesDataLoader: CapsulesDataLoader,
+    private readonly payloadsDataLoader: PayloadsDataLoader,
   ) {}
 
   @Query(() => [Launch], { description: 'Get all launches' })
@@ -51,6 +54,13 @@ export class LaunchesResolver {
   async capsules(@Parent() launch: Launch): Promise<Capsule[]> {
     return Promise.all(
       launch.capsuleIds.map((id) => this.capsulesDataLoader.load(id)),
+    );
+  }
+
+  @ResolveField(() => [Payload])
+  async payloads(@Parent() launch: Launch): Promise<Payload[]> {
+    return Promise.all(
+      launch.payloadIds.map((id) => this.payloadsDataLoader.load(id)),
     );
   }
 }

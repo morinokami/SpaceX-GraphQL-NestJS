@@ -66,4 +66,11 @@ export class PayloadsService {
       docs: payloads.docs.map((payload) => this.convertToPayload(payload)),
     };
   }
+
+  async getPayloadsByIds(ids: string[]): Promise<Payload[]> {
+    const payloads = await Promise.all(
+      ids.map((id) => DefaultService.getOnePayload(id)),
+    );
+    return payloads.map((payload) => this.convertToPayload(payload));
+  }
 }
