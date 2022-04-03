@@ -1,6 +1,8 @@
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { CapsulesDataLoader } from 'src/capsules/capsules.dataloader';
 import { Capsule } from 'src/capsules/models/capsule.model';
+import { CrewDataLoader } from 'src/crew/crew.dataloader';
+import { Crew } from 'src/crew/models/crew.model';
 import { Rocket } from 'src/rockets/models/rocket.model';
 import { RocketsDataLoader } from 'src/rockets/rockets.dataloader';
 import { Ship } from 'src/ships/models/ship.model';
@@ -13,6 +15,7 @@ export class LaunchesResolver {
   constructor(
     private readonly launchesService: LaunchesService,
     private readonly rocketsDataLoader: RocketsDataLoader,
+    private readonly crewDataLoader: CrewDataLoader,
     private readonly shipsDataLoader: ShipsDataLoader,
     private readonly capsulesDataLoader: CapsulesDataLoader,
   ) {}
@@ -28,6 +31,13 @@ export class LaunchesResolver {
       return null;
     }
     return this.rocketsDataLoader.load(launch.rocketId);
+  }
+
+  @ResolveField(() => [Crew])
+  async crew(@Parent() launch: Launch): Promise<Crew[]> {
+    return Promise.all(
+      launch.crewIds.map((id) => this.crewDataLoader.load(id)),
+    );
   }
 
   @ResolveField(() => [Ship])

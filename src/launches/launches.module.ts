@@ -5,9 +5,15 @@ import { ShipsModule } from 'src/ships/ships.module';
 import { CapsulesModule } from 'src/capsules/capsules.module';
 import { LaunchesDataLoader } from './launches.dataloader';
 import { RocketsModule } from 'src/rockets/rockets.module';
+import { CrewModule } from 'src/crew/crew.module';
 
 @Module({
-  imports: [ShipsModule, forwardRef(() => CapsulesModule), RocketsModule],
+  imports: [
+    ShipsModule,
+    forwardRef(() => CapsulesModule),
+    RocketsModule,
+    CrewModule,
+  ],
   providers: [LaunchesService, LaunchesResolver, LaunchesDataLoader],
   exports: [LaunchesDataLoader],
 })

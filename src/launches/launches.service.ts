@@ -23,6 +23,7 @@ export class LaunchesService {
       failures: launch.failures,
       upcoming: launch.upcoming,
       details: launch.details,
+      crew: [],
       ships: [],
       capsules: [],
       links: {
@@ -37,6 +38,7 @@ export class LaunchesService {
       },
       autoUpdate: launch.auto_update,
       rocketId: launch.rocket,
+      crewIds: launch.crew,
       shipIds: launch.ships,
       capsuleIds: launch.capsules,
     };

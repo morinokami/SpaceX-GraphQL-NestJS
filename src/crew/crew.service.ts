@@ -36,4 +36,11 @@ export class CrewService {
       docs: crew.docs.map((crew) => this.convertToCrew(crew)),
     };
   }
+
+  async getCrewsByIds(ids: string[]): Promise<Crew[]> {
+    const crew = await Promise.all(
+      ids.map((id) => DefaultService.getOneCrewMember(id)),
+    );
+    return crew.map((crew) => this.convertToCrew(crew));
+  }
 }

@@ -234,6 +234,7 @@ type LandpadImages {
 type Launch {
   autoUpdate: Boolean!
   capsules: [Capsule!]!
+  crew: [Crew!]!
   dateLocal: String!
   datePrecision: String!
   dateUnix: Int!

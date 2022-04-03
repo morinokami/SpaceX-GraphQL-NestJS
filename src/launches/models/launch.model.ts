@@ -1,5 +1,6 @@
 import { Field, HideField, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Capsule } from 'src/capsules/models/capsule.model';
+import { Crew } from 'src/crew/models/crew.model';
 import { Rocket } from 'src/rockets/models/rocket.model';
 import { Ship } from 'src/ships/models/ship.model';
 
@@ -138,7 +139,8 @@ export class Launch {
 
   // TODO: fairings
 
-  // TODO: crew
+  @Field(() => [Crew])
+  crew: Crew[];
 
   @Field(() => [Ship])
   ships: Ship[];
@@ -160,6 +162,9 @@ export class Launch {
 
   @HideField()
   rocketId?: string;
+
+  @HideField()
+  crewIds?: string[];
 
   @HideField()
   shipIds: string[];
