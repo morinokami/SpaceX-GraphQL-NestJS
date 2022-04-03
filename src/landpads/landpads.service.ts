@@ -44,4 +44,11 @@ export class LandpadsService {
       docs: landpads.docs.map((landpad) => this.convertToLandpad(landpad)),
     };
   }
+
+  async getLandpadsByIds(ids: string[]): Promise<Landpad[]> {
+    const landpads = await Promise.all(
+      ids.map((id) => DefaultService.getOneLandpad(id)),
+    );
+    return landpads.map((landpad) => this.convertToLandpad(landpad));
+  }
 }

@@ -8,6 +8,8 @@ import { RocketsModule } from 'src/rockets/rockets.module';
 import { CrewModule } from 'src/crew/crew.module';
 import { PayloadsModule } from 'src/payloads/payloads.module';
 import { LaunchpadsModule } from 'src/launchpads/launchpads.module';
+import { CoresModule } from 'src/cores/cores.module';
+import { LandpadsModule } from 'src/landpads/landpads.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { LaunchpadsModule } from 'src/launchpads/launchpads.module';
     CrewModule,
     PayloadsModule,
     LaunchpadsModule,
+    CoresModule,
+    LandpadsModule,
   ],
   providers: [LaunchesService, LaunchesResolver, LaunchesDataLoader],
   exports: [LaunchesDataLoader],

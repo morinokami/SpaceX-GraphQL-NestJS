@@ -1,6 +1,8 @@
 import { Field, HideField, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Capsule } from 'src/capsules/models/capsule.model';
+import { Core } from 'src/cores/models/core.model';
 import { Crew } from 'src/crew/models/crew.model';
+import { Landpad } from 'src/landpads/models/landpad.model';
 import { Launchpad } from 'src/launchpads/models/launchpad.model';
 import { Payload } from 'src/payloads/models/payload.model';
 import { Rocket } from 'src/rockets/models/rocket.model';
@@ -39,6 +41,42 @@ export class Fairings {
 
   @Field(() => [Ship])
   ships: Ship[];
+}
+
+@ObjectType({ description: 'LaunchCore' })
+export class LaunchCore {
+  @Field(() => Core, { nullable: true })
+  core?: Core;
+
+  @Field(() => Int, { nullable: true })
+  flight?: number;
+
+  @Field(() => Boolean, { nullable: true })
+  gridfins?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  legs?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  reused?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  landingAttempt?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  landingSuccess?: boolean;
+
+  @Field({ nullable: true })
+  landingType?: string;
+
+  @Field(() => Landpad, { nullable: true })
+  landpad?: Landpad;
+
+  @HideField()
+  coreId?: string;
+
+  @HideField()
+  landpadId?: string;
 }
 
 @ObjectType({ description: 'Patch' })
@@ -172,7 +210,8 @@ export class Launch {
   @Field(() => Launchpad, { nullable: true })
   launchpad?: Launchpad;
 
-  // TODO: cores
+  @Field(() => [LaunchCore])
+  cores: LaunchCore[];
 
   @Field(() => Link)
   links: Link;

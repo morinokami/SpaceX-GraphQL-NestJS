@@ -1,8 +1,10 @@
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { CapsulesDataLoader } from 'src/capsules/capsules.dataloader';
 import { Capsule } from 'src/capsules/models/capsule.model';
+import { CoresDataLoader } from 'src/cores/cores.dataloader';
 import { CrewDataLoader } from 'src/crew/crew.dataloader';
 import { Crew } from 'src/crew/models/crew.model';
+import { LandpadsDataLoader } from 'src/landpads/landpads.dataloader';
 import { LaunchpadsDataLoader } from 'src/launchpads/launchpads.dataloader';
 import { Launchpad } from 'src/launchpads/models/launchpad.model';
 import { Payload } from 'src/payloads/models/payload.model';
@@ -12,7 +14,7 @@ import { RocketsDataLoader } from 'src/rockets/rockets.dataloader';
 import { Ship } from 'src/ships/models/ship.model';
 import { ShipsDataLoader } from 'src/ships/ships.dataloader';
 import { LaunchesService } from './launches.service';
-import { Fairings, Launch } from './models/launch.model';
+import { Fairings, Launch, LaunchCore } from './models/launch.model';
 
 @Resolver(() => Launch)
 export class LaunchesResolver {
@@ -24,6 +26,8 @@ export class LaunchesResolver {
     private readonly capsulesDataLoader: CapsulesDataLoader,
     private readonly payloadsDataLoader: PayloadsDataLoader,
     private readonly launchpadsDataLoader: LaunchpadsDataLoader,
+    private readonly coresDataLoader: CoresDataLoader,
+    private readonly landpadsDataLoader: LandpadsDataLoader,
   ) {}
 
   @Query(() => [Launch], { description: 'Get all launches' })
@@ -84,5 +88,18 @@ export class LaunchesResolver {
       return null;
     }
     return this.launchpadsDataLoader.load(launch.launchpadId);
+  }
+
+  @ResolveField(() => [LaunchCore])
+  async cores(@Parent() launch: Launch): Promise<LaunchCore[]> {
+    return Promise.all(
+      launch.cores.map(async (core) => ({
+        ...core,
+        core: core.coreId ? await this.coresDataLoader.load(core.coreId) : null,
+        landpad: core.landpadId
+          ? await this.landpadsDataLoader.load(core.landpadId)
+          : null,
+      })),
+    );
   }
 }

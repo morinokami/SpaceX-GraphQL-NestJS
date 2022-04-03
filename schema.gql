@@ -242,6 +242,7 @@ type LandpadImages {
 type Launch {
   autoUpdate: Boolean!
   capsules: [Capsule!]!
+  cores: [LaunchCore!]!
   crew: [Crew!]!
   dateLocal: String!
   datePrecision: String!
@@ -265,6 +266,19 @@ type Launch {
   tbd: Boolean!
   upcoming: Boolean!
   window: Int
+}
+
+"""LaunchCore"""
+type LaunchCore {
+  core: Core
+  flight: Int
+  gridfins: Boolean
+  landingAttempt: Boolean
+  landingSuccess: Boolean
+  landingType: String
+  landpad: Landpad
+  legs: Boolean
+  reused: Boolean
 }
 
 """Launchpad"""

@@ -40,4 +40,11 @@ export class CoresService {
       docs: cores.docs.map((core) => this.convertToCore(core)),
     };
   }
+
+  async getCoresByIds(ids: string[]): Promise<Core[]> {
+    const cores = await Promise.all(
+      ids.map((id) => DefaultService.getOneCore(id)),
+    );
+    return cores.map((core) => this.convertToCore(core));
+  }
 }
