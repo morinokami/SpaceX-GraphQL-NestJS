@@ -31,10 +31,13 @@ Apollo Sandbox: http://sandbox.apollo.dev/?endpoint=https://spacex-graphql-nestj
   * ✔️ landpad
   * ✔️ landpads
 * Launches
-  * allLaunches
-  * launch
-  * launches
-  * ...
+  * ✔️ allLaunches
+  * ✔️ launch
+  * ✔️ launches
+  * ✔️ pastLaunches
+  * ✔️ upcomingLaunches
+  * ✔️ latestLaunch
+  * ✔️ nextLaunch
 * Launchpads
   * ✔️ allLaunchpads
   * ✔️ launchpad
