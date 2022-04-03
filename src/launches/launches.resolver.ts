@@ -1,4 +1,4 @@
-import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { CapsulesDataLoader } from 'src/capsules/capsules.dataloader';
 import { Capsule } from 'src/capsules/models/capsule.model';
 import { CoresDataLoader } from 'src/cores/cores.dataloader';
@@ -33,6 +33,11 @@ export class LaunchesResolver {
   @Query(() => [Launch], { description: 'Get all launches' })
   async allLaunches(): Promise<Launch[]> {
     return this.launchesService.getAllLaunches();
+  }
+
+  @Query(() => Launch, { description: 'Get one launch' })
+  async launch(@Args('id') id: string): Promise<Launch> {
+    return this.launchesService.getLaunch(id);
   }
 
   @ResolveField(() => Rocket)

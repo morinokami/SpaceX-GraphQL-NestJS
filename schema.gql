@@ -626,6 +626,9 @@ type Query {
   """Query landpads"""
   landpads(input: QueryOptionsInput!): PaginatedLandpads!
 
+  """Get one launch"""
+  launch(id: String!): Launch!
+
   """Get one launchpad"""
   launchpad(id: String!): Launchpad!
 

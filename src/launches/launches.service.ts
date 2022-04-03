@@ -75,6 +75,11 @@ export class LaunchesService {
     return launches.map((launch) => this.convertToLaunch(launch));
   }
 
+  async getLaunch(id: string): Promise<Launch> {
+    const launch = await DefaultService.getOneLaunch(id);
+    return this.convertToLaunch(launch);
+  }
+
   async getLaunchesByIds(ids: string[]): Promise<Launch[]> {
     const launches = await Promise.all(
       ids.map(async (id) => {
