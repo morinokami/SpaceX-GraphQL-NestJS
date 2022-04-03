@@ -5,7 +5,7 @@ import type { Capsule } from '../models/Capsule';
 import type { Company } from '../models/Company';
 import type { Core } from '../models/Core';
 import type { Crew } from '../models/Crew';
-import type { DocMeta } from '../models/DocMeta';
+import type { DocInfo } from '../models/DocInfo';
 import type { Dragon } from '../models/Dragon';
 import type { History } from '../models/History';
 import type { Landpad } from '../models/Landpad';
@@ -62,7 +62,7 @@ export class DefaultService {
      */
     public static queryCapsules(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<Capsule>;
     })> {
         return __request(OpenAPI, {
@@ -123,7 +123,7 @@ export class DefaultService {
      */
     public static queryCores(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<Core>;
     })> {
         return __request(OpenAPI, {
@@ -172,7 +172,7 @@ export class DefaultService {
      */
     public static queryCrewMembers(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<Crew>;
     })> {
         return __request(OpenAPI, {
@@ -221,7 +221,7 @@ export class DefaultService {
      */
     public static queryDragons(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<Dragon>;
     })> {
         return __request(OpenAPI, {
@@ -270,7 +270,7 @@ export class DefaultService {
      */
     public static queryHistory(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<History>;
     })> {
         return __request(OpenAPI, {
@@ -319,7 +319,7 @@ export class DefaultService {
      */
     public static queryLandpads(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<Landpad>;
     })> {
         return __request(OpenAPI, {
@@ -368,7 +368,7 @@ export class DefaultService {
      */
     public static queryLaunches(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<Launch>;
     })> {
         return __request(OpenAPI, {
@@ -417,7 +417,7 @@ export class DefaultService {
      */
     public static queryLaunchpads(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<Launchpad>;
     })> {
         return __request(OpenAPI, {
@@ -466,7 +466,7 @@ export class DefaultService {
      */
     public static queryPayloads(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<Payload>;
     })> {
         return __request(OpenAPI, {
@@ -527,7 +527,7 @@ export class DefaultService {
      */
     public static queryRockets(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<Rocket>;
     })> {
         return __request(OpenAPI, {
@@ -576,7 +576,7 @@ export class DefaultService {
      */
     public static queryShips(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<Ship>;
     })> {
         return __request(OpenAPI, {
@@ -625,7 +625,7 @@ export class DefaultService {
      */
     public static queryStarlinkSats(
         requestBody: QueryOptions,
-    ): CancelablePromise<(DocMeta & {
+    ): CancelablePromise<(DocInfo & {
         docs?: Array<Starlink>;
     })> {
         return __request(OpenAPI, {

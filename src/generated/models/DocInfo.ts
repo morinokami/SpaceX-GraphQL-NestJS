@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type DocMeta = {
+export type DocInfo = {
     totalDocs?: number;
     offset?: number;
     limit?: number;

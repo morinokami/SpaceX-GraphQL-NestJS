@@ -10,7 +10,7 @@ export type { Capsule } from './models/Capsule';
 export type { Company } from './models/Company';
 export type { Core } from './models/Core';
 export type { Crew } from './models/Crew';
-export type { DocMeta } from './models/DocMeta';
+export type { DocInfo } from './models/DocInfo';
 export type { Dragon } from './models/Dragon';
 export type { History } from './models/History';
 export type { Landpad } from './models/Landpad';
