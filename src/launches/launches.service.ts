@@ -80,6 +80,26 @@ export class LaunchesService {
     return this.convertToLaunch(launch);
   }
 
+  async getPastLaunches(): Promise<Launch[]> {
+    const launches = await DefaultService.getPastLaunches();
+    return launches.map((launch) => this.convertToLaunch(launch));
+  }
+
+  async getUpcomingLaunches(): Promise<Launch[]> {
+    const launches = await DefaultService.getUpcomingLaunches();
+    return launches.map((launch) => this.convertToLaunch(launch));
+  }
+
+  async getLatestLaunch(): Promise<Launch> {
+    const launch = await DefaultService.getLatestLaunch();
+    return this.convertToLaunch(launch);
+  }
+
+  async getNextLaunch(): Promise<Launch> {
+    const launch = await DefaultService.getNextLaunch();
+    return this.convertToLaunch(launch);
+  }
+
   async getLaunchesByIds(ids: string[]): Promise<Launch[]> {
     const launches = await Promise.all(
       ids.map(async (id) => {

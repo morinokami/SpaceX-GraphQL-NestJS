@@ -411,6 +411,54 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/Launch"
+  /v4/launches/past:
+    get:
+      summary: Get past launches
+      operationId: GetPastLaunches
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Launch"
+  /v4/launches/upcoming:
+    get:
+      summary: Get upcoming launches
+      operationId: GetUpcomingLaunches
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Launch"
+  /v4/launches/latest:
+    get:
+      summary: Get latest launch
+      operationId: GetLatestLaunch
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Launch"
+  /v4/launches/next:
+    get:
+      summary: Get next launch
+      operationId: GetNextLaunch
+      responses:
+        200:
+          description: default
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Launch"
   /v4/launchpads:
     get:
       summary: Get all launchpads

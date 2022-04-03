@@ -40,6 +40,26 @@ export class LaunchesResolver {
     return this.launchesService.getLaunch(id);
   }
 
+  @Query(() => [Launch], { description: 'Get past launches' })
+  async pastLaunches(): Promise<Launch[]> {
+    return this.launchesService.getPastLaunches();
+  }
+
+  @Query(() => [Launch], { description: 'Get upcoming launches' })
+  async upcomingLaunches(): Promise<Launch[]> {
+    return this.launchesService.getUpcomingLaunches();
+  }
+
+  @Query(() => Launch, { description: 'Get latest launch' })
+  async latestLaunch(): Promise<Launch> {
+    return this.launchesService.getLatestLaunch();
+  }
+
+  @Query(() => Launch, { description: 'Get next launch' })
+  async nextLaunch(): Promise<Launch> {
+    return this.launchesService.getNextLaunch();
+  }
+
   @ResolveField(() => Rocket)
   async rocket(@Parent() launch: Launch): Promise<Rocket> {
     if (!launch.rocketId) {

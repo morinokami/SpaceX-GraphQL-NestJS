@@ -380,6 +380,54 @@ export class DefaultService {
     }
 
     /**
+     * Get past launches
+     * @returns Launch default
+     * @throws ApiError
+     */
+    public static getPastLaunches(): CancelablePromise<Array<Launch>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/launches/past',
+        });
+    }
+
+    /**
+     * Get upcoming launches
+     * @returns Launch default
+     * @throws ApiError
+     */
+    public static getUpcomingLaunches(): CancelablePromise<Array<Launch>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/launches/upcoming',
+        });
+    }
+
+    /**
+     * Get latest launch
+     * @returns Launch default
+     * @throws ApiError
+     */
+    public static getLatestLaunch(): CancelablePromise<Launch> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/launches/latest',
+        });
+    }
+
+    /**
+     * Get next launch
+     * @returns Launch default
+     * @throws ApiError
+     */
+    public static getNextLaunch(): CancelablePromise<Launch> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/v4/launches/next',
+        });
+    }
+
+    /**
      * Get all launchpads
      * @returns Launchpad default
      * @throws ApiError

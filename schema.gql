@@ -626,6 +626,9 @@ type Query {
   """Query landpads"""
   landpads(input: QueryOptionsInput!): PaginatedLandpads!
 
+  """Get latest launch"""
+  latestLaunch: Launch!
+
   """Get one launch"""
   launch(id: String!): Launch!
 
@@ -634,6 +637,12 @@ type Query {
 
   """Query launchpads"""
   launchpads(input: QueryOptionsInput!): PaginatedLaunchpads!
+
+  """Get next launch"""
+  nextLaunch: Launch!
+
+  """Get past launches"""
+  pastLaunches: [Launch!]!
 
   """Get one payload"""
   payload(id: String!): Payload!
@@ -661,6 +670,9 @@ type Query {
 
   """Query starlinks"""
   starlinks(input: QueryOptionsInput!): PaginatedStarlinks!
+
+  """Get upcoming launches"""
+  upcomingLaunches: [Launch!]!
 }
 
 input QueryOptionsInput {
