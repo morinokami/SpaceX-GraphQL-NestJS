@@ -129,6 +129,13 @@ type Engines {
   version: String
 }
 
+"""Failure"""
+type Failure {
+  altitude: Int
+  reason: String
+  time: Int
+}
+
 """First Stage"""
 type FirstStage {
   burnTimeSec: Int
@@ -137,6 +144,12 @@ type FirstStage {
   reusable: Boolean
   thrustSeaLevel: ThrustSeaLevel!
   thrustVacuum: ThrustVacuum!
+}
+
+"""Flickr"""
+type Flickr {
+  original: [String!]
+  small: [String!]
 }
 
 """Headquarters"""
@@ -219,11 +232,26 @@ type LandpadImages {
 
 """Launch"""
 type Launch {
+  autoUpdate: Boolean!
   capsules: [Capsule!]!
+  dateLocal: String!
+  datePrecision: String!
+  dateUnix: Int!
+  dateUtc: String!
+  details: String
+  failures: [Failure!]!
   flightNumber: Int!
   id: ID!
+  links: Link!
   name: String!
+  net: Boolean!
   ships: [Ship!]!
+  staticFireDateUnix: Float
+  staticFireDateUtc: String
+  success: Boolean
+  tbd: Boolean!
+  upcoming: Boolean!
+  window: Int
 }
 
 """Launchpad"""
@@ -241,6 +269,18 @@ type Launchpad {
   rockets: [Rocket!]!
   status: String!
   timezone: String
+}
+
+"""Link"""
+type Link {
+  article: String
+  flickr: Flickr!
+  patch: Patch!
+  presskit: String
+  reddit: Reddit!
+  webcast: String
+  wikipedia: String
+  youtubeId: String
 }
 
 """Mass"""
@@ -401,6 +441,12 @@ type PaginatedStarlinks {
   prevPage: Int
   totalDocs: Int!
   totalPages: Int!
+}
+
+"""Patch"""
+type Patch {
+  large: String
+  small: String
 }
 
 """Payload"""
@@ -590,6 +636,14 @@ type Query {
 input QueryOptionsInput {
   limit: Int = 10
   offset: Int = 0
+}
+
+"""Reddit"""
+type Reddit {
+  campaign: String
+  launch: String
+  media: String
+  recovery: String
 }
 
 """Roadster Info"""
