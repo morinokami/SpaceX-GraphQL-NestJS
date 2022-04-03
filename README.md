@@ -1,6 +1,6 @@
 # SpaceX GraphQL
 
-Playground: https://spacex-graphql-nestjs.herokuapp.com/graphql
+Apollo Sandbox: http://sandbox.apollo.dev/?endpoint=https://spacex-graphql-nestjs.herokuapp.com/graphql
 
 ## Development Status
 
