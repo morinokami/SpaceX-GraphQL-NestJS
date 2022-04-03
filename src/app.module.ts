@@ -1,3 +1,4 @@
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { ApolloDriver } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -22,7 +23,8 @@ import { PayloadsModule } from './payloads/payloads.module';
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
       sortSchema: true,
-      playground: true,
+      playground: false,
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
       introspection: true,
     }),
     CapsulesModule,
