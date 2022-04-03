@@ -1,5 +1,6 @@
 import { Field, HideField, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Capsule } from 'src/capsules/models/capsule.model';
+import { Rocket } from 'src/rockets/models/rocket.model';
 import { Ship } from 'src/ships/models/ship.model';
 
 export type DatePrecision =
@@ -120,7 +121,8 @@ export class Launch {
   @Field(() => Int, { nullable: true })
   window?: number;
 
-  // TODO: rocket
+  @Field(() => Rocket, { nullable: true })
+  rocket?: Rocket;
 
   @Field(() => Boolean, { nullable: true })
   success?: boolean;
@@ -157,10 +159,11 @@ export class Launch {
   autoUpdate: boolean;
 
   @HideField()
+  rocketId?: string;
+
+  @HideField()
   shipIds: string[];
 
   @HideField()
   capsuleIds: string[];
-
-  // TODO: other fields
 }

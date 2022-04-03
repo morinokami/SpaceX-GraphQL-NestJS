@@ -245,6 +245,7 @@ type Launch {
   links: Link!
   name: String!
   net: Boolean!
+  rocket: Rocket
   ships: [Ship!]!
   staticFireDateUnix: Float
   staticFireDateUtc: String

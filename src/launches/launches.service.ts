@@ -18,6 +18,7 @@ export class LaunchesService {
       tbd: launch.tbd,
       net: launch.net,
       window: launch.window,
+      rocket: null,
       success: launch.success,
       failures: launch.failures,
       upcoming: launch.upcoming,
@@ -35,6 +36,7 @@ export class LaunchesService {
         wikipedia: launch.links.wikipedia,
       },
       autoUpdate: launch.auto_update,
+      rocketId: launch.rocket,
       shipIds: launch.ships,
       capsuleIds: launch.capsules,
     };
