@@ -23,6 +23,14 @@ export class LaunchesService {
       failures: launch.failures,
       upcoming: launch.upcoming,
       details: launch.details,
+      fairings: launch.fairings
+        ? {
+            reused: launch.fairings.reused,
+            recoveryAttempt: launch.fairings.recovery_attempt,
+            recovered: launch.fairings.recovered,
+            ships: [],
+          }
+        : null,
       crew: [],
       ships: [],
       capsules: [],
@@ -40,6 +48,7 @@ export class LaunchesService {
       },
       autoUpdate: launch.auto_update,
       rocketId: launch.rocket,
+      shipIdsForFairings: launch.fairings ? launch.fairings.ships : [],
       crewIds: launch.crew,
       shipIds: launch.ships,
       capsuleIds: launch.capsules,

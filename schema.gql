@@ -136,6 +136,14 @@ type Failure {
   time: Int
 }
 
+"""Fairings"""
+type Fairings {
+  recovered: Boolean
+  recoveryAttempt: Boolean
+  reused: Boolean
+  ships: [Ship!]!
+}
+
 """First Stage"""
 type FirstStage {
   burnTimeSec: Int
@@ -241,6 +249,7 @@ type Launch {
   dateUtc: String!
   details: String
   failures: [Failure!]!
+  fairings: Fairings
   flightNumber: Int!
   id: ID!
   launchpad: Launchpad

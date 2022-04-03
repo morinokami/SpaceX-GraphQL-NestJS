@@ -12,7 +12,7 @@ import { RocketsDataLoader } from 'src/rockets/rockets.dataloader';
 import { Ship } from 'src/ships/models/ship.model';
 import { ShipsDataLoader } from 'src/ships/ships.dataloader';
 import { LaunchesService } from './launches.service';
-import { Launch } from './models/launch.model';
+import { Fairings, Launch } from './models/launch.model';
 
 @Resolver(() => Launch)
 export class LaunchesResolver {
@@ -37,6 +37,17 @@ export class LaunchesResolver {
       return null;
     }
     return this.rocketsDataLoader.load(launch.rocketId);
+  }
+
+  @ResolveField(() => Fairings)
+  async fairings(@Parent() launch: Launch): Promise<Fairings> {
+    if (launch.shipIdsForFairings.length === 0) {
+      return launch.fairings;
+    }
+    const ships = await Promise.all(
+      launch.shipIdsForFairings.map((id) => this.shipsDataLoader.load(id)),
+    );
+    return { ...launch.fairings, ships };
   }
 
   @ResolveField(() => [Crew])

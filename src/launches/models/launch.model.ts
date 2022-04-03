@@ -26,6 +26,21 @@ class Failure {
   reason?: string;
 }
 
+@ObjectType({ description: 'Fairings' })
+export class Fairings {
+  @Field(() => Boolean, { nullable: true })
+  reused?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  recoveryAttempt?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  recovered?: boolean;
+
+  @Field(() => [Ship])
+  ships: Ship[];
+}
+
 @ObjectType({ description: 'Patch' })
 class Patch {
   @Field({ nullable: true })
@@ -139,7 +154,8 @@ export class Launch {
   @Field({ nullable: true })
   details?: string;
 
-  // TODO: fairings
+  @Field(() => Fairings, { nullable: true })
+  fairings?: Fairings;
 
   @Field(() => [Crew])
   crew: Crew[];
@@ -166,6 +182,9 @@ export class Launch {
 
   @HideField()
   rocketId?: string;
+
+  @HideField()
+  shipIdsForFairings?: string[];
 
   @HideField()
   crewIds?: string[];
