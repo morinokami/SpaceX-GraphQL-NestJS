@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { QueryOptionsInput } from 'src/common';
 import { DefaultService, Launch as _Launch } from 'src/generated';
 import { DatePrecision, Launch } from './models/launch.model';
+import { PaginatedLaunch } from './models/paginated-launch.model';
 
 @Injectable()
 export class LaunchesService {
@@ -78,6 +80,14 @@ export class LaunchesService {
   async getLaunch(id: string): Promise<Launch> {
     const launch = await DefaultService.getOneLaunch(id);
     return this.convertToLaunch(launch);
+  }
+
+  async getLaunches(options: QueryOptionsInput): Promise<PaginatedLaunch> {
+    const launches = await DefaultService.queryLaunches({ options });
+    return {
+      ...launches,
+      docs: launches.docs.map((launch) => this.convertToLaunch(launch)),
+    };
   }
 
   async getPastLaunches(): Promise<Launch[]> {

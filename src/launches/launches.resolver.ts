@@ -1,6 +1,7 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { CapsulesDataLoader } from 'src/capsules/capsules.dataloader';
 import { Capsule } from 'src/capsules/models/capsule.model';
+import { QueryOptionsInput } from 'src/common';
 import { CoresDataLoader } from 'src/cores/cores.dataloader';
 import { CrewDataLoader } from 'src/crew/crew.dataloader';
 import { Crew } from 'src/crew/models/crew.model';
@@ -15,6 +16,7 @@ import { Ship } from 'src/ships/models/ship.model';
 import { ShipsDataLoader } from 'src/ships/ships.dataloader';
 import { LaunchesService } from './launches.service';
 import { Fairings, Launch, LaunchCore } from './models/launch.model';
+import { PaginatedLaunch } from './models/paginated-launch.model';
 
 @Resolver(() => Launch)
 export class LaunchesResolver {
@@ -38,6 +40,13 @@ export class LaunchesResolver {
   @Query(() => Launch, { description: 'Get one launch' })
   async launch(@Args('id') id: string): Promise<Launch> {
     return this.launchesService.getLaunch(id);
+  }
+
+  @Query(() => PaginatedLaunch, { description: 'Query launches' })
+  async launches(
+    @Args('input') options: QueryOptionsInput,
+  ): Promise<PaginatedLaunch> {
+    return this.launchesService.getLaunches(options);
   }
 
   @Query(() => [Launch], { description: 'Get past launches' })

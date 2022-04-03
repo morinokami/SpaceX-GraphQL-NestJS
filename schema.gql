@@ -400,6 +400,20 @@ type PaginatedLandpads {
   totalPages: Int!
 }
 
+type PaginatedLaunch {
+  docs: [Launch!]!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  limit: Int!
+  nextPage: Int
+  offset: Int!
+  page: Int!
+  pagingCounter: Int!
+  prevPage: Int
+  totalDocs: Int!
+  totalPages: Int!
+}
+
 type PaginatedLaunchpads {
   docs: [Launchpad!]!
   hasNextPage: Boolean!
@@ -631,6 +645,9 @@ type Query {
 
   """Get one launch"""
   launch(id: String!): Launch!
+
+  """Query launches"""
+  launches(input: QueryOptionsInput!): PaginatedLaunch!
 
   """Get one launchpad"""
   launchpad(id: String!): Launchpad!
