@@ -1,3 +1,4 @@
+import { LaunchpadsAPI } from '.';
 import CapsulesAPI from './capsules-api';
 import CompanyInfoAPI from './company-info-api';
 import CoresAPI from './cores-api';
@@ -16,4 +17,5 @@ export interface DataSources {
   historyAPI: HistoryAPI;
   landpadsAPI: LandpadsAPI;
   launchesAPI: LaunchesAPI;
+  launchpadsAPI: LaunchpadsAPI;
 }
