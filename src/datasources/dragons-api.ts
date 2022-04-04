@@ -97,7 +97,9 @@ class DragonsAPI extends RESTDataSource {
   }
 
   async getDragons(options: QueryOptionsInput): Promise<PaginatedDragons> {
-    const dragons = await this.post<PaginatedDragons>('dragons', { options });
+    const dragons = await this.post<PaginatedDragons>('dragons/query', {
+      options,
+    });
     return {
       ...dragons,
       docs: dragons.docs.map((dragon) => this.convertToDragon(dragon)),

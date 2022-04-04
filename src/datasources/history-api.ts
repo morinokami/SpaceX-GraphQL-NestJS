@@ -32,7 +32,9 @@ class HistoryAPI extends RESTDataSource {
   }
 
   async getHistories(options: QueryOptionsInput): Promise<PaginatedHistory> {
-    const history = await this.post<PaginatedHistory>('history', { options });
+    const history = await this.post<PaginatedHistory>('history/query', {
+      options,
+    });
     return {
       ...history,
       docs: history.docs.map((history) => this.convertToHistory(history)),

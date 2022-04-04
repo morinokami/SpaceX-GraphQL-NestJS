@@ -34,7 +34,7 @@ class CrewAPI extends RESTDataSource {
   }
 
   async getCrews(options: QueryOptionsInput): Promise<PaginatedCrew> {
-    const crew = await this.post<PaginatedCrew>('crew', { options });
+    const crew = await this.post<PaginatedCrew>('crew/query', { options });
     return {
       ...crew,
       docs: crew.docs.map((crew) => this.convertToCrew(crew)),

@@ -46,9 +46,12 @@ class LaunchPadsAPI extends RESTDataSource {
   async getLaunchpads(
     options: QueryOptionsInput,
   ): Promise<PaginatedLaunchpads> {
-    const launchpads = await this.get<PaginatedLaunchpads>('launchpads', {
-      options,
-    });
+    const launchpads = await this.post<PaginatedLaunchpads>(
+      'launchpads/query',
+      {
+        options,
+      },
+    );
     return {
       ...launchpads,
       docs: launchpads.docs.map((launchpad) =>

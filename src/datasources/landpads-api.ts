@@ -42,7 +42,9 @@ class LandpadsAPI extends RESTDataSource {
   }
 
   async getLandpads(options: QueryOptionsInput): Promise<PaginatedLandpads> {
-    const landpads = await this.get<PaginatedLandpads>('landpads', { options });
+    const landpads = await this.post<PaginatedLandpads>('landpads/query', {
+      options,
+    });
     return {
       ...landpads,
       docs: landpads.docs.map((landpad) => this.convertToLandpad(landpad)),

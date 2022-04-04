@@ -38,7 +38,7 @@ class CoresAPI extends RESTDataSource {
   }
 
   async getCores(options: QueryOptionsInput): Promise<PaginatedCores> {
-    const cores = await this.post<PaginatedCores>('cores', { options });
+    const cores = await this.post<PaginatedCores>('cores/query', { options });
     return {
       ...cores,
       docs: cores.docs.map((core) => this.convertToCore(core)),
