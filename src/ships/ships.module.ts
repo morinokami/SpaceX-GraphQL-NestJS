@@ -1,12 +1,7 @@
-import { forwardRef, Module } from '@nestjs/common';
-import { LaunchesModule } from 'src/launches/launches.module';
-import { ShipsDataLoader } from './ships.dataloader';
+import { Module } from '@nestjs/common';
 import { ShipsResolver } from './ships.resolver';
-import { ShipsService } from './ships.service';
 
 @Module({
-  imports: [forwardRef(() => LaunchesModule)],
-  providers: [ShipsResolver, ShipsService, ShipsDataLoader],
-  exports: [ShipsDataLoader],
+  providers: [ShipsResolver],
 })
 export class ShipsModule {}

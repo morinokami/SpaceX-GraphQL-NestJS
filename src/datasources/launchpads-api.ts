@@ -1,11 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { RESTDataSource } from 'apollo-datasource-rest';
 import { QueryOptionsInput } from 'src/common';
-import { DefaultService, Launchpad as _Launchpad } from 'src/generated';
-import { Launchpad, LaunchpadStatus } from './models/launchpad.model';
-import { PaginatedLaunchpads } from './models/paginated-launchpad.model';
+import { Launchpad as _Launchpad } from 'src/generated';
+import {
+  Launchpad,
+  LaunchpadStatus,
+} from 'src/launchpads/models/launchpad.model';
+import { PaginatedLaunchpads } from 'src/launchpads/models/paginated-launchpad.model';
 
-@Injectable()
-export class LaunchpadsService {
+class LaunchpadsAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToLauchpad(launchpad: _Launchpad): Launchpad {
     return {
       id: launchpad.id,
@@ -27,19 +34,24 @@ export class LaunchpadsService {
   }
 
   async getAllLaunchpads(): Promise<Launchpad[]> {
-    const launchpads = await DefaultService.getAllLaunchpads();
+    const launchpads = await this.get<_Launchpad[]>('launchpads');
     return launchpads.map((launchpad) => this.convertToLauchpad(launchpad));
   }
 
   async getLaunchpad(id: string): Promise<Launchpad> {
-    const launchpad = await DefaultService.getOneLaunchpad(id);
+    const launchpad = await this.get<_Launchpad>(`launchpads/${id}`);
     return this.convertToLauchpad(launchpad);
   }
 
   async getLaunchpads(
     options: QueryOptionsInput,
   ): Promise<PaginatedLaunchpads> {
-    const launchpads = await DefaultService.queryLaunchpads({ options });
+    const launchpads = await this.post<PaginatedLaunchpads>(
+      'launchpads/query',
+      {
+        options,
+      },
+    );
     return {
       ...launchpads,
       docs: launchpads.docs.map((launchpad) =>
@@ -47,11 +59,6 @@ export class LaunchpadsService {
       ),
     };
   }
-
-  async getLaunchpadsByIds(ids: string[]): Promise<Launchpad[]> {
-    const launchpads = await Promise.all(
-      ids.map((id) => DefaultService.getOneLaunchpad(id)),
-    );
-    return launchpads.map((launchpad) => this.convertToLauchpad(launchpad));
-  }
 }
+
+export default LaunchpadsAPI;

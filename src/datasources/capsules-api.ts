@@ -1,11 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { QueryOptionsInput } from 'src/common/query-options.input';
-import { Capsule as _Capsule, DefaultService } from 'src/generated';
-import { Capsule, CapsuleStatus, CapsuleType } from './models/capsule.model';
-import { PaginatedCapsules } from './models/paginated-capsules.model';
+import { RESTDataSource } from 'apollo-datasource-rest';
+import { Capsule as _Capsule } from 'src/generated';
+import {
+  Capsule,
+  CapsuleStatus,
+  CapsuleType,
+} from 'src/capsules/models/capsule.model';
+import { PaginatedCapsules } from 'src/capsules/models/paginated-capsules.model';
+import { QueryOptionsInput } from 'src/common';
 
-@Injectable()
-export class CapsulesService {
+class CapsulesAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToCapsule(capsule: _Capsule): Capsule {
     return {
       id: capsule.id,
@@ -22,31 +30,24 @@ export class CapsulesService {
   }
 
   async getAllCapsules(): Promise<Capsule[]> {
-    const capsules = await DefaultService.getAllCapsules();
+    const capsules = await this.get<_Capsule[]>('capsules');
     return capsules.map((capsule) => this.convertToCapsule(capsule));
   }
 
   async getCapsule(id: string): Promise<Capsule> {
-    const capsule = await DefaultService.getOneCapsule(id);
+    const capsule = await this.get<_Capsule>(`capsules/${id}`);
     return this.convertToCapsule(capsule);
   }
 
   async getCapsules(options: QueryOptionsInput): Promise<PaginatedCapsules> {
-    const capsules = await DefaultService.queryCapsules({ options });
+    const capsules = await this.post<PaginatedCapsules>('capsules/query', {
+      options,
+    });
     return {
       ...capsules,
       docs: capsules.docs.map((capsule) => this.convertToCapsule(capsule)),
     };
   }
-
-  async getCapsulesByIds(ids: string[]): Promise<Capsule[]> {
-    const capsules = await Promise.all(
-      ids.map((id) => {
-        return DefaultService.getOneCapsule(id);
-      }),
-    );
-    return capsules.map((capsule) => {
-      return this.convertToCapsule(capsule);
-    });
-  }
 }
+
+export default CapsulesAPI;

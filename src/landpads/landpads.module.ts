@@ -1,12 +1,7 @@
-import { forwardRef, Module } from '@nestjs/common';
-import { LandpadsService } from './landpads.service';
+import { Module } from '@nestjs/common';
 import { LandpadsResolver } from './landpads.resolver';
-import { LaunchesModule } from 'src/launches/launches.module';
-import { LandpadsDataLoader } from './landpads.dataloader';
 
 @Module({
-  imports: [forwardRef(() => LaunchesModule)],
-  providers: [LandpadsService, LandpadsResolver, LandpadsDataLoader],
-  exports: [LandpadsDataLoader],
+  providers: [LandpadsResolver],
 })
 export class LandpadsModule {}

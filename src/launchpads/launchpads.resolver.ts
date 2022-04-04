@@ -1,49 +1,60 @@
-import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Context,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { QueryOptionsInput } from 'src/common';
-import { LaunchesDataLoader } from 'src/launches/launches.dataloader';
+import { DataSources } from 'src/datasources';
 import { Launch } from 'src/launches/models/launch.model';
 import { Rocket } from 'src/rockets/models/rocket.model';
-import { RocketsDataLoader } from 'src/rockets/rockets.dataloader';
-import { LaunchpadsService } from './launchpads.service';
 import { Launchpad } from './models/launchpad.model';
 import { PaginatedLaunchpads } from './models/paginated-launchpad.model';
 
 @Resolver(() => Launchpad)
 export class LaunchpadsResolver {
-  constructor(
-    private readonly launchpadsService: LaunchpadsService,
-    private readonly rocketsDataLoader: RocketsDataLoader,
-    private readonly launchesDataLoader: LaunchesDataLoader,
-  ) {}
-
   @Query(() => [Launchpad], { description: 'Get all launchpads' })
-  async allLaunchpads(): Promise<Launchpad[]> {
-    return this.launchpadsService.getAllLaunchpads();
+  async allLaunchpads(
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Launchpad[]> {
+    return dataSources.launchpadsAPI.getAllLaunchpads();
   }
 
   @Query(() => Launchpad, { description: 'Get one launchpad' })
-  async launchpad(@Args('id') id: string): Promise<Launchpad> {
-    return this.launchpadsService.getLaunchpad(id);
+  async launchpad(
+    @Args('id') id: string,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Launchpad> {
+    return dataSources.launchpadsAPI.getLaunchpad(id);
   }
 
   @Query(() => PaginatedLaunchpads, { description: 'Query launchpads' })
   async launchpads(
     @Args('input') options: QueryOptionsInput,
+    @Context('dataSources') dataSources: DataSources,
   ): Promise<PaginatedLaunchpads> {
-    return this.launchpadsService.getLaunchpads(options);
+    return dataSources.launchpadsAPI.getLaunchpads(options);
   }
 
   @ResolveField(() => [Rocket])
-  async rockets(@Parent() launchpad: Launchpad): Promise<Rocket[]> {
+  async rockets(
+    @Parent() launchpad: Launchpad,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Rocket[]> {
     return Promise.all(
-      launchpad.rocketIds.map((id) => this.rocketsDataLoader.load(id)),
+      launchpad.rocketIds.map((id) => dataSources.rocketsAPI.getRocket(id)),
     );
   }
 
   @ResolveField(() => [Launch])
-  async launches(@Parent() launchpad: Launchpad): Promise<Launch[]> {
+  async launches(
+    @Parent() launchpad: Launchpad,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Launch[]> {
     return Promise.all(
-      launchpad.launchIds.map((id) => this.launchesDataLoader.load(id)),
+      launchpad.launchIds.map((id) => dataSources.launchesAPI.getLaunch(id)),
     );
   }
 }

@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { RESTDataSource } from 'apollo-datasource-rest';
 import { QueryOptionsInput } from 'src/common';
-import { DefaultService, Starlink as _Starlink } from 'src/generated';
-import { PaginatedStarlinks } from './models/paginated-starlinks.model';
-import { Starlink } from './models/starlink.model';
+import { Starlink as _Starlink } from 'src/generated';
+import { PaginatedStarlinks } from 'src/starlink/models/paginated-starlinks.model';
+import { Starlink } from 'src/starlink/models/starlink.model';
 
-@Injectable()
-export class StarlinkService {
+class StarlinkAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToStarlink(starlink: _Starlink): Starlink {
     return {
       id: starlink.id,
@@ -21,20 +25,24 @@ export class StarlinkService {
   }
 
   async getAllStarlinks(): Promise<Starlink[]> {
-    const starlinks = await DefaultService.getAllStarlinkSats();
+    const starlinks = await this.get<_Starlink[]>('/starlink');
     return starlinks.map((starlink) => this.convertToStarlink(starlink));
   }
 
   async getStarlink(id: string): Promise<Starlink> {
-    const starlink = await DefaultService.getOneStarlinkSat(id);
+    const starlink = await this.get<_Starlink>(`/starlink/${id}`);
     return this.convertToStarlink(starlink);
   }
 
   async getStarlinks(options: QueryOptionsInput): Promise<PaginatedStarlinks> {
-    const starlinks = await DefaultService.queryStarlinkSats({ options });
+    const starlinks = await this.post<PaginatedStarlinks>('/starlink/query', {
+      options,
+    });
     return {
       ...starlinks,
       docs: starlinks.docs.map((starlink) => this.convertToStarlink(starlink)),
     };
   }
 }
+
+export default StarlinkAPI;

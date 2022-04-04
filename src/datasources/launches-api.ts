@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { RESTDataSource } from 'apollo-datasource-rest';
 import { QueryOptionsInput } from 'src/common';
-import { DefaultService, Launch as _Launch } from 'src/generated';
-import { DatePrecision, Launch } from './models/launch.model';
-import { PaginatedLaunch } from './models/paginated-launch.model';
+import { Launch as _Launch } from 'src/generated';
+import { DatePrecision, Launch } from 'src/launches/models/launch.model';
+import { PaginatedLaunch } from 'src/launches/models/paginated-launch.model';
 
-@Injectable()
-export class LaunchesService {
+class LaunchesAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToLaunch(launch: _Launch): Launch {
     return {
       id: launch.id,
@@ -73,17 +77,19 @@ export class LaunchesService {
   }
 
   async getAllLaunches(): Promise<Launch[]> {
-    const launches = await DefaultService.getAllLaunches();
+    const launches = await this.get<_Launch[]>('launches');
     return launches.map((launch) => this.convertToLaunch(launch));
   }
 
   async getLaunch(id: string): Promise<Launch> {
-    const launch = await DefaultService.getOneLaunch(id);
+    const launch = await this.get<_Launch>(`launches/${id}`);
     return this.convertToLaunch(launch);
   }
 
   async getLaunches(options: QueryOptionsInput): Promise<PaginatedLaunch> {
-    const launches = await DefaultService.queryLaunches({ options });
+    const launches = await this.post<PaginatedLaunch>('launches/query', {
+      options,
+    });
     return {
       ...launches,
       docs: launches.docs.map((launch) => this.convertToLaunch(launch)),
@@ -91,37 +97,24 @@ export class LaunchesService {
   }
 
   async getPastLaunches(): Promise<Launch[]> {
-    const launches = await DefaultService.getPastLaunches();
+    const launches = await this.get<_Launch[]>('launches/past');
     return launches.map((launch) => this.convertToLaunch(launch));
   }
 
   async getUpcomingLaunches(): Promise<Launch[]> {
-    const launches = await DefaultService.getUpcomingLaunches();
+    const launches = await this.get<_Launch[]>('launches/upcoming');
     return launches.map((launch) => this.convertToLaunch(launch));
   }
 
   async getLatestLaunch(): Promise<Launch> {
-    const launch = await DefaultService.getLatestLaunch();
+    const launch = await this.get<_Launch>('launches/latest');
     return this.convertToLaunch(launch);
   }
 
   async getNextLaunch(): Promise<Launch> {
-    const launch = await DefaultService.getNextLaunch();
+    const launch = await this.get<_Launch>('launches/next');
     return this.convertToLaunch(launch);
   }
-
-  async getLaunchesByIds(ids: string[]): Promise<Launch[]> {
-    const launches = await Promise.all(
-      ids.map(async (id) => {
-        try {
-          return await DefaultService.getOneLaunch(id);
-        } catch {
-          return null;
-        }
-      }),
-    );
-    return launches.map((launch) =>
-      launch ? this.convertToLaunch(launch) : null,
-    );
-  }
 }
+
+export default LaunchesAPI;

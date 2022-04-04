@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { RESTDataSource } from 'apollo-datasource-rest';
 import { QueryOptionsInput } from 'src/common';
-import { DefaultService, Dragon as _Dragon } from 'src/generated';
-import { Dragon } from './models/dragon.model';
-import { PaginatedDragons } from './models/paginated-dragons.model';
+import { Dragon } from 'src/dragons/models/dragon.model';
+import { PaginatedDragons } from 'src/dragons/models/paginated-dragons.model';
+import { Dragon as _Dragon } from 'src/generated';
 
-@Injectable()
-export class DragonsService {
+class DragonsAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToDragon(dragon: _Dragon): Dragon {
     return {
       id: dragon.id,
@@ -83,20 +87,24 @@ export class DragonsService {
   }
 
   async getAllDragons(): Promise<Dragon[]> {
-    const dragons = await DefaultService.getAllDragons();
+    const dragons = await this.get<_Dragon[]>('dragons');
     return dragons.map((dragon) => this.convertToDragon(dragon));
   }
 
   async getDragon(id: string): Promise<Dragon> {
-    const dragon = await DefaultService.getOneDragon(id);
+    const dragon = await this.get<_Dragon>(`dragons/${id}`);
     return this.convertToDragon(dragon);
   }
 
   async getDragons(options: QueryOptionsInput): Promise<PaginatedDragons> {
-    const dragons = await DefaultService.queryDragons({ options });
+    const dragons = await this.post<PaginatedDragons>('dragons/query', {
+      options,
+    });
     return {
       ...dragons,
       docs: dragons.docs.map((dragon) => this.convertToDragon(dragon)),
     };
   }
 }
+
+export default DragonsAPI;

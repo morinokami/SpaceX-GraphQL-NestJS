@@ -1,13 +1,13 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import { Context, Query, Resolver } from '@nestjs/graphql';
+import { DataSources } from 'src/datasources';
 import { RoadsterInfo } from './models/roadster-info.model';
-import { RoadsterInfoService } from './roadster-info.service';
 
 @Resolver()
 export class RoadsterInfoResolver {
-  constructor(private readonly roadsterInfoService: RoadsterInfoService) {}
-
   @Query(() => RoadsterInfo, { description: 'Roadster info' })
-  async roadsterInfo(): Promise<RoadsterInfo> {
-    return this.roadsterInfoService.getRoadsterInfo();
+  async roadsterInfo(
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<RoadsterInfo> {
+    return dataSources.roadsterInfoAPI.getRoadsterInfo();
   }
 }

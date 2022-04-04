@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { RESTDataSource } from 'apollo-datasource-rest';
 import { QueryOptionsInput } from 'src/common';
-import { Crew as _Crew, DefaultService } from 'src/generated';
-import { Crew, CrewStatus } from './models/crew.model';
-import { PaginatedCrew } from './models/paginated-crew-model';
+import { Crew, CrewStatus } from 'src/crew/models/crew.model';
+import { PaginatedCrew } from 'src/crew/models/paginated-crew-model';
+import { Crew as _Crew } from 'src/generated';
 
-@Injectable()
-export class CrewService {
+class CrewAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToCrew(crew: _Crew): Crew {
     return {
       id: crew.id,
@@ -20,27 +24,22 @@ export class CrewService {
   }
 
   async getAllCrew(): Promise<Crew[]> {
-    const crew = await DefaultService.getAllCrewMembers();
+    const crew = await this.get<_Crew[]>('crew');
     return crew.map((crew) => this.convertToCrew(crew));
   }
 
   async getCrew(id: string): Promise<Crew> {
-    const crew = await DefaultService.getOneCrewMember(id);
+    const crew = await this.get<_Crew>(`crew/${id}`);
     return this.convertToCrew(crew);
   }
 
   async getCrews(options: QueryOptionsInput): Promise<PaginatedCrew> {
-    const crew = await DefaultService.queryCrewMembers({ options });
+    const crew = await this.post<PaginatedCrew>('crew/query', { options });
     return {
       ...crew,
       docs: crew.docs.map((crew) => this.convertToCrew(crew)),
     };
   }
-
-  async getCrewsByIds(ids: string[]): Promise<Crew[]> {
-    const crew = await Promise.all(
-      ids.map((id) => DefaultService.getOneCrewMember(id)),
-    );
-    return crew.map((crew) => this.convertToCrew(crew));
-  }
 }
+
+export default CrewAPI;

@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { RESTDataSource } from 'apollo-datasource-rest';
 import { QueryOptionsInput } from 'src/common';
-import { DefaultService, Ship as _Ship } from 'src/generated';
-import { PaginatedShips } from './models/paginated-ships.model';
-import { Ship } from './models/ship.model';
+import { Ship as _Ship } from 'src/generated';
+import { PaginatedShips } from 'src/ships/models/paginated-ships.model';
+import { Ship } from 'src/ships/models/ship.model';
 
-@Injectable()
-export class ShipsService {
+class ShipsAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToShip(ship: _Ship): Ship {
     return {
       id: ship.id,
@@ -36,29 +40,22 @@ export class ShipsService {
   }
 
   async getAllShips(): Promise<Ship[]> {
-    const ships = await DefaultService.getAllShips();
+    const ships = await this.get<_Ship[]>('ships');
     return ships.map((ship) => this.convertToShip(ship));
   }
 
   async getShip(id: string): Promise<Ship> {
-    const ship = await DefaultService.getOneShip(id);
+    const ship = await this.get<_Ship>(`ships/${id}`);
     return this.convertToShip(ship);
   }
 
   async getShips(options: QueryOptionsInput): Promise<PaginatedShips> {
-    const ships = await DefaultService.queryShips({ options });
+    const ships = await this.post<PaginatedShips>('ships/query', { options });
     return {
       ...ships,
       docs: ships.docs.map((ship) => this.convertToShip(ship)),
     };
   }
-
-  async getShipsByIds(ids: string[]): Promise<Ship[]> {
-    const ships = await Promise.all(
-      ids.map((id) => {
-        return DefaultService.getOneShip(id);
-      }),
-    );
-    return ships.map((ship) => this.convertToShip(ship));
-  }
 }
+
+export default ShipsAPI;

@@ -19,7 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "codegen:client": "rimraf src/generated && mkdir src/generated && openapi --input ./openapi.yaml --output src/generated --client node"
+    "codegen:model": "rimraf src/generated && mkdir src/generated && openapi --input ./openapi.yaml --output src/generated --client node --exportCore false --exportServices false"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.7",
@@ -27,9 +27,9 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/graphql": "^10.0.7",
     "@nestjs/platform-express": "^8.0.0",
+    "apollo-datasource-rest": "^3.5.2",
     "apollo-server-express": "^3.6.4",
     "class-validator": "^0.13.2",
-    "dataloader": "^2.0.0",
     "graphql": "^16.3.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

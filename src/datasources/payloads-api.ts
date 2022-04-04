@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { RESTDataSource } from 'apollo-datasource-rest';
 import { QueryOptionsInput } from 'src/common';
-import { DefaultService, Payload as _Payload } from 'src/generated';
-import { PaginatedPayload } from './models/paginated-payload.model';
-import { Payload } from './models/payload.model';
+import { Payload as _Payload } from 'src/generated';
+import { PaginatedPayload } from 'src/payloads/models/paginated-payload.model';
+import { Payload } from 'src/payloads/models/payload.model';
 
-@Injectable()
-export class PayloadsService {
+class PayloadsAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToPayload(payload: _Payload): Payload {
     return {
       id: payload.id,
@@ -50,27 +54,24 @@ export class PayloadsService {
   }
 
   async getAllPayloads(): Promise<Payload[]> {
-    const payloads = await DefaultService.getAllPayloads();
+    const payloads = await this.get<_Payload[]>('payloads');
     return payloads.map((payload) => this.convertToPayload(payload));
   }
 
   async getPayload(id: string): Promise<Payload> {
-    const payload = await DefaultService.getOnePayload(id);
+    const payload = await this.get<_Payload>(`payloads/${id}`);
     return this.convertToPayload(payload);
   }
 
   async getPayloads(options: QueryOptionsInput): Promise<PaginatedPayload> {
-    const payloads = await DefaultService.queryPayloads({ options });
+    const payloads = await this.post<PaginatedPayload>('payloads/query', {
+      options,
+    });
     return {
       ...payloads,
       docs: payloads.docs.map((payload) => this.convertToPayload(payload)),
     };
   }
-
-  async getPayloadsByIds(ids: string[]): Promise<Payload[]> {
-    const payloads = await Promise.all(
-      ids.map((id) => DefaultService.getOnePayload(id)),
-    );
-    return payloads.map((payload) => this.convertToPayload(payload));
-  }
 }
+
+export default PayloadsAPI;

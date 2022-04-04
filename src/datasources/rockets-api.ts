@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { RESTDataSource } from 'apollo-datasource-rest';
 import { QueryOptionsInput } from 'src/common';
-import { DefaultService, Rocket as _Rocket } from 'src/generated';
-import { PaginatedRockets } from './models/paginated-rockets.model';
-import { Rocket } from './models/rocket.model';
+import { Rocket as _Rocket } from 'src/generated';
+import { PaginatedRockets } from 'src/rockets/models/paginated-rockets.model';
+import { Rocket } from 'src/rockets/models/rocket.model';
 
-@Injectable()
-export class RocketsService {
+class RocketsAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToRocket(rocket: _Rocket): Rocket {
     return {
       id: rocket.id,
@@ -75,27 +79,24 @@ export class RocketsService {
   }
 
   async getAllRockets(): Promise<Rocket[]> {
-    const rockets = await DefaultService.getAllRockets();
+    const rockets = await this.get<_Rocket[]>('rockets');
     return rockets.map((rocket) => this.convertToRocket(rocket));
   }
 
   async getRocket(id: string): Promise<Rocket> {
-    const rocket = await DefaultService.getOneRocket(id);
+    const rocket = await this.get<_Rocket>(`rockets/${id}`);
     return this.convertToRocket(rocket);
   }
 
   async getRockets(options: QueryOptionsInput): Promise<PaginatedRockets> {
-    const rockets = await DefaultService.queryRockets({ options });
+    const rockets = await this.post<PaginatedRockets>('rockets/query', {
+      options,
+    });
     return {
       ...rockets,
       docs: rockets.docs.map((rocket) => this.convertToRocket(rocket)),
     };
   }
-
-  async getRocketsByIds(ids: string[]): Promise<Rocket[]> {
-    const rockets = await Promise.all(
-      ids.map((id) => DefaultService.getOneRocket(id)),
-    );
-    return rockets.map((rocket) => this.convertToRocket(rocket));
-  }
 }
+
+export default RocketsAPI;

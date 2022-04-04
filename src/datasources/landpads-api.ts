@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { RESTDataSource } from 'apollo-datasource-rest';
 import { QueryOptionsInput } from 'src/common';
-import { DefaultService, Landpad as _Landpad } from 'src/generated';
-import { Landpad, LandpadStatus } from './models/landpad.model';
-import { PaginatedLandpads } from './models/paginated-landpad.model';
+import { Landpad as _Landpad } from 'src/generated';
+import { Landpad, LandpadStatus } from 'src/landpads/models/landpad.model';
+import { PaginatedLandpads } from 'src/landpads/models/paginated-landpad.model';
 
-@Injectable()
-export class LandpadsService {
+class LandpadsAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToLandpad(landpad: _Landpad): Landpad {
     return {
       id: landpad.id,
@@ -28,27 +32,24 @@ export class LandpadsService {
   }
 
   async getAllLandpads(): Promise<Landpad[]> {
-    const landpads = await DefaultService.getAllLandpads();
+    const landpads = await this.get<_Landpad[]>('landpads');
     return landpads.map((landpad) => this.convertToLandpad(landpad));
   }
 
   async getLandpad(id: string): Promise<Landpad> {
-    const landpad = await DefaultService.getOneLandpad(id);
+    const landpad = await this.get<_Landpad>(`landpads/${id}`);
     return this.convertToLandpad(landpad);
   }
 
   async getLandpads(options: QueryOptionsInput): Promise<PaginatedLandpads> {
-    const landpads = await DefaultService.queryLandpads({ options });
+    const landpads = await this.post<PaginatedLandpads>('landpads/query', {
+      options,
+    });
     return {
       ...landpads,
       docs: landpads.docs.map((landpad) => this.convertToLandpad(landpad)),
     };
   }
-
-  async getLandpadsByIds(ids: string[]): Promise<Landpad[]> {
-    const landpads = await Promise.all(
-      ids.map((id) => DefaultService.getOneLandpad(id)),
-    );
-    return landpads.map((landpad) => this.convertToLandpad(landpad));
-  }
 }
+
+export default LandpadsAPI;

@@ -1,9 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { Company, DefaultService } from 'src/generated';
-import { CompanyInfo } from './models/company-info.model';
+import { RESTDataSource } from 'apollo-datasource-rest';
+import { CompanyInfo } from 'src/company-info/models/company-info.model';
+import { Company } from 'src/generated';
 
-@Injectable()
-export class CompanyInfoService {
+class CompanyInfoAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToCompanyInfo(company: Company): CompanyInfo {
     return {
       id: company.id,
@@ -29,7 +33,9 @@ export class CompanyInfoService {
   }
 
   async getCompanyInfo(): Promise<CompanyInfo> {
-    const companyInfo = await DefaultService.getCompanyInfo();
+    const companyInfo = await this.get<Company>('company');
     return this.convertToCompanyInfo(companyInfo);
   }
 }
+
+export default CompanyInfoAPI;

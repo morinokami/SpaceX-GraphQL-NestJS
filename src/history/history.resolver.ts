@@ -1,27 +1,31 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Context, Query, Resolver } from '@nestjs/graphql';
 import { QueryOptionsInput } from 'src/common';
-import { HistoryService } from './history.service';
+import { DataSources } from 'src/datasources';
 import { History } from './models/history.model';
 import { PaginatedHistory } from './models/paginated-history.model';
 
 @Resolver()
 export class HistoryResolver {
-  constructor(private readonly historyService: HistoryService) {}
-
   @Query(() => [History], { description: 'Get all histories' })
-  async allHistories(): Promise<History[]> {
-    return this.historyService.getAllHistory();
+  async allHistories(
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<History[]> {
+    return dataSources.historyAPI.getAllHistories();
   }
 
   @Query(() => History, { description: 'Get one history' })
-  async history(@Args('id') id: string): Promise<History> {
-    return this.historyService.getHistory(id);
+  async history(
+    @Args('id') id: string,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<History> {
+    return dataSources.historyAPI.getHistory(id);
   }
 
   @Query(() => PaginatedHistory, { description: 'Query histories' })
   async histories(
     @Args('input') options: QueryOptionsInput,
+    @Context('dataSources') dataSources: DataSources,
   ): Promise<PaginatedHistory> {
-    return this.historyService.getHistories(options);
+    return dataSources.historyAPI.getHistories(options);
   }
 }

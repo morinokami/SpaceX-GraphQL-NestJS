@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { RESTDataSource } from 'apollo-datasource-rest';
 import { QueryOptionsInput } from 'src/common';
-import { Core as _Core, DefaultService } from 'src/generated';
-import { Core, CoreStatus } from './models/core.model';
-import { PaginatedCores } from './models/paginated-cores.model';
+import { Core, CoreStatus } from 'src/cores/models/core.model';
+import { PaginatedCores } from 'src/cores/models/paginated-cores.model';
+import { Core as _Core } from 'src/generated';
 
-@Injectable()
-export class CoresService {
+class CoresAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToCore(core: _Core): Core {
     return {
       id: core.id,
@@ -24,27 +28,22 @@ export class CoresService {
   }
 
   async getAllCores(): Promise<Core[]> {
-    const cores = await DefaultService.getAllCores();
+    const cores = await this.get<_Core[]>('cores');
     return cores.map((core) => this.convertToCore(core));
   }
 
   async getCore(id: string): Promise<Core> {
-    const core = await DefaultService.getOneCore(id);
+    const core = await this.get<_Core>(`cores/${id}`);
     return this.convertToCore(core);
   }
 
   async getCores(options: QueryOptionsInput): Promise<PaginatedCores> {
-    const cores = await DefaultService.queryCores({ options });
+    const cores = await this.post<PaginatedCores>('cores/query', { options });
     return {
       ...cores,
       docs: cores.docs.map((core) => this.convertToCore(core)),
     };
   }
-
-  async getCoresByIds(ids: string[]): Promise<Core[]> {
-    const cores = await Promise.all(
-      ids.map((id) => DefaultService.getOneCore(id)),
-    );
-    return cores.map((core) => this.convertToCore(core));
-  }
 }
+
+export default CoresAPI;
