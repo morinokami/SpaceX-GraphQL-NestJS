@@ -6,3 +6,4 @@ export { default as CrewAPI } from './crew-api';
 export { default as DragonsAPI } from './dragons-api';
 export { default as HistoryAPI } from './history-api';
 export { default as LandpadsAPI } from './landpads-api';
+export { default as LaunchesAPI } from './launches-api';

@@ -24,6 +24,7 @@ import {
   DragonsAPI,
   HistoryAPI,
   LandpadsAPI,
+  LaunchesAPI,
 } from './datasources';
 
 @Module({
@@ -45,6 +46,7 @@ import {
           dragonsAPI: new DragonsAPI(),
           historyAPI: new HistoryAPI(),
           landpadsAPI: new LandpadsAPI(),
+          launchesAPI: new LaunchesAPI(),
         };
       },
     }),
