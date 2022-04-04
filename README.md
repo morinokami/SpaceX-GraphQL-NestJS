@@ -1,6 +1,8 @@
-# SpaceX GraphQL
+# SpaceX-GraphQL-NestJS
 
-Apollo Sandbox: http://sandbox.apollo.dev/?endpoint=https://spacex-graphql-nestjs.herokuapp.com/graphql
+A GraphQL server for SpaceX API, powered by NestJS. [SpaceX API](https://github.com/r-spacex/SpaceX-API) is used as a datasource under the hood.
+
+Try it out with Apollo Sandbox: http://sandbox.apollo.dev/?endpoint=https://spacex-graphql-nestjs.herokuapp.com/graphql
 
 ## Development Status
 
