@@ -16,7 +16,13 @@ import { LaunchpadsModule } from './launchpads/launchpads.module';
 import { DragonsModule } from './dragons/dragons.module';
 import { RocketsModule } from './rockets/rockets.module';
 import { PayloadsModule } from './payloads/payloads.module';
-import { CapsulesAPI, CompanyInfoAPI, CoresAPI, CrewAPI } from './datasources';
+import {
+  CapsulesAPI,
+  CompanyInfoAPI,
+  CoresAPI,
+  CrewAPI,
+  DragonsAPI,
+} from './datasources';
 
 @Module({
   imports: [
@@ -34,6 +40,7 @@ import { CapsulesAPI, CompanyInfoAPI, CoresAPI, CrewAPI } from './datasources';
           companyInfoAPI: new CompanyInfoAPI(),
           coresAPI: new CoresAPI(),
           crewAPI: new CrewAPI(),
+          dragonsAPI: new DragonsAPI(),
         };
       },
     }),
