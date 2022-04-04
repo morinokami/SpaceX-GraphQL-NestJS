@@ -10,3 +10,4 @@ export { default as LaunchesAPI } from './launches-api';
 export { default as LaunchpadsAPI } from './launchpads-api';
 export { default as PayloadsAPI } from './payloads-api';
 export { default as RoadsterInfoAPI } from './roadster-info-api';
+export { default as RocketsAPI } from './rockets-api';

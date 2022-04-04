@@ -9,6 +9,7 @@ import LaunchesAPI from './launches-api';
 import LaunchpadsAPI from './launchpads-api';
 import PayloadsAPI from './payloads-api';
 import RoadsterInfoAPI from './roadster-info-api';
+import RocketsAPI from './rockets-api';
 
 export interface DataSources {
   capsulesAPI: CapsulesAPI;
@@ -22,4 +23,5 @@ export interface DataSources {
   launchpadsAPI: LaunchpadsAPI;
   payloadsAPI: PayloadsAPI;
   roadsterInfoAPI: RoadsterInfoAPI;
+  rocketsAPI: RocketsAPI;
 }
