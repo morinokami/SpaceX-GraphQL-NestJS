@@ -22,6 +22,7 @@ import {
   CoresAPI,
   CrewAPI,
   DragonsAPI,
+  HistoryAPI,
 } from './datasources';
 
 @Module({
@@ -41,6 +42,7 @@ import {
           coresAPI: new CoresAPI(),
           crewAPI: new CrewAPI(),
           dragonsAPI: new DragonsAPI(),
+          historyAPI: new HistoryAPI(),
         };
       },
     }),

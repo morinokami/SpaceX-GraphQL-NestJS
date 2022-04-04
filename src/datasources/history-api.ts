@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { RESTDataSource } from 'apollo-datasource-rest';
 import { QueryOptionsInput } from 'src/common';
-import { DefaultService, History as _History } from 'src/generated';
-import { History } from './models/history.model';
-import { PaginatedHistory } from './models/paginated-history.model';
+import { History as _History } from 'src/generated';
+import { History } from 'src/history/models/history.model';
+import { PaginatedHistory } from 'src/history/models/paginated-history.model';
 
-@Injectable()
-export class HistoryService {
+class HistoryAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToHistory(history: _History): History {
     return {
       id: history.id,
@@ -17,21 +21,23 @@ export class HistoryService {
     };
   }
 
-  async getAllHistory(): Promise<History[]> {
-    const history = await DefaultService.getAllHistory();
+  async getAllHistories(): Promise<History[]> {
+    const history = await this.get<_History[]>('history');
     return history.map((history) => this.convertToHistory(history));
   }
 
   async getHistory(id: string): Promise<History> {
-    const history = await DefaultService.getOneHistory(id);
+    const history = await this.get<_History>(`history/${id}`);
     return this.convertToHistory(history);
   }
 
   async getHistories(options: QueryOptionsInput): Promise<PaginatedHistory> {
-    const history = await DefaultService.queryHistory({ options });
+    const history = await this.post<PaginatedHistory>('history', { options });
     return {
       ...history,
       docs: history.docs.map((history) => this.convertToHistory(history)),
     };
   }
 }
+
+export default HistoryAPI;
