@@ -23,6 +23,7 @@ import {
   CrewAPI,
   DragonsAPI,
   HistoryAPI,
+  LandpadsAPI,
 } from './datasources';
 
 @Module({
@@ -43,6 +44,7 @@ import {
           crewAPI: new CrewAPI(),
           dragonsAPI: new DragonsAPI(),
           historyAPI: new HistoryAPI(),
+          landpadsAPI: new LandpadsAPI(),
         };
       },
     }),

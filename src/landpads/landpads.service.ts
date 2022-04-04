@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { QueryOptionsInput } from 'src/common';
 import { DefaultService, Landpad as _Landpad } from 'src/generated';
 import { Landpad, LandpadStatus } from './models/landpad.model';
-import { PaginatedLandpads } from './models/paginated-landpad.model';
 
+// TODO: Delete this file
 @Injectable()
 export class LandpadsService {
   private convertToLandpad(landpad: _Landpad): Landpad {
@@ -24,24 +23,6 @@ export class LandpadsService {
       launches: [],
       launchIds: landpad.launches,
       images: landpad.images,
-    };
-  }
-
-  async getAllLandpads(): Promise<Landpad[]> {
-    const landpads = await DefaultService.getAllLandpads();
-    return landpads.map((landpad) => this.convertToLandpad(landpad));
-  }
-
-  async getLandpad(id: string): Promise<Landpad> {
-    const landpad = await DefaultService.getOneLandpad(id);
-    return this.convertToLandpad(landpad);
-  }
-
-  async getLandpads(options: QueryOptionsInput): Promise<PaginatedLandpads> {
-    const landpads = await DefaultService.queryLandpads({ options });
-    return {
-      ...landpads,
-      docs: landpads.docs.map((landpad) => this.convertToLandpad(landpad)),
     };
   }
 

@@ -4,6 +4,7 @@ import CoresAPI from './cores-api';
 import CrewAPI from './crew-api';
 import DragonsAPI from './dragons-api';
 import HistoryAPI from './history-api';
+import LandpadsAPI from './landpads-api';
 
 export interface DataSources {
   capsulesAPI: CapsulesAPI;
@@ -12,4 +13,5 @@ export interface DataSources {
   crewAPI: CrewAPI;
   dragonsAPI: DragonsAPI;
   historyAPI: HistoryAPI;
+  landpadsAPI: LandpadsAPI;
 }
