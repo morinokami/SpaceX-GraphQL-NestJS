@@ -29,6 +29,7 @@ import {
   PayloadsAPI,
   RoadsterInfoAPI,
   RocketsAPI,
+  ShipsAPI,
 } from './datasources';
 
 @Module({
@@ -55,6 +56,7 @@ import {
           payloadsAPI: new PayloadsAPI(),
           roadsterInfoAPI: new RoadsterInfoAPI(),
           rocketsAPI: new RocketsAPI(),
+          shipsAPI: new ShipsAPI(),
         };
       },
     }),
