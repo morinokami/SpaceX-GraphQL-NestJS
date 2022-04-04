@@ -16,7 +16,7 @@ import { LaunchpadsModule } from './launchpads/launchpads.module';
 import { DragonsModule } from './dragons/dragons.module';
 import { RocketsModule } from './rockets/rockets.module';
 import { PayloadsModule } from './payloads/payloads.module';
-import { CapsulesAPI } from './datasources';
+import { CapsulesAPI, CompanyInfoAPI } from './datasources';
 
 @Module({
   imports: [
@@ -31,6 +31,7 @@ import { CapsulesAPI } from './datasources';
       dataSources: () => {
         return {
           capsulesAPI: new CapsulesAPI(),
+          companyInfoAPI: new CompanyInfoAPI(),
         };
       },
     }),

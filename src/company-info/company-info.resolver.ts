@@ -1,13 +1,13 @@
-import { Query, Resolver } from '@nestjs/graphql';
-import { CompanyInfoService } from './company-info.service';
+import { Context, Query, Resolver } from '@nestjs/graphql';
+import { DataSources } from 'src/datasources';
 import { CompanyInfo } from './models/company-info.model';
 
 @Resolver(() => CompanyInfo)
 export class CompanyInfoResolver {
-  constructor(private readonly companyInfoService: CompanyInfoService) {}
-
   @Query(() => CompanyInfo, { description: 'Company info' })
-  async companyInfo(): Promise<CompanyInfo> {
-    return this.companyInfoService.getCompanyInfo();
+  async companyInfo(
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<CompanyInfo> {
+    return dataSources.companyInfoAPI.getCompanyInfo();
   }
 }
