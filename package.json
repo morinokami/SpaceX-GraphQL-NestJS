@@ -30,7 +30,6 @@
     "apollo-datasource-rest": "^3.5.2",
     "apollo-server-express": "^3.6.4",
     "class-validator": "^0.13.2",
-    "dataloader": "^2.0.0",
     "graphql": "^16.3.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

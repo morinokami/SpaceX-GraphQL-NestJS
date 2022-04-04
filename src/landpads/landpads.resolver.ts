@@ -8,15 +8,12 @@ import {
 } from '@nestjs/graphql';
 import { QueryOptionsInput } from 'src/common';
 import { DataSources } from 'src/datasources';
-import { LaunchesDataLoader } from 'src/launches/launches.dataloader';
 import { Launch } from 'src/launches/models/launch.model';
 import { Landpad } from './models/landpad.model';
 import { PaginatedLandpads } from './models/paginated-landpad.model';
 
 @Resolver(() => Landpad)
 export class LandpadsResolver {
-  constructor(private readonly launchesDataLoader: LaunchesDataLoader) {}
-
   @Query(() => [Landpad], { description: 'Get all landpads' })
   async allLandpads(
     @Context('dataSources') dataSources: DataSources,
@@ -41,9 +38,12 @@ export class LandpadsResolver {
   }
 
   @ResolveField(() => [Launch])
-  async launches(@Parent() landpad: Landpad): Promise<Launch[]> {
+  async launches(
+    @Parent() landpad: Landpad,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Launch[]> {
     return Promise.all(
-      landpad.launchIds.map((id) => this.launchesDataLoader.load(id)),
+      landpad.launchIds.map((id) => dataSources.launchesAPI.getLaunch(id)),
     );
   }
 }

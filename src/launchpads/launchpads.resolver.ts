@@ -10,14 +10,11 @@ import { QueryOptionsInput } from 'src/common';
 import { DataSources } from 'src/datasources';
 import { Launch } from 'src/launches/models/launch.model';
 import { Rocket } from 'src/rockets/models/rocket.model';
-import { RocketsDataLoader } from 'src/rockets/rockets.dataloader';
 import { Launchpad } from './models/launchpad.model';
 import { PaginatedLaunchpads } from './models/paginated-launchpad.model';
 
 @Resolver(() => Launchpad)
 export class LaunchpadsResolver {
-  constructor(private readonly rocketsDataLoader: RocketsDataLoader) {}
-
   @Query(() => [Launchpad], { description: 'Get all launchpads' })
   async allLaunchpads(
     @Context('dataSources') dataSources: DataSources,
@@ -42,9 +39,12 @@ export class LaunchpadsResolver {
   }
 
   @ResolveField(() => [Rocket])
-  async rockets(@Parent() launchpad: Launchpad): Promise<Rocket[]> {
+  async rockets(
+    @Parent() launchpad: Launchpad,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Rocket[]> {
     return Promise.all(
-      launchpad.rocketIds.map((id) => this.rocketsDataLoader.load(id)),
+      launchpad.rocketIds.map((id) => dataSources.rocketsAPI.getRocket(id)),
     );
   }
 

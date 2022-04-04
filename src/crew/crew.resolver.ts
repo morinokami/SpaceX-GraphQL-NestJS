@@ -8,15 +8,12 @@ import {
 } from '@nestjs/graphql';
 import { QueryOptionsInput } from 'src/common';
 import { DataSources } from 'src/datasources';
-import { LaunchesDataLoader } from 'src/launches/launches.dataloader';
 import { Launch } from 'src/launches/models/launch.model';
 import { Crew } from './models/crew.model';
 import { PaginatedCrew } from './models/paginated-crew-model';
 
 @Resolver(() => Crew)
 export class CrewResolver {
-  constructor(private readonly launchesDataLoader: LaunchesDataLoader) {}
-
   @Query(() => [Crew], { description: 'Get all crew' })
   async allCrew(
     @Context('dataSources') dataSources: DataSources,
@@ -41,9 +38,12 @@ export class CrewResolver {
   }
 
   @ResolveField(() => [Launch])
-  async launches(@Parent() crew: Crew): Promise<Launch[]> {
+  async launches(
+    @Parent() crew: Crew,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Launch[]> {
     return Promise.all(
-      crew.launchIds.map((id) => this.launchesDataLoader.load(id)),
+      crew.launchIds.map((id) => dataSources.launchesAPI.getLaunch(id)),
     );
   }
 }

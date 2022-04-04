@@ -10,26 +10,15 @@ import { Capsule } from 'src/capsules/models/capsule.model';
 import { QueryOptionsInput } from 'src/common';
 import { Crew } from 'src/crew/models/crew.model';
 import { DataSources } from 'src/datasources';
-import { LaunchpadsDataLoader } from 'src/launchpads/launchpads.dataloader';
 import { Launchpad } from 'src/launchpads/models/launchpad.model';
 import { Payload } from 'src/payloads/models/payload.model';
-import { PayloadsDataLoader } from 'src/payloads/payloads.dataloader';
 import { Rocket } from 'src/rockets/models/rocket.model';
-import { RocketsDataLoader } from 'src/rockets/rockets.dataloader';
 import { Ship } from 'src/ships/models/ship.model';
-import { ShipsDataLoader } from 'src/ships/ships.dataloader';
 import { Fairings, Launch, LaunchCore } from './models/launch.model';
 import { PaginatedLaunch } from './models/paginated-launch.model';
 
 @Resolver(() => Launch)
 export class LaunchesResolver {
-  constructor(
-    private readonly rocketsDataLoader: RocketsDataLoader,
-    private readonly shipsDataLoader: ShipsDataLoader,
-    private readonly payloadsDataLoader: PayloadsDataLoader,
-    private readonly launchpadsDataLoader: LaunchpadsDataLoader,
-  ) {}
-
   @Query(() => [Launch], { description: 'Get all launches' })
   async allLaunches(
     @Context('dataSources') dataSources: DataSources,
@@ -82,20 +71,26 @@ export class LaunchesResolver {
   }
 
   @ResolveField(() => Rocket)
-  async rocket(@Parent() launch: Launch): Promise<Rocket> {
+  async rocket(
+    @Parent() launch: Launch,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Rocket> {
     if (!launch.rocketId) {
       return null;
     }
-    return this.rocketsDataLoader.load(launch.rocketId);
+    return dataSources.rocketsAPI.getRocket(launch.rocketId);
   }
 
   @ResolveField(() => Fairings)
-  async fairings(@Parent() launch: Launch): Promise<Fairings> {
+  async fairings(
+    @Parent() launch: Launch,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Fairings> {
     if (launch.shipIdsForFairings.length === 0) {
       return launch.fairings;
     }
     const ships = await Promise.all(
-      launch.shipIdsForFairings.map((id) => this.shipsDataLoader.load(id)),
+      launch.shipIdsForFairings.map((id) => dataSources.shipsAPI.getShip(id)),
     );
     return { ...launch.fairings, ships };
   }
@@ -111,9 +106,12 @@ export class LaunchesResolver {
   }
 
   @ResolveField(() => [Ship])
-  async ships(@Parent() launch: Launch): Promise<Ship[]> {
+  async ships(
+    @Parent() launch: Launch,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Ship[]> {
     return Promise.all(
-      launch.shipIds.map((id) => this.shipsDataLoader.load(id)),
+      launch.shipIds.map((id) => dataSources.shipsAPI.getShip(id)),
     );
   }
 
@@ -128,18 +126,24 @@ export class LaunchesResolver {
   }
 
   @ResolveField(() => [Payload])
-  async payloads(@Parent() launch: Launch): Promise<Payload[]> {
+  async payloads(
+    @Parent() launch: Launch,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Payload[]> {
     return Promise.all(
-      launch.payloadIds.map((id) => this.payloadsDataLoader.load(id)),
+      launch.payloadIds.map((id) => dataSources.payloadsAPI.getPayload(id)),
     );
   }
 
   @ResolveField(() => Launchpad)
-  async launchpad(@Parent() launch: Launch): Promise<Launchpad> {
+  async launchpad(
+    @Parent() launch: Launch,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Launchpad> {
     if (!launch.launchpadId) {
       return null;
     }
-    return this.launchpadsDataLoader.load(launch.launchpadId);
+    return dataSources.launchpadsAPI.getLaunchpad(launch.launchpadId);
   }
 
   @ResolveField(() => [LaunchCore])

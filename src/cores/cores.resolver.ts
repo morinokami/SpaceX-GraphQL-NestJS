@@ -9,15 +9,12 @@ import {
 import { Capsule } from 'src/capsules/models/capsule.model';
 import { QueryOptionsInput } from 'src/common';
 import { DataSources } from 'src/datasources';
-import { LaunchesDataLoader } from 'src/launches/launches.dataloader';
 import { Launch } from 'src/launches/models/launch.model';
 import { Core } from './models/core.model';
 import { PaginatedCores } from './models/paginated-cores.model';
 
 @Resolver(() => Core)
 export class CoresResolver {
-  constructor(private readonly launchesDataLoader: LaunchesDataLoader) {}
-
   @Query(() => [Core], { description: 'Get all cores' })
   async allCores(
     @Context('dataSources') dataSources: DataSources,
@@ -42,9 +39,12 @@ export class CoresResolver {
   }
 
   @ResolveField(() => [Launch])
-  async launches(@Parent() capsule: Capsule): Promise<Launch[]> {
+  async launches(
+    @Parent() capsule: Capsule,
+    @Context('dataSources') dataSources: DataSources,
+  ): Promise<Launch[]> {
     return Promise.all(
-      capsule.launchIds.map((id) => this.launchesDataLoader.load(id)),
+      capsule.launchIds.map((id) => dataSources.launchesAPI.getLaunch(id)),
     );
   }
 }
