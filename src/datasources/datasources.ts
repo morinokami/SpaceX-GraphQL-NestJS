@@ -11,6 +11,7 @@ import PayloadsAPI from './payloads-api';
 import RoadsterInfoAPI from './roadster-info-api';
 import RocketsAPI from './rockets-api';
 import ShipsAPI from './ships-api';
+import StarlinkAPI from './starlink-api';
 
 export interface DataSources {
   capsulesAPI: CapsulesAPI;
@@ -26,4 +27,5 @@ export interface DataSources {
   roadsterInfoAPI: RoadsterInfoAPI;
   rocketsAPI: RocketsAPI;
   shipsAPI: ShipsAPI;
+  starlinkAPI: StarlinkAPI;
 }

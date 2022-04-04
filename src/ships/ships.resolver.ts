@@ -9,15 +9,12 @@ import {
 import { Capsule } from 'src/capsules/models/capsule.model';
 import { QueryOptionsInput } from 'src/common';
 import { DataSources } from 'src/datasources';
-import { LaunchesDataLoader } from 'src/launches/launches.dataloader';
 import { Launch } from 'src/launches/models/launch.model';
 import { PaginatedShips } from './models/paginated-ships.model';
 import { Ship } from './models/ship.model';
 
 @Resolver(() => Ship)
 export class ShipsResolver {
-  constructor(private readonly launchesDataLoader: LaunchesDataLoader) {}
-
   @Query(() => [Ship], { description: 'Get all ships' })
   async allShips(
     @Context('dataSources') dataSources: DataSources,

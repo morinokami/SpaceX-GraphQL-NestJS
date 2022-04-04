@@ -12,3 +12,4 @@ export { default as PayloadsAPI } from './payloads-api';
 export { default as RoadsterInfoAPI } from './roadster-info-api';
 export { default as RocketsAPI } from './rockets-api';
 export { default as ShipsAPI } from './ships-api';
+export { default as StarlinkAPI } from './starlink-api';

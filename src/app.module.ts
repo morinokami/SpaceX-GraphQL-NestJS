@@ -30,6 +30,7 @@ import {
   RoadsterInfoAPI,
   RocketsAPI,
   ShipsAPI,
+  StarlinkAPI,
 } from './datasources';
 
 @Module({
@@ -57,23 +58,24 @@ import {
           roadsterInfoAPI: new RoadsterInfoAPI(),
           rocketsAPI: new RocketsAPI(),
           shipsAPI: new ShipsAPI(),
+          starlinkAPI: new StarlinkAPI(),
         };
       },
     }),
     CapsulesModule,
-    LaunchesModule,
-    ShipsModule,
     CompanyInfoModule,
     CoresModule,
-    RoadsterInfoModule,
-    StarlinkModule,
-    LandpadsModule,
     CrewModule,
-    HistoryModule,
-    LaunchpadsModule,
     DragonsModule,
-    RocketsModule,
+    HistoryModule,
+    LandpadsModule,
+    LaunchesModule,
+    LaunchpadsModule,
     PayloadsModule,
+    RoadsterInfoModule,
+    RocketsModule,
+    ShipsModule,
+    StarlinkModule,
   ],
 })
 export class AppModule {}
