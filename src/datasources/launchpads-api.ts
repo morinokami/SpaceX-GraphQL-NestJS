@@ -7,7 +7,7 @@ import {
 } from 'src/launchpads/models/launchpad.model';
 import { PaginatedLaunchpads } from 'src/launchpads/models/paginated-launchpad.model';
 
-class LaunchPadsAPI extends RESTDataSource {
+class LaunchpadsAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://api.spacexdata.com/v4/';
@@ -61,4 +61,4 @@ class LaunchPadsAPI extends RESTDataSource {
   }
 }
 
-export default LaunchPadsAPI;
+export default LaunchpadsAPI;

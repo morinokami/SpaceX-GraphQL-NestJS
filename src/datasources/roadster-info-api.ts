@@ -1,9 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { DefaultService, Roadster } from 'src/generated';
-import { RoadsterInfo } from './models/roadster-info.model';
+import { RESTDataSource } from 'apollo-datasource-rest';
+import { Roadster } from 'src/generated';
+import { RoadsterInfo } from 'src/roadster-info/models/roadster-info.model';
 
-@Injectable()
-export class RoadsterInfoService {
+class RoadsterInfoAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://api.spacexdata.com/v4/';
+  }
+
   private convertToRoadsterInfo(roadster: Roadster): RoadsterInfo {
     return {
       id: roadster.id,
@@ -37,7 +41,9 @@ export class RoadsterInfoService {
   }
 
   async getRoadsterInfo(): Promise<RoadsterInfo> {
-    const roadsterInfo = await DefaultService.getRoadsterInfo();
+    const roadsterInfo = await this.get<Roadster>('roadster');
     return this.convertToRoadsterInfo(roadsterInfo);
   }
 }
+
+export default RoadsterInfoAPI;

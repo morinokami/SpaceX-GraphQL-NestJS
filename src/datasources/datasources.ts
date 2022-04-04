@@ -1,4 +1,3 @@
-import { LaunchpadsAPI, PayloadsAPI } from '.';
 import CapsulesAPI from './capsules-api';
 import CompanyInfoAPI from './company-info-api';
 import CoresAPI from './cores-api';
@@ -7,6 +6,9 @@ import DragonsAPI from './dragons-api';
 import HistoryAPI from './history-api';
 import LandpadsAPI from './landpads-api';
 import LaunchesAPI from './launches-api';
+import LaunchpadsAPI from './launchpads-api';
+import PayloadsAPI from './payloads-api';
+import RoadsterInfoAPI from './roadster-info-api';
 
 export interface DataSources {
   capsulesAPI: CapsulesAPI;
@@ -19,4 +21,5 @@ export interface DataSources {
   launchesAPI: LaunchesAPI;
   launchpadsAPI: LaunchpadsAPI;
   payloadsAPI: PayloadsAPI;
+  roadsterInfoAPI: RoadsterInfoAPI;
 }
