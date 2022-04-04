@@ -1,5 +1,4 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
-import { Capsule as _Capsule } from 'src/generated';
 import {
   Capsule,
   CapsuleStatus,
@@ -7,6 +6,7 @@ import {
 } from 'src/capsules/models/capsule.model';
 import { PaginatedCapsules } from 'src/capsules/models/paginated-capsules.model';
 import { QueryOptionsInput } from 'src/common';
+import { Capsule as _Capsule } from 'src/generated';
 
 class CapsulesAPI extends RESTDataSource {
   constructor() {

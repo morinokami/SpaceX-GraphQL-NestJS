@@ -1,6 +1,7 @@
 import { Args, Context, Query, Resolver } from '@nestjs/graphql';
 import { QueryOptionsInput } from 'src/common';
 import { DataSources } from 'src/datasources';
+
 import { History } from './models/history.model';
 import { PaginatedHistory } from './models/paginated-history.model';
 

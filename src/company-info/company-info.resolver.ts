@@ -1,5 +1,6 @@
 import { Context, Query, Resolver } from '@nestjs/graphql';
 import { DataSources } from 'src/datasources';
+
 import { CompanyInfo } from './models/company-info.model';
 
 @Resolver(() => CompanyInfo)

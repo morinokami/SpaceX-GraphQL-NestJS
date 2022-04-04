@@ -9,6 +9,7 @@ import {
 import { QueryOptionsInput } from 'src/common';
 import { DataSources } from 'src/datasources';
 import { Launch } from 'src/launches/models/launch.model';
+
 import { Capsule } from './models/capsule.model';
 import { PaginatedCapsules } from './models/paginated-capsules.model';
 

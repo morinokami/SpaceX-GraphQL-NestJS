@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+
 import { ShipsResolver } from './ships.resolver';
 
 @Module({

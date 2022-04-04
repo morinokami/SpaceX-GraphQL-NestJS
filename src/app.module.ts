@@ -1,21 +1,12 @@
-import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+
 import { CapsulesModule } from './capsules/capsules.module';
-import { LaunchesModule } from './launches/launches.module';
-import { ShipsModule } from './ships/ships.module';
 import { CompanyInfoModule } from './company-info/company-info.module';
 import { CoresModule } from './cores/cores.module';
-import { RoadsterInfoModule } from './roadster-info/roadster-info.module';
-import { StarlinkModule } from './starlink/starlink.module';
-import { LandpadsModule } from './landpads/landpads.module';
 import { CrewModule } from './crew/crew.module';
-import { HistoryModule } from './history/history.module';
-import { LaunchpadsModule } from './launchpads/launchpads.module';
-import { DragonsModule } from './dragons/dragons.module';
-import { RocketsModule } from './rockets/rockets.module';
-import { PayloadsModule } from './payloads/payloads.module';
 import {
   CapsulesAPI,
   CompanyInfoAPI,
@@ -32,6 +23,16 @@ import {
   ShipsAPI,
   StarlinkAPI,
 } from './datasources';
+import { DragonsModule } from './dragons/dragons.module';
+import { HistoryModule } from './history/history.module';
+import { LandpadsModule } from './landpads/landpads.module';
+import { LaunchesModule } from './launches/launches.module';
+import { LaunchpadsModule } from './launchpads/launchpads.module';
+import { PayloadsModule } from './payloads/payloads.module';
+import { RoadsterInfoModule } from './roadster-info/roadster-info.module';
+import { RocketsModule } from './rockets/rockets.module';
+import { ShipsModule } from './ships/ships.module';
+import { StarlinkModule } from './starlink/starlink.module';
 
 @Module({
   imports: [
